@@ -9,7 +9,7 @@ using Android.OS;
 using Android.Runtime;
 using Android.Views;
 using Android.Widget;
-using AnimateRaw.Android.Model;
+using AnimateRaw.Shared.Model;
 
 namespace AnimateRaw.Android.Adapter
 {

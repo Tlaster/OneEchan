@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using AnimateRaw.Android.Adapter;
 using System.Net.Http;
 using System.Linq;
-using AnimateRaw.Android.Model;
+using AnimateRaw.Shared.Model;
 using Android.Graphics.Drawables;
 using Android.Graphics;
 

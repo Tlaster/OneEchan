@@ -7,7 +7,14 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimateRaw", "AnimateRaw\An
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AnimateRaw.Android", "AnimateRaw.Android\AnimateRaw.Android.csproj", "{47803F8D-3066-4B8E-B20C-BFDBE895CFF3}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "AnimateRaw.Shared", "AnimateRaw.Shared\AnimateRaw.Shared.shproj", "{6AF1E69D-3561-41F0-A01A-39720411D11D}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		AnimateRaw.Shared\AnimateRaw.Shared.projitems*{47803f8d-3066-4b8e-b20c-bfdbe895cff3}*SharedItemsImports = 4
+		AnimateRaw.Shared\AnimateRaw.Shared.projitems*{aae0e40e-fa28-4c88-b9c9-9a8ad1450578}*SharedItemsImports = 4
+		AnimateRaw.Shared\AnimateRaw.Shared.projitems*{6af1e69d-3561-41f0-a01a-39720411d11d}*SharedItemsImports = 13
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Debug|ARM = Debug|ARM

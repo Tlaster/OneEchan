@@ -1,4 +1,4 @@
-﻿using AnimateRaw.Model;
+﻿using AnimateRaw.Shared.Model;
 using System;
 using System.Collections.Generic;
 using System.IO;

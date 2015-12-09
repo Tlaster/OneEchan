@@ -11,11 +11,11 @@ using Android.Widget;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using AnimateRaw.Android.Model;
 using AnimateRaw.Android.Adapter;
 using Android.Graphics.Drawables;
 using Android.Graphics;
 using Android.Net;
+using AnimateRaw.Shared.Model;
 
 namespace AnimateRaw.Android
 {

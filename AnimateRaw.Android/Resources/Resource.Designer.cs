@@ -72,9 +72,6 @@ namespace AnimateRaw.Android
 			// aapt resource value: 0x7f050003
 			public const int MainListLayoutUpdateTime = 2131034115;
 			
-			// aapt resource value: 0x7f050004
-			public const int VideoPlayer = 2131034116;
-			
 			static Id()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -94,9 +91,6 @@ namespace AnimateRaw.Android
 			// aapt resource value: 0x7f030001
 			public const int MainListLayout = 2130903041;
 			
-			// aapt resource value: 0x7f030002
-			public const int PlayPage = 2130903042;
-			
 			static Layout()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -110,11 +104,8 @@ namespace AnimateRaw.Android
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040001
-			public const int ApplicationName = 2130968577;
-			
 			// aapt resource value: 0x7f040000
-			public const int Hello = 2130968576;
+			public const int ApplicationName = 2130968576;
 			
 			static String()
 			{
