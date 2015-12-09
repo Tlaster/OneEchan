@@ -32,6 +32,10 @@ namespace AnimateRaw.Android
                 Window.SetStatusBarColor(Color.MediumVioletRed);
                 Window.SetNavigationBarColor(Color.MediumVioletRed);
             }
+            else
+            {
+                Title = "Animate Raw";
+            }
 
             base.OnCreate(bundle);
             using (var client = new HttpClient())

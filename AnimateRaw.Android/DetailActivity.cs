@@ -29,7 +29,8 @@ namespace AnimateRaw.Android
         {
             base.OnCreate(savedInstanceState);
             _name = Intent.Extras.GetString("name");
-            _id = Intent.Extras.GetDouble("id"); if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
+            _id = Intent.Extras.GetDouble("id");
+            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
             {
                 ActionBar.SetIcon(new ColorDrawable(Color.Transparent));
                 ActionBar.SetBackgroundDrawable(new ColorDrawable(Color.MediumVioletRed));
@@ -39,6 +40,11 @@ namespace AnimateRaw.Android
                 Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
                 Window.SetStatusBarColor(Color.MediumVioletRed);
                 Window.SetNavigationBarColor(Color.MediumVioletRed);
+            }
+            else
+            {
+                Title = _name;
+                
             }
             using (var client = new HttpClient())
             {
@@ -62,11 +68,6 @@ namespace AnimateRaw.Android
             var intent = new Intent(Intent.ActionView);
             intent.SetDataAndType(Uri.Parse(item.FilePath), "video/mp4");
             StartActivity(intent);
-            //var intent = new Intent(this, typeof(PlayActivity));
-            //Bundle bundle = new Bundle();
-            //bundle.PutString("filePath", item.FilePath);
-            //intent.PutExtras(bundle);
-            //StartActivity(intent);
         }
     }
 }

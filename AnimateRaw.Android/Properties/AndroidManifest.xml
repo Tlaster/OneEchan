@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="AnimateRaw.Android.AnimateRaw.Android" android:versionCode="1" android:versionName="1.0" android:installLocation="auto">
-	<uses-sdk android:targetSdkVersion="23" android:minSdkVersion="21" />
+	<uses-sdk android:targetSdkVersion="23" android:minSdkVersion="15" />
 	<uses-permission android:name="android.permission.INTERNET" />
 	<application android:label="Animate Raw" android:theme="@android:style/Theme.Material.Light.DarkActionBar" android:icon="@drawable/Icon"></application>
 </manifest>
