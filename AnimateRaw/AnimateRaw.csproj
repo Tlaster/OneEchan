@@ -106,6 +106,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Converter\BoolToFavorIconConverter.cs" />
+    <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\TimeSpanToShortTimeConverter.cs" />
     <Compile Include="Extension\JsonValueExtension.cs" />
     <Compile Include="MainPage.xaml.cs">

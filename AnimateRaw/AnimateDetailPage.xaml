@@ -5,49 +5,50 @@
     xmlns:local="using:AnimateRaw"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:model="using:AnimateRaw.Model"
+    xmlns:model="using:AnimateRaw.Shared.Model"
+    xmlns:converter="using:AnimateRaw.Converter"
     mc:Ignorable="d">
-
+    <Page.Resources>
+        <converter:BoolToFavorIconConverter x:Key="BoolToFavorIconConverter"/>
+        <MenuFlyout x:Key="RightClickMenu">
+            <MenuFlyoutItem x:Uid="CopyLink" Text="Copy link" Click="MenuFlyoutItem_Click"/>
+        </MenuFlyout>
+    </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <Grid Background="MediumVioletRed" RequestedTheme="Dark">
-            <TextBlock Text="{x:Bind DetailVM.Name}" TextTrimming="CharacterEllipsis" Style="{ThemeResource SubheaderTextBlockStyle}" MaxLines="2" HorizontalAlignment="Center" VerticalAlignment="Center" Padding="16"/>
-        </Grid>
-        <Grid Grid.Row="1">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition/>
-                <ColumnDefinition/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <TextBlock Padding="8,0" Text="Name" Style="{ThemeResource TitleTextBlockStyle}"/>
-            <TextBlock HorizontalAlignment="Right" Text="Click count" Grid.Column="1" Style="{ThemeResource TitleTextBlockStyle}"/>
-            <ListView SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{x:Bind DetailVM.SetList,Mode=OneWay}" >
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                    </Style>
-                </ListView.ItemContainerStyle>
-                <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:AnimateSetModel">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="auto"/>
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Text="{x:Bind FileName}" TextTrimming="WordEllipsis"/>
-                            <TextBlock Grid.Column="1" Text="{x:Bind ClickCount}" TextTrimming="WordEllipsis"/>
-                        </Grid>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-
+            <TextBlock Text="{x:Bind DetailVM.Name}" TextTrimming="CharacterEllipsis" Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="2" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="12"/>
+            <Button Grid.Column="1" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Click="{x:Bind DetailVM.FavorClick}">
+                <SymbolIcon Symbol="{x:Bind DetailVM.IsFavor,Converter={StaticResource BoolToFavorIconConverter},Mode=OneWay}"/>
+            </Button>
+            <Button Grid.Column="2" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Click="{x:Bind DetailVM.Refresh}">
+                <SymbolIcon Symbol="Refresh"/>
+            </Button>
         </Grid>
+        <ProgressBar Grid.Row="1" VerticalAlignment="Top" IsIndeterminate="{x:Bind DetailVM.IsLoading,Mode=OneWay}" Visibility="{x:Bind DetailVM.IsLoading,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
+        <ListView RightTapped="{x:Bind RightClick}" Holding="{x:Bind RightClick}" Grid.Row="1" SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick"  ItemsSource="{x:Bind DetailVM.SetList,Mode=OneWay}" >
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                </Style>
+            </ListView.ItemContainerStyle>
+            <ListView.ItemTemplate>
+                <DataTemplate x:DataType="model:AnimateSetModel">
+                    <StackPanel>
+                        <TextBlock Text="{x:Bind FileName}" Style="{ThemeResource SubtitleTextBlockStyle}" TextTrimming="WordEllipsis"/>
+                        <TextBlock Padding="6,0" Foreground="Gray" Grid.Column="1" Text="{x:Bind ClickCount}" TextTrimming="WordEllipsis"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </Grid>
 </Page>

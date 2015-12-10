@@ -38,9 +38,9 @@ namespace AnimateRaw.Android.Adapter
         {
             View view = convertView;
             if (view == null)
-                view = _context.LayoutInflater.Inflate(Resource.Layout.DetailListLayout, null);
-            view.FindViewById<TextView>(Resource.Id.DetailListLayoutSetName).Text = Items[position].FileName;
-            view.FindViewById<TextView>(Resource.Id.DetailListLayoutClickCount).Text = $"Click Count:{Items[position].ClickCount}";
+                view = _context.LayoutInflater.Inflate(Resource.Layout.MainListLayout, null);
+            view.FindViewById<TextView>(Resource.Id.MainListLayoutName).Text = Items[position].FileName;
+            view.FindViewById<TextView>(Resource.Id.MainListLayoutUpdateTime).Text = $"Click Count:{Items[position].ClickCount}";
             return view;
         }
 

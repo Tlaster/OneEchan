@@ -36,12 +36,24 @@ namespace AnimateRaw
             NavigationCacheMode = NavigationCacheMode.Required;
             MainVM = new MainViewModel();
         }
-        
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        {
+            base.OnNavigatedTo(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                await MainVM.GetFavorList();
+            }
+        }
+
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = e.ClickedItem as AnimateListModel;
             Frame.Navigate(typeof(AnimateDetailPage), new AnimateDetailViewModel(item.ID,item.Name));
         }
-        
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            MainVM.Refresh();
+        }
     }
 }

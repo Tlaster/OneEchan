@@ -90,6 +90,7 @@ namespace AnimateRaw.Android
             catch (Exception e) when(e is WebException || e is HttpRequestException)
             {
                 Toast.MakeText(this, "Error,can not get the list", ToastLength.Short).Show();
+                _refresher.Refreshing = false;
             }
         }
     }

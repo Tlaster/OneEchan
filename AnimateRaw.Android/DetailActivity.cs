@@ -17,14 +17,18 @@ using Android.Graphics;
 using Android.Net;
 using AnimateRaw.Shared.Model;
 using System.Net;
+using System;
+using System.Threading.Tasks;
 
 namespace AnimateRaw.Android
 {
     [Activity(Label = "Detail")]
-    public class DetailActivity : ListActivity
+    public class DetailActivity : Activity
     {
         private double _id;
+        private ListView _listView;
         private string _name;
+        private ScrollChildSwipeRefreshLayout _refresher;
 
         protected override async void OnCreate(Bundle savedInstanceState)
         {
@@ -46,6 +50,40 @@ namespace AnimateRaw.Android
             {
                 Title = _name;
             }
+
+            SetContentView(Resource.Layout.MainPage);
+            _listView = FindViewById<ListView>(Resource.Id.MainPageListView);
+            _listView.ItemClick += listView_ItemClick;
+            _refresher = FindViewById<ScrollChildSwipeRefreshLayout>(Resource.Id.MainPageRefresher);
+            _refresher.SetColorSchemeResources(Resource.Color.MediumVioletRed);
+            _refresher.Refresh += refresher_Refresh;
+            _refresher.Post(() => _refresher.Refreshing = true);
+            await Refresh();
+        }
+
+        private async void refresher_Refresh(object sender, EventArgs e)
+        {
+            await Refresh();
+        }
+
+        private async void listView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
+        {
+            var item = (_listView.Adapter as DetailListAdapter).Items[e.Position];
+            try
+            {
+                using (var client = new HttpClient())
+                    await client.GetStringAsync($"http://tlaster.me/getanimate?id={_id}&filename={item.FileName}");
+            }
+            catch
+            {
+            }
+            var intent = new Intent(Intent.ActionView);
+            intent.SetDataAndType(global::Android.Net.Uri.Parse(item.FilePath), "video/mp4");
+            StartActivity(intent);
+        }
+
+        private async Task Refresh()
+        {
             try
             {
                 using (var client = new HttpClient())
@@ -58,29 +96,16 @@ namespace AnimateRaw.Android
                                     FileName = item.Value<string>("FileName"),
                                     FilePath = item.Value<string>("FilePath"),
                                 }).OrderBy(a => a.FileName).ToList();
-                    ListAdapter = new DetailListAdapter(this, list);
+                    _listView.Adapter = new DetailListAdapter(this, list);
+                    _refresher.Refreshing = false;
                 }
             }
-            catch (System.Exception e) when (e is WebException || e is HttpRequestException)
+            catch (Exception e) when (e is WebException || e is HttpRequestException)
             {
+                _refresher.Refreshing = false;
                 Toast.MakeText(this, "Error,can not get the detail", ToastLength.Short).Show();
             }
         }
-        protected override async void OnListItemClick(ListView l, View v, int position, long id)
-        {
-            base.OnListItemClick(l, v, position, id);
-            var item = (l.Adapter as DetailListAdapter).Items[position];
-            try
-            {
-                using (var client = new HttpClient())
-                    await client.GetStringAsync($"http://tlaster.me/getanimate?id={_id}&filename={item.FileName}");
-            }
-            catch
-            {
-            }
-            var intent = new Intent(Intent.ActionView);
-            intent.SetDataAndType(Uri.Parse(item.FilePath), "video/mp4");
-            StartActivity(intent);
-        }
+
     }
 }
