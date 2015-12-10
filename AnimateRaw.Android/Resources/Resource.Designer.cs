@@ -41,6 +41,22 @@ namespace AnimateRaw.Android
 			}
 		}
 		
+		public partial class Color
+		{
+			
+			// aapt resource value: 0x7f050000
+			public const int MediumVioletRed = 2131034112;
+			
+			static Color()
+			{
+				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
+			}
+			
+			private Color()
+			{
+			}
+		}
+		
 		public partial class Drawable
 		{
 			
@@ -60,17 +76,23 @@ namespace AnimateRaw.Android
 		public partial class Id
 		{
 			
-			// aapt resource value: 0x7f050001
-			public const int DetailListLayoutClickCount = 2131034113;
+			// aapt resource value: 0x7f060001
+			public const int DetailListLayoutClickCount = 2131099649;
 			
-			// aapt resource value: 0x7f050000
-			public const int DetailListLayoutSetName = 2131034112;
+			// aapt resource value: 0x7f060000
+			public const int DetailListLayoutSetName = 2131099648;
 			
-			// aapt resource value: 0x7f050002
-			public const int MainListLayoutName = 2131034114;
+			// aapt resource value: 0x7f060002
+			public const int MainListLayoutName = 2131099650;
 			
-			// aapt resource value: 0x7f050003
-			public const int MainListLayoutUpdateTime = 2131034115;
+			// aapt resource value: 0x7f060003
+			public const int MainListLayoutUpdateTime = 2131099651;
+			
+			// aapt resource value: 0x7f060005
+			public const int MainPageListView = 2131099653;
+			
+			// aapt resource value: 0x7f060004
+			public const int MainPageRefresher = 2131099652;
 			
 			static Id()
 			{
@@ -90,6 +112,9 @@ namespace AnimateRaw.Android
 			
 			// aapt resource value: 0x7f030001
 			public const int MainListLayout = 2130903041;
+			
+			// aapt resource value: 0x7f030002
+			public const int MainPage = 2130903042;
 			
 			static Layout()
 			{
