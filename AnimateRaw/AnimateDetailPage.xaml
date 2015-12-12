@@ -12,6 +12,7 @@
         <converter:BoolToFavorIconConverter x:Key="BoolToFavorIconConverter"/>
         <MenuFlyout x:Key="RightClickMenu">
             <MenuFlyoutItem x:Uid="CopyLink" Text="Copy link" Click="MenuFlyoutItem_Click"/>
+            <MenuFlyoutItem x:Uid="OpenWith" Text="Open with other player" Click="MenuFlyoutItem_Click_1"/>
         </MenuFlyout>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

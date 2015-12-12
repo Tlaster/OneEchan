@@ -40,7 +40,7 @@ namespace AnimateRaw.ViewModel
                                {
                                    ID = item.GetNamedNumber("ID"),
                                    Name = item.GetNamedString("Name"),
-                                   LastUpdate = DateTime.Now - DateTime.Parse(item.GetNamedString("LastUpdate")),
+                                   LastUpdate = TimeZoneInfo.ConvertTime(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("China Standard Time")) - DateTime.Parse(item.GetNamedString("LastUpdate")),
                                }).OrderBy(a => a.LastUpdate).ToList();
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RawList)));
                     await GetFavorList();

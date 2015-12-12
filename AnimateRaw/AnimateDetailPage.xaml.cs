@@ -8,6 +8,7 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
@@ -65,15 +66,22 @@ namespace AnimateRaw
             }
             else if (e is HoldingRoutedEventArgs)
             {
-                point = (e as RightTappedRoutedEventArgs).GetPosition(null);
+                point = (e as HoldingRoutedEventArgs).GetPosition(null);
                 (e as HoldingRoutedEventArgs).Handled = true;
             }
-
             _clickedItem = (e.OriginalSource as FrameworkElement).DataContext as AnimateSetModel;
             if (_clickedItem != null)
             {
                 var menu = Resources["RightClickMenu"] as MenuFlyout;
                 menu.ShowAt(null, point);
+            }
+        }
+
+        private async void MenuFlyoutItem_Click_1(object sender, RoutedEventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_clickedItem.FilePath))
+            {
+                await Launcher.LaunchUriAsync(new Uri(_clickedItem.FilePath), new LauncherOptions { ContentType = "video/mp4" });
             }
         }
     }

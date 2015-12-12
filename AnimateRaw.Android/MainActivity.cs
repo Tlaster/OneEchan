@@ -81,7 +81,7 @@ namespace AnimateRaw.Android
                                 {
                                     ID = item.Value<int>("ID"),
                                     Name = item.Value<string>("Name"),
-                                    LastUpdate = DateTime.Now - DateTime.Parse(item.Value<string>("LastUpdate")),
+                                    LastUpdate = TimeZoneInfo.ConvertTime(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("China Standard Time")) - DateTime.Parse(item.Value<string>("LastUpdate")),
                                 }).OrderBy(a => a.LastUpdate).ToList();
                     _listView.Adapter = new MainListAdapter(this, list);
                     _refresher.Refreshing = false;
