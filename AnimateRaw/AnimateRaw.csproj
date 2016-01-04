@@ -95,22 +95,27 @@
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="AnimateRaw_StoreKey.pfx" />
     <None Include="project.json" />
+    <PRIResource Include="Strings\zh-CN\Resources.resw" />
+    <PRIResource Include="Strings\en-US\Resources.resw" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AnimateDetailPage.xaml.cs">
+    <Compile Include="Common\AnimateListIncrementalLoadingClass.cs" />
+    <Compile Include="View\AnimateDetailPage.xaml.cs">
       <DependentUpon>AnimateDetailPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="AnimatePlayPage.xaml.cs">
+    <Compile Include="View\AnimatePlayPage.xaml.cs">
       <DependentUpon>AnimatePlayPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Common\GeneratorIncrementalLoadingClass.cs" />
+    <Compile Include="Common\IncrementalLoadingBase.cs" />
     <Compile Include="Converter\BoolToFavorIconConverter.cs" />
     <Compile Include="Converter\BoolToVisibilityConverter.cs" />
     <Compile Include="Converter\TimeSpanToShortTimeConverter.cs" />
     <Compile Include="Extension\JsonValueExtension.cs" />
-    <Compile Include="MainPage.xaml.cs">
+    <Compile Include="View\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -137,15 +142,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="AnimateDetailPage.xaml">
+    <Page Include="View\AnimateDetailPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="AnimatePlayPage.xaml">
+    <Page Include="View\AnimatePlayPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="MainPage.xaml">
+    <Page Include="View\MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

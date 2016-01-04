@@ -215,29 +215,27 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Pivot Style="{StaticResource PivotStyle1}" ItemContainerStyle="{StaticResource PivotItemStyle1}">
-            <PivotItem Header="Raws">
-                <ptr:PullToRefreshBox>
-                    <Grid>
-                        <ProgressBar VerticalAlignment="Top" IsIndeterminate="{x:Bind MainVM.IsLoading,Mode=OneWay}" Visibility="{x:Bind MainVM.IsLoading,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
-                        <ListView SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{x:Bind MainVM.RawList,Mode=OneWay}" >
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="ListViewItem">
-                                    <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                            <ListView.ItemTemplate>
-                                <DataTemplate x:DataType="model:AnimateListModel">
-                                    <StackPanel>
-                                        <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind Name}" TextTrimming="WordEllipsis"/>
-                                        <TextBlock Padding="6,0" Foreground="Gray" Text="{x:Bind LastUpdate,Converter={StaticResource TimeSpanToShortTimeConverter}}"/>
-                                    </StackPanel>
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </Grid>
-                </ptr:PullToRefreshBox>
+            <PivotItem x:Uid="RawPovitItem" Header="Raws">
+                <Grid>
+                    <ProgressBar VerticalAlignment="Top" IsIndeterminate="{x:Bind MainVM.IsLoading,Mode=OneWay}" Visibility="{x:Bind MainVM.IsLoading,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
+                    <ListView SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{x:Bind MainVM.RawList,Mode=OneWay}" >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="ListViewItem">
+                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.ItemTemplate>
+                            <DataTemplate x:DataType="model:AnimateListModel">
+                                <StackPanel>
+                                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind Name}" TextTrimming="WordEllipsis"/>
+                                    <TextBlock Padding="6,0" Foreground="Gray" Text="{x:Bind LastUpdate,Converter={StaticResource TimeSpanToShortTimeConverter}}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Grid>
             </PivotItem>
-            <PivotItem Header="Favor">
+            <PivotItem x:Uid="FavorPovitItem" Header="Favor">
                 <ListView SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{x:Bind MainVM.FavorList,Mode=OneWay}" >
                     <ListView.ItemContainerStyle>
                         <Style TargetType="ListViewItem">

@@ -40,13 +40,15 @@ namespace AnimateRaw.ViewModel
             {
                 using (var client = new HttpClient())
                 {
-                    var jsstr = await client.GetStringAsync($"http://tlaster.me/getanimate?id={_id}");
-                    SetList = (from item in JsonObject.Parse(jsstr).GetNamedArray("SetList")
+                    var jsstr = await client.GetStringAsync($"http://tlaster.me/api/detail?id={_id}");
+                    var obj = JsonObject.Parse(jsstr);
+                    SetList = (from item in obj.GetNamedArray("SetList")
                                select new AnimateSetModel
                                {
                                    ClickCount = item.GetNamedNumber("ClickCount"),
                                    FileName = item.GetNamedString("FileName"),
                                    FilePath = item.GetNamedString("FilePath"),
+                                   FileThumb = item.GetNamedString("FileThumb"),
                                }).OrderBy(a => a.FileName).ToList();
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SetList)));
                     IsFavor = await FavorHelper.IsFavor(_id);
@@ -64,20 +66,16 @@ namespace AnimateRaw.ViewModel
         public async void FavorClick()
         {
             if (IsFavor)
-            {
                 await FavorHelper.RemoveFavor(_id);
-            }
             else
-            {
                 await FavorHelper.AddFavor(_id);
-            }
             IsFavor = await FavorHelper.IsFavor(_id);
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsFavor)));
         }
         internal async void Click(string fileName)
         {
             using (var client = new HttpClient())
-                await client.GetStringAsync($"http://tlaster.me/getanimate?id={_id}&filename={fileName}");
+                await client.GetStringAsync($"http://tlaster.me/api/detail?id={_id}&filename={fileName}");
         }
     }
 }

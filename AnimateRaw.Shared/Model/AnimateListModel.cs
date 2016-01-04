@@ -9,7 +9,13 @@ namespace AnimateRaw.Shared.Model
         [DataMember]
         public double ID { get; internal set; }
         [IgnoreDataMember]
-        public TimeSpan LastUpdate { get; internal set; }
+        public DateTime LastUpdateBeijing { get; internal set; }
+        [IgnoreDataMember]
+#if WINDOWS_UWP
+        public TimeSpan LastUpdate => TimeZoneInfo.ConvertTime(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("China Standard Time")) - LastUpdateBeijing;
+#else
+        public TimeSpan LastUpdate => TimeZoneInfo.ConvertTime(DateTime.UtcNow, TimeZoneInfo.FindSystemTimeZoneById("Etc/GMT-8")) - LastUpdateBeijing;
+#endif
         [DataMember]
         public string Name { get; internal set; }
     }

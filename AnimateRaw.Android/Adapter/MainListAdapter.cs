@@ -10,39 +10,31 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using AnimateRaw.Shared.Model;
+using System.Collections.ObjectModel;
+using Android.Support.V7.Widget;
 
 namespace AnimateRaw.Android.Adapter
 {
-    public class MainListAdapter : BaseAdapter<AnimateListModel>
+    public class MainListAdapter : RecyclerView.Adapter
     {
+        public event EventHandler<int> ItemClick;
+
         public List<AnimateListModel> Items { get; private set; }
         private Activity _context;
         public MainListAdapter(Activity context, List<AnimateListModel> items) : base()
         {
-            this._context = context;
-            this.Items = items;
+            _context = context;
+            Items = items;
         }
-        public override long GetItemId(int position)
+        public void Add(List<AnimateListModel> list)
         {
-            return position;
+            Items.AddRange(list);
+            NotifyDataSetChanged();
         }
-        public override AnimateListModel this[int position]
-        {
-            get { return Items[position]; }
-        }
-        public override int Count
-        {
-            get { return Items.Count; }
-        }
-        public override View GetView(int position, View convertView, ViewGroup parent)
-        {
-            View view = convertView;
-            if (view == null)
-                view = _context.LayoutInflater.Inflate(Resource.Layout.MainListLayout, null);
-            view.FindViewById<TextView>(Resource.Id.MainListLayoutName).Text = Items[position].Name;
-            view.FindViewById<TextView>(Resource.Id.MainListLayoutUpdateTime).Text = GetUpdate(Items[position].LastUpdate);
-            return view;
-        }
+        public override long GetItemId(int position) => position;
+
+        public override int ItemCount => Items.Count;
+
         private string GetUpdate(TimeSpan time)
         {
             if (time.Days != 0)
@@ -58,6 +50,22 @@ namespace AnimateRaw.Android.Adapter
                 return $"{time.Minutes} minutes ago";
             }
             return "Just now";
+        }
+
+        public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
+        {
+            MainViewHolder vh = holder as MainViewHolder;
+            vh.Name.Text = Items[position].Name;
+            vh.UpdateTime.Text = GetUpdate(Items[position].LastUpdate);
+        }
+
+        public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
+        {
+            View itemView = LayoutInflater.From(parent.Context).
+               Inflate(Resource.Layout.MainListLayout, parent, false);
+            MainViewHolder vh = new MainViewHolder(itemView);
+            itemView.Click += (s, e) => ItemClick?.Invoke(s, vh.LayoutPosition);
+            return vh;
         }
     }
 }

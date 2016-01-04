@@ -38,6 +38,37 @@ namespace AnimateRaw.Shared.Helper
 #endif
             return jsStr != "" ? FromJson<List<double>>(jsStr) : new List<double>();
         }
+#if WINDOWS_UWP
+        public static async Task<string> GetFavorString()
+#else
+        public static string GetFavorString()
+#endif
+        {
+#if WINDOWS_UWP
+            var file = await ApplicationData.Current.LocalFolder.CreateFileAsync(SAVE_DATABASE_NAME, CreationCollisionOption.OpenIfExists);
+            var jsStr = await FileIO.ReadTextAsync(file, Windows.Storage.Streams.UnicodeEncoding.Utf16LE);
+#else
+            var path = Application.Context.GetDatabasePath(SAVE_DATABASE_NAME).AbsolutePath;
+            var folder = Path.GetDirectoryName(path);
+            if (!File.Exists(path))
+            {
+                File.Create(path);
+            }
+            var jsStr = File.ReadAllText(path);
+#endif
+            var list = jsStr != "" ? FromJson<List<double>>(jsStr) : new List<double>();
+            var str = "";
+            foreach (var item in list)
+            {
+                str += $"{(int)item},";
+            }
+            if (str.EndsWith(","))
+            {
+                str = str.Remove(str.Length - 1);
+            }
+            return str;
+            //return jsStr != "" ? FromJson<List<double>>(jsStr) : new List<double>();
+        }
 
 #if WINDOWS_UWP
         public static async Task AddFavor(double item)
