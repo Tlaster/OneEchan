@@ -20,10 +20,8 @@ namespace AnimateRaw.Android.Adapter
         public event EventHandler<int> ItemClick;
 
         public List<AnimateListModel> Items { get; private set; }
-        private Activity _context;
-        public MainListAdapter(Activity context, List<AnimateListModel> items) : base()
+        public MainListAdapter(List<AnimateListModel> items) : base()
         {
-            _context = context;
             Items = items;
         }
         public void Add(List<AnimateListModel> list)

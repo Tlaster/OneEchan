@@ -1,30 +1,24 @@
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-
 using Android.App;
 using Android.Content;
 using Android.OS;
-using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using System.Net.Http;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using AnimateRaw.Android.Adapter;
-using Android.Graphics.Drawables;
-using Android.Graphics;
-using Android.Net;
 using AnimateRaw.Shared.Model;
 using System.Net;
 using System;
 using System.Threading.Tasks;
 using Android.Support.V7.Widget;
+using Android.Support.V7.App;
+using Android.Util;
 
 namespace AnimateRaw.Android
 {
     [Activity(Label = "Detail")]
-    public class DetailActivity : Activity
+    public class DetailActivity : AppCompatActivity
     {
         private double _id;
         private ExRecyclerView _exRecyclerView;
@@ -36,25 +30,17 @@ namespace AnimateRaw.Android
             base.OnCreate(savedInstanceState);
             _name = Intent.Extras.GetString("name");
             _id = Intent.Extras.GetDouble("id");
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-            {
-                ActionBar.SetIcon(new ColorDrawable(Color.Transparent));
-                ActionBar.SetBackgroundDrawable(new ColorDrawable(Color.MediumVioletRed));
-                ActionBar.SetDisplayShowTitleEnabled(true);
-                ActionBar.Title = _name;
-                Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
-                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-                Window.SetStatusBarColor(Color.MediumVioletRed);
-                Window.SetNavigationBarColor(Color.MediumVioletRed);
-            }
-            else
-            {
-                Title = _name;
-            }
-
             SetContentView(Resource.Layout.MainPage);
+            var toolbar = FindViewById<global::Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
+            SupportActionBar.Title = _name;
             _exRecyclerView = FindViewById<ExRecyclerView>(Resource.Id.MainPageRecyclerView);
-            _exRecyclerView.ViewLayoutManager = new GridLayoutManager(this, 3);
+            var disp = WindowManager.DefaultDisplay;
+            var met = new DisplayMetrics();
+            disp.GetMetrics(met);
+            var heightm = met.HeightPixels;
+            var widthm = met.WidthPixels;
+            _exRecyclerView.ViewLayoutManager = new GridLayoutManager(this, heightm > widthm ? 2 : 3);
             _refresher = FindViewById<ScrollChildSwipeRefreshLayout>(Resource.Id.MainPageRefresher);
             _refresher.SetColorSchemeResources(Resource.Color.MediumVioletRed);
             _refresher.Refresh += refresher_Refresh;
@@ -73,7 +59,7 @@ namespace AnimateRaw.Android
             {
                 using (var client = new HttpClient())
                 {
-                    var jsstr = await client.GetStringAsync($"http://tlaster.me/api/detail?id={_id}");
+                    var jsstr = await client.GetStringAsync($"http://ani-raw.cc/api/detail?id={_id}");
                     var list = (from item in (JArray)((JObject)JsonConvert.DeserializeObject(jsstr))["SetList"]
                                 select new AnimateSetModel
                                 {
@@ -82,7 +68,7 @@ namespace AnimateRaw.Android
                                     FilePath = item.Value<string>("FilePath"),
                                     FileThumb = item.Value<string>("FileThumb"),
                                 }).OrderBy(a => a.FileName).ToList();
-                    var ada = new DetailListAdapter(this, list);
+                    var ada = new DetailListAdapter(list);
                     ada.ItemClick += Ada_ItemClick;
                     _exRecyclerView.ViewAdapter = ada;
                     _refresher.Refreshing = false;
@@ -95,13 +81,13 @@ namespace AnimateRaw.Android
             }
         }
 
-        private async void Ada_ItemClick(object sender, int e)
+        private void Ada_ItemClick(object sender, int e)
         {
             var item = (_exRecyclerView.ViewAdapter as DetailListAdapter).Items[e];
             try
             {
                 using (var client = new HttpClient())
-                    await client.GetStringAsync($"http://tlaster.me/api/detail?id={_id}&filename={item.FileName}");
+                    client.GetStringAsync($"http://ani-raw.cc/api/detail?id={_id}&filename={item.FileName}");
             }
             catch
             {

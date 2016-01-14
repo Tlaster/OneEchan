@@ -1,5 +1,4 @@
 ﻿using AnimateRaw.Extension;
-using AnimateRaw.Shared.Helper;
 using AnimateRaw.Shared.Model;
 using System;
 using System.Collections.Generic;
@@ -7,11 +6,8 @@ using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
-using System.Text;
-using System.Threading.Tasks;
 using Windows.Data.Json;
 using Windows.UI.Popups;
-using Windows.UI.Xaml.Controls;
 
 namespace AnimateRaw.ViewModel
 {
@@ -19,7 +15,6 @@ namespace AnimateRaw.ViewModel
     {
         public string Name { get; private set; }
         public List<AnimateSetModel> SetList { get; private set; }
-        public bool IsFavor { get; private set; }
         public bool IsLoading { get; private set; }
         private double _id;
 
@@ -40,7 +35,7 @@ namespace AnimateRaw.ViewModel
             {
                 using (var client = new HttpClient())
                 {
-                    var jsstr = await client.GetStringAsync($"http://tlaster.me/api/detail?id={_id}");
+                    var jsstr = await client.GetStringAsync($"http://ani-raw.cc/api/detail?id={_id}");
                     var obj = JsonObject.Parse(jsstr);
                     SetList = (from item in obj.GetNamedArray("SetList")
                                select new AnimateSetModel
@@ -51,8 +46,6 @@ namespace AnimateRaw.ViewModel
                                    FileThumb = item.GetNamedString("FileThumb"),
                                }).OrderBy(a => a.FileName).ToList();
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SetList)));
-                    IsFavor = await FavorHelper.IsFavor(_id);
-                    PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsFavor)));
                 }
             }
             catch (Exception e) when (e is WebException || e is HttpRequestException)
@@ -63,19 +56,10 @@ namespace AnimateRaw.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLoading)));
         }
         public void Refresh() => Init();
-        public async void FavorClick()
-        {
-            if (IsFavor)
-                await FavorHelper.RemoveFavor(_id);
-            else
-                await FavorHelper.AddFavor(_id);
-            IsFavor = await FavorHelper.IsFavor(_id);
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsFavor)));
-        }
         internal async void Click(string fileName)
         {
             using (var client = new HttpClient())
-                await client.GetStringAsync($"http://tlaster.me/api/detail?id={_id}&filename={fileName}");
+                await client.GetStringAsync($"http://ani-raw.cc/api/detail?id={_id}&filename={fileName}");
         }
     }
 }

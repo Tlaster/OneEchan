@@ -18,6 +18,7 @@ using Windows.UI.Xaml.Navigation;
 using AnimateRaw.Extension;
 using System.ComponentModel;
 using AnimateRaw.ViewModel;
+using AnimateRaw.View;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -36,14 +37,6 @@ namespace AnimateRaw
             NavigationCacheMode = NavigationCacheMode.Required;
             MainVM = new MainViewModel();
         }
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
-        {
-            base.OnNavigatedTo(e);
-            if (e.NavigationMode == NavigationMode.Back)
-            {
-                await MainVM.GetFavorList();
-            }
-        }
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
@@ -54,6 +47,17 @@ namespace AnimateRaw
         private void Button_Click(object sender, RoutedEventArgs e)
         {
             MainVM.Refresh();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            var menu = Resources["TitleMenu"] as MenuFlyout;
+            menu.ShowAt(null, (sender as Button).TransformToVisual(null).TransformPoint(new Point()));
+        }
+
+        private void MenuFlyoutItem_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AboutPage));
         }
     }
 }

@@ -22,7 +22,7 @@ namespace AnimateRaw.Common
         {
             using (var client = new HttpClient())
             {
-                var jsstr = await client.GetStringAsync($"http://tlaster.me/api/list?page={_page++}");
+                var jsstr = await client.GetStringAsync($"http://ani-raw.cc/api/list?page={_page++}");
                 var obj = JsonObject.Parse(jsstr);
                 _hasMore = obj.GetNamedBoolean("HasMore");
                 if (obj.GetNamedBoolean("Success"))

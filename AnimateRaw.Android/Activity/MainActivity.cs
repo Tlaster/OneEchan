@@ -17,11 +17,13 @@ using Android.Support.V4.Widget;
 using System.Net;
 using System.Collections.ObjectModel;
 using Android.Support.V7.Widget;
+using Android.Support.V7.App;
+using AnimateRaw.Android.Activity;
 
 namespace AnimateRaw.Android
 {
     [Activity(Label = "Animate Raw", MainLauncher = true, Icon = "@drawable/icon")]
-    public class MainActivity : Activity
+    public class MainActivity : AppCompatActivity
     {
         private ExRecyclerView _recyclerView;
         private SwipeRefreshLayout _refresher;
@@ -32,23 +34,14 @@ namespace AnimateRaw.Android
 
         protected override async void OnCreate(Bundle bundle)
         {
-            if (Build.VERSION.SdkInt >= BuildVersionCodes.Lollipop)
-            {
-                ActionBar.SetIcon(new ColorDrawable(Color.Transparent));
-                ActionBar.SetBackgroundDrawable(new ColorDrawable(Color.MediumVioletRed));
-                ActionBar.SetDisplayShowTitleEnabled(true);
-                ActionBar.Title = "Animate Raw";
-                Window.ClearFlags(WindowManagerFlags.TranslucentStatus);
-                Window.AddFlags(WindowManagerFlags.DrawsSystemBarBackgrounds);
-                Window.SetStatusBarColor(Color.MediumVioletRed);
-                Window.SetNavigationBarColor(Color.MediumVioletRed);
-            }
-            else
-            {
-                Title = "Animate Raw";
-            }
+#if !DEBUG
+            Xamarin.Insights.Initialize(XamarinInsights.ApiKey, this);
+#endif
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.MainPage);
+            var toolbar = FindViewById<global::Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            SetSupportActionBar(toolbar);
+            SupportActionBar.Title = "Animate Raw";
             _recyclerView = FindViewById<ExRecyclerView>(Resource.Id.MainPageRecyclerView);
             _recyclerView.OnScroll += recyclerView_OnScroll;
             _layoutManager = new LinearLayoutManager(this);
@@ -60,6 +53,19 @@ namespace AnimateRaw.Android
             await Refresh();
         }
 
+        public override bool OnOptionsItemSelected(IMenuItem item)
+        {
+            switch (item.ItemId)
+            {
+                case Resource.Id.Menu_About:
+                    StartActivity(new Intent(this, typeof(AboutActivity)));
+                    break;
+                default:
+                    break;
+            }
+
+            return base.OnOptionsItemSelected(item);
+        }
         private void recyclerView_OnScroll(object sender, OnScrollEventArgs e)
         {
             if (e.dy > 0)
@@ -78,13 +84,18 @@ namespace AnimateRaw.Android
                 }
             }
         }
-       
+
+        public override bool OnCreateOptionsMenu(IMenu menu)
+        {
+            MenuInflater.Inflate(Resource.Menu.home, menu);
+            return base.OnCreateOptionsMenu(menu);
+        }
 
         private async void LoadMore()
         {
             using (var client = new HttpClient())
             {
-                var jsstr = await client.GetStringAsync($"http://tlaster.me/api/list?page={_page++}");
+                var jsstr = await client.GetStringAsync($"http://ani-raw.cc/api/list?page={_page++}");
                 var obj = (JObject)JsonConvert.DeserializeObject(jsstr);
                 _hasMore = (bool)obj["HasMore"];
                 var list = (from item in (JArray)obj["List"]
@@ -112,7 +123,7 @@ namespace AnimateRaw.Android
                 using (var client = new HttpClient())
                 {
                     _page = 0;
-                    var jsstr = await client.GetStringAsync($"http://tlaster.me/api/list?page={_page++}");
+                    var jsstr = await client.GetStringAsync($"http://ani-raw.cc/api/list?page={_page++}");
                     var obj = (JObject)JsonConvert.DeserializeObject(jsstr);
                     _hasMore = (bool)obj["HasMore"];
                     var list = (from item in (JArray)obj["List"]
@@ -122,7 +133,7 @@ namespace AnimateRaw.Android
                                     Name = item.Value<string>("Name"),
                                     LastUpdateBeijing = DateTime.Parse(item.Value<string>("LastUpdate")),
                                 }).ToList();
-                    var ada = new MainListAdapter(this, list);
+                    var ada = new MainListAdapter(list);
                     ada.ItemClick += Ada_ItemClick;
                     _recyclerView.ViewAdapter = ada;
                     _refresher.Refreshing = false;

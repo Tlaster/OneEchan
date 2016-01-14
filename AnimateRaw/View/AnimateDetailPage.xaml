@@ -29,9 +29,6 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <TextBlock Text="{x:Bind DetailVM.Name}" TextTrimming="CharacterEllipsis" Style="{ThemeResource SubtitleTextBlockStyle}" MaxLines="2" HorizontalAlignment="Left" VerticalAlignment="Center" Padding="12"/>
-            <Button Grid.Column="1" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Click="{x:Bind DetailVM.FavorClick}">
-                <SymbolIcon Symbol="{x:Bind DetailVM.IsFavor,Converter={StaticResource BoolToFavorIconConverter},Mode=OneWay}"/>
-            </Button>
             <Button Grid.Column="2" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Click="{x:Bind DetailVM.Refresh}">
                 <SymbolIcon Symbol="Refresh"/>
             </Button>

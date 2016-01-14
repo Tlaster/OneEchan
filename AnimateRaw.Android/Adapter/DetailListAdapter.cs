@@ -14,6 +14,7 @@ using Android.Support.V7.Widget;
 using AnimateRaw.Android.ViewHolder;
 using Android.Graphics;
 using System.Net.Http;
+using Android.Support.V7.App;
 
 namespace AnimateRaw.Android.Adapter
 {
@@ -21,11 +22,9 @@ namespace AnimateRaw.Android.Adapter
     {
         public event EventHandler<int> ItemClick;
         public List<AnimateSetModel> Items { get; private set; }
-        private Activity _context;
-        public DetailListAdapter(Activity context, List<AnimateSetModel> items) : base()
+        public DetailListAdapter(List<AnimateSetModel> items) : base()
         {
-            this._context = context;
-            this.Items = items;
+            Items = items;
         }
         public override long GetItemId(int position)
         {
@@ -53,13 +52,20 @@ namespace AnimateRaw.Android.Adapter
         private async System.Threading.Tasks.Task<Bitmap> GetImageBitmapFromUrl(string url)
         {
             Bitmap imageBitmap = null;
-            using (var client = new HttpClient())
+            try
             {
-                var imageBytes = await client.GetByteArrayAsync(url);
-                if (imageBytes != null && imageBytes.Length > 0)
+                using (var client = new HttpClient())
                 {
-                    imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                    var imageBytes = await client.GetByteArrayAsync(url);
+                    if (imageBytes != null && imageBytes.Length > 0)
+                    {
+                        imageBitmap = BitmapFactory.DecodeByteArray(imageBytes, 0, imageBytes.Length);
+                    }
                 }
+            }
+            catch (Exception)
+            {
+
             }
             return imageBitmap;
         }

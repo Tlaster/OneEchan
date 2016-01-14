@@ -211,47 +211,54 @@
         <Style x:Key="PivotItemStyle1" TargetType="PivotItem">
             <Setter Property="Margin" Value="0"/>
         </Style>
+
+        <MenuFlyout x:Key="TitleMenu">
+            <MenuFlyoutItem Text="About" Click="MenuFlyoutItem_Click"/>
+        </MenuFlyout>
     </Page.Resources>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Pivot Style="{StaticResource PivotStyle1}" ItemContainerStyle="{StaticResource PivotItemStyle1}">
-            <PivotItem x:Uid="RawPovitItem" Header="Raws">
-                <Grid>
-                    <ProgressBar VerticalAlignment="Top" IsIndeterminate="{x:Bind MainVM.IsLoading,Mode=OneWay}" Visibility="{x:Bind MainVM.IsLoading,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
-                    <ListView SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{x:Bind MainVM.RawList,Mode=OneWay}" >
-                        <ListView.ItemContainerStyle>
-                            <Style TargetType="ListViewItem">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                            </Style>
-                        </ListView.ItemContainerStyle>
-                        <ListView.ItemTemplate>
-                            <DataTemplate x:DataType="model:AnimateListModel">
-                                <StackPanel>
-                                    <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind Name}" TextTrimming="WordEllipsis"/>
-                                    <TextBlock Padding="6,0" Foreground="Gray" Text="{x:Bind LastUpdate,Converter={StaticResource TimeSpanToShortTimeConverter}}"/>
-                                </StackPanel>
-                            </DataTemplate>
-                        </ListView.ItemTemplate>
-                    </ListView>
-                </Grid>
-            </PivotItem>
-            <PivotItem x:Uid="FavorPovitItem" Header="Favor">
-                <ListView SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{x:Bind MainVM.FavorList,Mode=OneWay}" >
-                    <ListView.ItemContainerStyle>
-                        <Style TargetType="ListViewItem">
-                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                        </Style>
-                    </ListView.ItemContainerStyle>
-                    <ListView.ItemTemplate>
-                        <DataTemplate x:DataType="model:AnimateListModel">
-                            <StackPanel>
-                                <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind Name}" TextTrimming="WordEllipsis"/>
-                                <TextBlock Padding="6,0" Foreground="Gray" Text="{x:Bind LastUpdate,Converter={StaticResource TimeSpanToShortTimeConverter}}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </PivotItem>
-        </Pivot>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Border Background="MediumVioletRed">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Style="{ThemeResource TitleTextBlockStyle}" Foreground="White" Padding="16">Animate Raw</TextBlock>
+                <Button Click="Button_Click" Grid.Column="1" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Foreground="White">
+                    <SymbolIcon Symbol="Refresh"/>
+                </Button>
+                <Button Click="Button_Click_1" Grid.Column="2" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}" Foreground="White">
+                    <SymbolIcon Symbol="More" RenderTransformOrigin="0.5,0.5">
+                        <SymbolIcon.RenderTransform>
+                            <CompositeTransform Rotation="90"/>
+                        </SymbolIcon.RenderTransform>
+                    </SymbolIcon>
+                </Button>
+            </Grid>
+        </Border>
+        <Grid Grid.Row="1">
+            <ProgressBar VerticalAlignment="Top" IsIndeterminate="{x:Bind MainVM.IsLoading,Mode=OneWay}" Visibility="{x:Bind MainVM.IsLoading,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
+            <ListView SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick" Grid.Row="1" Grid.ColumnSpan="2" ItemsSource="{x:Bind MainVM.RawList,Mode=OneWay}" >
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="model:AnimateListModel">
+                        <StackPanel>
+                            <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind Name}" TextTrimming="WordEllipsis"/>
+                            <TextBlock Padding="6,0" Foreground="Gray" Text="{x:Bind LastUpdate,Converter={StaticResource TimeSpanToShortTimeConverter}}"/>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
     </Grid>
 </Page>
