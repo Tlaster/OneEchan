@@ -19,3 +19,9 @@ Requirement
 -----------
 Visual Studio 2015  
 Xamarin  
+
+About
+-----------
+This application is designed for myself who is tired of downloading animate everyday.  
+Support:  
+　　alipay:myy421108033@gmail.com
