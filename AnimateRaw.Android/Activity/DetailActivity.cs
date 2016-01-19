@@ -59,7 +59,7 @@ namespace AnimateRaw.Android
             {
                 using (var client = new HttpClient())
                 {
-                    var jsstr = await client.GetStringAsync($"http://ani-raw.cc/api/detail?id={_id}");
+                    var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/detail?id={_id}");
                     var list = (from item in (JArray)((JObject)JsonConvert.DeserializeObject(jsstr))["SetList"]
                                 select new AnimateSetModel
                                 {
@@ -87,7 +87,7 @@ namespace AnimateRaw.Android
             try
             {
                 using (var client = new HttpClient())
-                    client.GetStringAsync($"http://ani-raw.cc/api/detail?id={_id}&filename={item.FileName}");
+                    client.GetStringAsync($"http://oneechan.moe/api/detail?id={_id}&filename={item.FileName}");
             }
             catch
             {

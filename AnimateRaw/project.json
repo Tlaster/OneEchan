@@ -1,7 +1,8 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.0.0",
-    "PullToRefresh.UWP": "0.3.3"
+    "PullToRefresh.UWP": "0.3.3",
+    "Xamarin.Insights": "1.11.3"
   },
   "frameworks": {
     "uap10.0": {}

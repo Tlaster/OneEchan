@@ -95,7 +95,7 @@ namespace AnimateRaw.Android
         {
             using (var client = new HttpClient())
             {
-                var jsstr = await client.GetStringAsync($"http://ani-raw.cc/api/list?page={_page++}");
+                var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/list?page={_page++}");
                 var obj = (JObject)JsonConvert.DeserializeObject(jsstr);
                 _hasMore = (bool)obj["HasMore"];
                 var list = (from item in (JArray)obj["List"]
@@ -123,7 +123,7 @@ namespace AnimateRaw.Android
                 using (var client = new HttpClient())
                 {
                     _page = 0;
-                    var jsstr = await client.GetStringAsync($"http://ani-raw.cc/api/list?page={_page++}");
+                    var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/list?page={_page++}");
                     var obj = (JObject)JsonConvert.DeserializeObject(jsstr);
                     _hasMore = (bool)obj["HasMore"];
                     var list = (from item in (JArray)obj["List"]
