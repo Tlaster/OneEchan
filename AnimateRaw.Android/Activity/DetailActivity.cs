@@ -14,10 +14,12 @@ using System.Threading.Tasks;
 using Android.Support.V7.Widget;
 using Android.Support.V7.App;
 using Android.Util;
+using AnimateRaw.Shared;
+using AnimateRaw.Android.Common.Helpers;
 
 namespace AnimateRaw.Android
 {
-    [Activity(Label = "Detail")]
+    [Activity(Label = "Detail", Theme = "@style/AppTheme.NoActionBar")]
     public class DetailActivity : AppCompatActivity
     {
         private double _id;
@@ -32,6 +34,7 @@ namespace AnimateRaw.Android
             _id = Intent.Extras.GetDouble("id");
             SetContentView(Resource.Layout.MainPage);
             var toolbar = FindViewById<global::Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            ((LinearLayout.LayoutParams)toolbar.LayoutParameters).SetMargins(0, StatusBarHelper.GetStatusBarHeight(this), 0, 0);
             SetSupportActionBar(toolbar);
             SupportActionBar.Title = _name;
             _exRecyclerView = FindViewById<ExRecyclerView>(Resource.Id.MainPageRecyclerView);
@@ -43,23 +46,18 @@ namespace AnimateRaw.Android
             _exRecyclerView.ViewLayoutManager = new GridLayoutManager(this, heightm > widthm ? 2 : 3);
             _refresher = FindViewById<ScrollChildSwipeRefreshLayout>(Resource.Id.MainPageRefresher);
             _refresher.SetColorSchemeResources(Resource.Color.MediumVioletRed);
-            _refresher.Refresh += refresher_Refresh;
+            _refresher.Refresh += async delegate { await Refresh(); };
             _refresher.Post(() => _refresher.Refreshing = true);
             await Refresh();
         }
-
-        private async void refresher_Refresh(object sender, EventArgs e)
-        {
-            await Refresh();
-        }
-
+        
         private async Task Refresh()
         {
             try
             {
                 using (var client = new HttpClient())
                 {
-                    var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/detail?id={_id}");
+                    var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/detail?id={_id}&prefLang={LanguageHelper.PrefLang}");
                     var list = (from item in (JArray)((JObject)JsonConvert.DeserializeObject(jsstr))["SetList"]
                                 select new AnimateSetModel
                                 {
@@ -87,7 +85,7 @@ namespace AnimateRaw.Android
             try
             {
                 using (var client = new HttpClient())
-                    client.GetStringAsync($"http://oneechan.moe/api/detail?id={_id}&filename={item.FileName}");
+                    client.GetStringAsync($"http://oneechan.moe/api/detail?id={_id}&filename={item.FileName}&prefLang={LanguageHelper.PrefLang}");
             }
             catch
             {

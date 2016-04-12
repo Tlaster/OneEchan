@@ -14,9 +14,11 @@ using Android.Util;
 
 namespace AnimateRaw.Android
 {
+
     public class ExRecyclerView : RecyclerView
     {
-        public event EventHandler<OnScrollEventArgs> OnScroll;
+        public event EventHandler<ScrollEventArgs> Scroll;
+        public event EventHandler LoadMore;
         public Adapter ViewAdapter
         {
             get { return GetAdapter(); }
@@ -28,7 +30,7 @@ namespace AnimateRaw.Android
             set { SetLayoutManager(value); }
         }
 
-        public ExRecyclerView(Context context):base(context)
+        public ExRecyclerView(Context context) : base(context)
         {
 
         }
@@ -47,12 +49,19 @@ namespace AnimateRaw.Android
         public override void OnScrolled(int dx, int dy)
         {
             base.OnScrolled(dx, dy);
-            OnScroll?.Invoke(this, new OnScrollEventArgs(dx, dy));
+            Scroll?.Invoke(this, new ScrollEventArgs(dx, dy));
+            if (dy <= 0)
+                return;
+            var visibleItemCount = ViewLayoutManager.ChildCount;
+            var totalItemCount = ViewLayoutManager.ItemCount;
+            var pastVisiblesItems = (ViewLayoutManager is LinearLayoutManager ? ViewLayoutManager as LinearLayoutManager : ViewLayoutManager is GridLayoutManager ? ViewLayoutManager as GridLayoutManager : null).FindFirstVisibleItemPosition();
+            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount - 3)
+                LoadMore?.Invoke(this, new EventArgs());
         }
     }
-    public class OnScrollEventArgs : EventArgs
+    public class ScrollEventArgs : EventArgs
     {
-        public OnScrollEventArgs(int dx,int dy)
+        public ScrollEventArgs(int dx,int dy)
         {
             this.dx = dx;
             this.dy = dy;

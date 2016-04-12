@@ -19,10 +19,13 @@ using System.Collections.ObjectModel;
 using Android.Support.V7.Widget;
 using Android.Support.V7.App;
 using AnimateRaw.Android.Activity;
+using Java.Util;
+using AnimateRaw.Shared;
+using AnimateRaw.Android.Common.Helpers;
 
 namespace AnimateRaw.Android
 {
-    [Activity(Label = "Animate Raw", MainLauncher = true, Icon = "@drawable/icon")]
+    [Activity(Label = "Animate Raw", MainLauncher = true, Icon = "@drawable/icon", Theme = "@style/AppTheme.NoActionBar")]
     public class MainActivity : AppCompatActivity
     {
         private ExRecyclerView _recyclerView;
@@ -31,6 +34,7 @@ namespace AnimateRaw.Android
         private int _page = 0;
         private bool _hasMore = true;
         private LinearLayoutManager _layoutManager;
+        private string _serverLink => $"http://oneechan.moe/api/list?page={_page++}&prefLang={LanguageHelper.PrefLang}";
 
         protected override async void OnCreate(Bundle bundle)
         {
@@ -40,19 +44,19 @@ namespace AnimateRaw.Android
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.MainPage);
             var toolbar = FindViewById<global::Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
+            ((LinearLayout.LayoutParams)toolbar.LayoutParameters).SetMargins(0, StatusBarHelper.GetStatusBarHeight(this), 0, 0);
             SetSupportActionBar(toolbar);
             SupportActionBar.Title = "Animate Raw";
             _recyclerView = FindViewById<ExRecyclerView>(Resource.Id.MainPageRecyclerView);
-            _recyclerView.OnScroll += recyclerView_OnScroll;
             _layoutManager = new LinearLayoutManager(this);
             _recyclerView.ViewLayoutManager = _layoutManager;
+            _recyclerView.LoadMore += (sender, e) => LoadMore();
             _refresher = FindViewById<ScrollChildSwipeRefreshLayout>(Resource.Id.MainPageRefresher);
             _refresher.SetColorSchemeResources(Resource.Color.MediumVioletRed);
-            _refresher.Refresh += refresher_Refresh;
+            _refresher.Refresh += async delegate { await Refresh(); };
             _refresher.Post(() => _refresher.Refreshing = true);
             await Refresh();
         }
-
         public override bool OnOptionsItemSelected(IMenuItem item)
         {
             switch (item.ItemId)
@@ -63,26 +67,7 @@ namespace AnimateRaw.Android
                 default:
                     break;
             }
-
             return base.OnOptionsItemSelected(item);
-        }
-        private void recyclerView_OnScroll(object sender, OnScrollEventArgs e)
-        {
-            if (e.dy > 0)
-            {
-                var visibleItemCount = _layoutManager.ChildCount;
-                var totalItemCount = _layoutManager.ItemCount;
-                var pastVisiblesItems = _layoutManager.FindFirstVisibleItemPosition();
-
-                if (!_isLoading)
-                {
-                    if ((visibleItemCount + pastVisiblesItems) >= totalItemCount - 3)
-                    {
-                        _isLoading = true;
-                        LoadMore();
-                    }
-                }
-            }
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
@@ -93,9 +78,12 @@ namespace AnimateRaw.Android
 
         private async void LoadMore()
         {
+            if (_isLoading)
+                return;
+            _isLoading = true;
             using (var client = new HttpClient())
             {
-                var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/list?page={_page++}");
+                var jsstr = await client.GetStringAsync(_serverLink);
                 var obj = (JObject)JsonConvert.DeserializeObject(jsstr);
                 _hasMore = (bool)obj["HasMore"];
                 var list = (from item in (JArray)obj["List"]
@@ -109,12 +97,6 @@ namespace AnimateRaw.Android
                 _isLoading = false;
             }
         }
-        
-
-        private async void refresher_Refresh(object sender, EventArgs e)
-        {
-            await Refresh();
-        }
 
         private async System.Threading.Tasks.Task Refresh()
         {
@@ -123,7 +105,7 @@ namespace AnimateRaw.Android
                 using (var client = new HttpClient())
                 {
                     _page = 0;
-                    var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/list?page={_page++}");
+                    var jsstr = await client.GetStringAsync(_serverLink);
                     var obj = (JObject)JsonConvert.DeserializeObject(jsstr);
                     _hasMore = (bool)obj["HasMore"];
                     var list = (from item in (JArray)obj["List"]

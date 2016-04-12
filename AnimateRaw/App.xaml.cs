@@ -7,6 +7,7 @@ using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -46,8 +47,28 @@ namespace AnimateRaw
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
+#else
+            Xamarin.Insights.HasPendingCrashReport += (sender, isStartupCrash) =>
+            {
+                if (isStartupCrash)
+                {
+                    Xamarin.Insights.PurgePendingCrashReports().Wait();
+                }
+            };
+            Xamarin.Insights.Initialize(XamarinInsights.ApiKey);
 #endif
 
+            if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
+            {
+                Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundColor = Color.FromArgb(255, 139, 14, 93);
+                Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundOpacity = 1d;
+                Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
+            }
+            else
+            {
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = Color.FromArgb(255, 139, 14, 93);
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Color.FromArgb(255, 139, 14, 93);
+            }
             Frame rootFrame = Window.Current.Content as Frame;
 
             // 不要在窗口已包含内容时重复应用程序初始化，
@@ -69,12 +90,7 @@ namespace AnimateRaw
             }
             rootFrame.Navigated += RootFrame_Navigated;
             Windows.ApplicationModel.Core.CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = false;
-            //SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility = AppViewBackButtonVisibility.Visible;
             SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
-            //Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
-            //Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Colors.Transparent;
-            //Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = Colors.Transparent;
-            //Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonForegroundColor = Colors.White;
 
             if (rootFrame.Content == null)
             {

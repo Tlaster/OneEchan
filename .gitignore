@@ -210,3 +210,6 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
+/AnimateRaw/BundleArtifacts
+/AnimateRaw/_language-zh-hans.appx
+/AnimateRaw.Shared/XamarinInsights.cs

@@ -8,6 +8,7 @@ using AnimateRaw.Shared.Model;
 using System.Net.Http;
 using Windows.Data.Json;
 using AnimateRaw.Extension;
+using AnimateRaw.Shared;
 
 namespace AnimateRaw.Common
 {
@@ -22,7 +23,7 @@ namespace AnimateRaw.Common
         {
             using (var client = new HttpClient())
             {
-                var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/list?page={_page++}");
+                var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/list?page={_page++}&prefLang={LanguageHelper.PrefLang}");
                 var obj = JsonObject.Parse(jsstr);
                 _hasMore = obj.GetNamedBoolean("HasMore");
                 if (obj.GetNamedBoolean("Success"))

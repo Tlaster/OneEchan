@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using Windows.Data.Json;
 using Windows.UI.Popups;
+using AnimateRaw.Shared;
 
 namespace AnimateRaw.ViewModel
 {
@@ -35,7 +36,7 @@ namespace AnimateRaw.ViewModel
             {
                 using (var client = new HttpClient())
                 {
-                    var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/detail?id={_id}");
+                    var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/detail?id={_id}&prefLang={LanguageHelper.PrefLang}");
                     var obj = JsonObject.Parse(jsstr);
                     SetList = (from item in obj.GetNamedArray("SetList")
                                select new AnimateSetModel
@@ -59,7 +60,7 @@ namespace AnimateRaw.ViewModel
         internal async void Click(string fileName)
         {
             using (var client = new HttpClient())
-                await client.GetStringAsync($"http://oneechan.moe/api/detail?id={_id}&filename={fileName}");
+                await client.GetStringAsync($"http://oneechan.moe/api/detail?id={_id}&filename={fileName}&prefLang={LanguageHelper.PrefLang}");
         }
     }
 }
