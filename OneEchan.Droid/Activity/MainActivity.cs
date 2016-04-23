@@ -26,7 +26,7 @@ using System.Threading.Tasks;
 
 namespace OneEchan.Droid
 {
-    [Activity(Label = "OneEchan", MainLauncher = true, Icon = "@drawable/icon", Theme = "@style/AppTheme.NoActionBar")]
+    [Activity(Label = "OneEchan", MainLauncher = true, Icon = "@mipmap/logo", Theme = "@style/AppTheme.NoActionBar")]
     public class MainActivity : AppCompatActivity
     {
         private ExRecyclerView _recyclerView;
