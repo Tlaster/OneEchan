@@ -1,13 +1,13 @@
-# AnimateRaw
+# OneEchan
 An application to get animate raw 
 
 What's this?
 -----------
-Using Animate Raw you can watch animate online without downloading  
+Using OneEchan you can watch animate online without downloading  
 For Windows 10 or Windows 10 Mobile users,you can download from the [Windows Store](https://www.microsoft.com/store/apps/9nblggh6jxgp).  
 For Android users,you can click the [releases](https://github.com/Tlaster/AnimateRaw/releases) and download the latest release for android.  
 For IOS or OS X users,sorry :)  
-Or,you can visit [Ani-Raw](http://oneechan.moe/).
+Or,you can visit [oneechan.moe](http://oneechan.moe/).
 
 Screenshots
 -----------
