@@ -210,6 +210,7 @@ FakesAssemblies/
 GeneratedArtifacts/
 _Pvt_Extensions/
 ModelManifest.xml
-/AnimateRaw/BundleArtifacts
-/AnimateRaw/_language-zh-hans.appx
-/AnimateRaw.Shared/XamarinInsights.cs
+/OneEchan.UWP/BundleArtifacts
+/OneEchan.UWP/_language-zh-hans.appx
+/OneEchan.Shared/XamarinInsights.cs
+/OneEchan.Shared/HockeyAppKey.cs
