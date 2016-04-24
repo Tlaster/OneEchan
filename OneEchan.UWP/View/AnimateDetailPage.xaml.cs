@@ -1,21 +1,13 @@
-﻿using OneEchan.Shared.Model;
-using OneEchan.ViewModel;
+﻿using OneEchan.ViewModel;
 using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.DataTransfer;
 using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.System;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using OneEchan.Core.Common.Api.Model;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -42,7 +34,7 @@ namespace OneEchan
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = e.ClickedItem as AnimateSetModel;
-            DetailVM.Click(item.FileName);
+            DetailVM.Click(int.Parse(item.FileName));
             Frame.Navigate(typeof(AnimatePlayPage), item.FilePath);
         }
 

@@ -165,6 +165,12 @@
       <Name>Windows Mobile Extensions for the UWP</Name>
     </SDKReference>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OneEchan.Core\OneEchan.Core.csproj">
+      <Project>{94574309-1c56-4f55-9535-7ed8f83552c1}</Project>
+      <Name>OneEchan.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\OneEchan.Shared\OneEchan.Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

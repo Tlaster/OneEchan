@@ -10,10 +10,7 @@ namespace OneEchan.Converter
 {
     public class BoolToFavorIconConverter : IValueConverter
     {
-        public object Convert(object value, Type targetType, object parameter, string language)
-        {
-            return bool.Parse(value.ToString()) ? Symbol.UnFavorite : Symbol.Favorite;
-        }
+        public object Convert(object value, Type targetType, object parameter, string language) => bool.Parse(value.ToString()) ? Symbol.UnFavorite : Symbol.Favorite;
 
         public object ConvertBack(object value, Type targetType, object parameter, string language)
         {

@@ -5,21 +5,14 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json;
 using OneEchan.Droid.Adapter;
 using System.Net.Http;
 using System.Linq;
-using OneEchan.Shared.Model;
-using Android.Graphics.Drawables;
-using Android.Graphics;
 using Android.Support.V4.Widget;
 using System.Net;
-using System.Collections.ObjectModel;
 using Android.Support.V7.Widget;
 using Android.Support.V7.App;
 using OneEchan.Droid.Activity;
-using Java.Util;
 using OneEchan.Shared;
 using OneEchan.Droid.Common.Helpers;
 using System.Threading.Tasks;
@@ -35,7 +28,6 @@ namespace OneEchan.Droid
         private int _page = 0;
         private bool _hasMore = true;
         private LinearLayoutManager _layoutManager;
-        private string _serverLink => $"http://oneechan.moe/api/list?page={_page++}&prefLang={LanguageHelper.PrefLang}";
 
         protected override async void OnCreate(Bundle bundle)
         {
@@ -60,28 +52,15 @@ namespace OneEchan.Droid
         private void InitHockeyApp()
         {
             HockeyApp.CrashManager.Register(this, HockeyAppKey.ApiKey);
-
-            //Register to with the Update Manager
             HockeyApp.UpdateManager.Register(this, HockeyAppKey.ApiKey);
-
-            // Initialize the Trace Writer
             HockeyApp.TraceWriter.Initialize();
-
-            // Wire up Unhandled Expcetion handler from Android
             AndroidEnvironment.UnhandledExceptionRaiser += (sender, args) =>
             {
-                // Use the trace writer to log exceptions so HockeyApp finds them
                 HockeyApp.TraceWriter.WriteTrace(args.Exception);
                 args.Handled = true;
             };
-
-            // Wire up the .NET Unhandled Exception handler
-            AppDomain.CurrentDomain.UnhandledException +=
-                (sender, args) => HockeyApp.TraceWriter.WriteTrace(args.ExceptionObject);
-
-            // Wire up the unobserved task exception handler
-            TaskScheduler.UnobservedTaskException +=
-                (sender, args) => HockeyApp.TraceWriter.WriteTrace(args.Exception);
+            AppDomain.CurrentDomain.UnhandledException += (sender, args) => HockeyApp.TraceWriter.WriteTrace(args.ExceptionObject);
+            TaskScheduler.UnobservedTaskException += (sender, args) => HockeyApp.TraceWriter.WriteTrace(args.Exception);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
@@ -105,54 +84,42 @@ namespace OneEchan.Droid
 
         private async void LoadMore()
         {
-            if (_isLoading)
+            if (_isLoading || !_hasMore)
                 return;
             _isLoading = true;
-            using (var client = new HttpClient())
+            try
             {
-                var jsstr = await client.GetStringAsync(_serverLink);
-                var obj = (JObject)JsonConvert.DeserializeObject(jsstr);
-                _hasMore = (bool)obj["HasMore"];
-                var list = (from item in (JArray)obj["List"]
-                            select new AnimateListModel
-                            {
-                                ID = item.Value<int>("ID"),
-                                Name = item.Value<string>("Name"),
-                                LastUpdateBeijing = DateTime.Parse(item.Value<string>("LastUpdate")),
-                            }).ToList();
-                (_recyclerView.ViewAdapter as MainListAdapter).Add(list);
-                _isLoading = false;
+                var item = await Core.Common.Api.Home.GetList(_page++, LanguageHelper.PrefLang);
+                if (!item.Success)
+                    return;
+                _hasMore = item.HasMore;
+                (_recyclerView.ViewAdapter as MainListAdapter).Add(item.List.ToList());
             }
+            catch (Exception e) when (e is WebException || e is HttpRequestException)
+            {
+
+            }
+            _isLoading = false;
         }
 
-        private async System.Threading.Tasks.Task Refresh()
+        private async Task Refresh()
         {
             try
             {
-                using (var client = new HttpClient())
-                {
-                    _page = 0;
-                    var jsstr = await client.GetStringAsync(_serverLink);
-                    var obj = (JObject)JsonConvert.DeserializeObject(jsstr);
-                    _hasMore = (bool)obj["HasMore"];
-                    var list = (from item in (JArray)obj["List"]
-                                select new AnimateListModel
-                                {
-                                    ID = item.Value<int>("ID"),
-                                    Name = item.Value<string>("Name"),
-                                    LastUpdateBeijing = DateTime.Parse(item.Value<string>("LastUpdate")),
-                                }).ToList();
-                    var ada = new MainListAdapter(list);
-                    ada.ItemClick += Ada_ItemClick;
-                    _recyclerView.ViewAdapter = ada;
-                    _refresher.Refreshing = false;
-                }
+                _page = 0;
+                var item = await Core.Common.Api.Home.GetList(_page++, LanguageHelper.PrefLang);
+                if (!item.Success)
+                    return;
+                _hasMore = item.HasMore;
+                var ada = new MainListAdapter(item.List.ToList());
+                ada.ItemClick += Ada_ItemClick;
+                _recyclerView.ViewAdapter = ada;
             }
             catch (Exception e) when(e is WebException || e is HttpRequestException)
             {
                 Toast.MakeText(this, "Error,can not get the list", ToastLength.Short).Show();
-                _refresher.Refreshing = false;
             }
+            _refresher.Refreshing = false;
         }
 
         private void Ada_ItemClick(object sender, int e)
@@ -161,7 +128,7 @@ namespace OneEchan.Droid
             var intent = new Intent(this, typeof(DetailActivity));
             Bundle bundle = new Bundle();
             bundle.PutString("name", item.Name);
-            bundle.PutDouble("id", item.ID);
+            bundle.PutInt("id", item.ID);
             intent.PutExtras(bundle);
             StartActivity(intent);
         }

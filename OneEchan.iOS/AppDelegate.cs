@@ -17,10 +17,10 @@ namespace OneEchan.iOS
 
 		public override bool FinishedLaunching (UIApplication application, NSDictionary launchOptions)
 		{
-			// Override point for customization after application launch.
-			// If not required for your application you can safely delete this method
-
-			return true;
+            // Override point for customization after application launch.
+            // If not required for your application you can safely delete this method
+            UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White });
+            return true;
 		}
 
 		public override void OnResignActivation (UIApplication application)

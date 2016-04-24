@@ -6,7 +6,7 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:model="using:OneEchan.Shared.Model"
+    xmlns:model="using:OneEchan.Core.Common.Api.Model"
     xmlns:converter="using:OneEchan.Converter"
     xmlns:ptr="using:PullToRefresh.UWP">
     <Page.Resources>
@@ -53,7 +53,7 @@
                     <DataTemplate x:DataType="model:AnimateListModel">
                         <StackPanel>
                             <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind Name}" TextTrimming="WordEllipsis"/>
-                            <TextBlock Padding="6,0" Foreground="Gray" Text="{x:Bind LastUpdate,Converter={StaticResource TimeSpanToShortTimeConverter}}"/>
+                            <TextBlock Padding="6,0" Foreground="Gray" Text="{x:Bind LastUpdateTime,Converter={StaticResource TimeSpanToShortTimeConverter}}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

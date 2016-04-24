@@ -4,6 +4,8 @@ using System.Text;
 #if WINDOWS_UWP
 using Windows.Globalization;
 using Windows.System.UserProfile;
+#elif __IOS__
+using Foundation;
 #else
 using Java.Util;
 #endif
@@ -17,8 +19,9 @@ namespace OneEchan.Shared
             get
             {
 #if WINDOWS_UWP
-                var lang = GlobalizationPreferences.Languages[0];
-
+                var lang = GlobalizationPreferences.Languages[0].ToLower();
+#elif __IOS__
+                var lang = NSLocale.PreferredLanguages[0].ToLower();
 #else
                 var lang = Locale.Default.Language.ToLower();
 #endif

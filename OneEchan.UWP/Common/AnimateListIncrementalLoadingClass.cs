@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
-using OneEchan.Shared.Model;
-using System.Net.Http;
-using Windows.Data.Json;
-using OneEchan.Extension;
 using OneEchan.Shared;
 
 namespace OneEchan.Common
@@ -21,26 +15,11 @@ namespace OneEchan.Common
 
         protected override async Task<IList<object>> LoadMoreItemsOverrideAsync(CancellationToken c, uint count)
         {
-            using (var client = new HttpClient())
-            {
-                var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/list?page={_page++}&prefLang={LanguageHelper.PrefLang}");
-                var obj = JsonObject.Parse(jsstr);
-                _hasMore = obj.GetNamedBoolean("HasMore");
-                if (obj.GetNamedBoolean("Success"))
-                {
-                    return (from item in obj.GetNamedArray("List")
-                            select new AnimateListModel
-                            {
-                                ID = item.GetNamedNumber("ID"),
-                                Name = item.GetNamedString("Name"),
-                                LastUpdateBeijing = DateTime.Parse(item.GetNamedString("LastUpdate")),
-                            }).ToArray();
-                }
-                else
-                {
-                    return null;
-                }
-            }
+            var item = await Core.Common.Api.Home.GetList(_page++, LanguageHelper.PrefLang);
+            if (!item.Success)
+                return null;
+            _hasMore = item.HasMore;
+            return item.List.ToArray();
         }
     }
 }

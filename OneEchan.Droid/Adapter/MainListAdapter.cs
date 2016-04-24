@@ -1,18 +1,9 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
-using Android.Widget;
-using OneEchan.Shared.Model;
-using System.Collections.ObjectModel;
 using Android.Support.V7.Widget;
 using OneEchan.Droid.ViewHolder;
+using OneEchan.Core.Common.Api.Model;
 
 namespace OneEchan.Droid.Adapter
 {
@@ -20,7 +11,7 @@ namespace OneEchan.Droid.Adapter
     {
         public event EventHandler<int> ItemClick;
 
-        public List<AnimateListModel> Items { get; private set; }
+        public List<AnimateListModel> Items { get; }
         public MainListAdapter(List<AnimateListModel> items) : base()
         {
             Items = items;
@@ -53,7 +44,7 @@ namespace OneEchan.Droid.Adapter
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            (holder as ViewHolderBase).SetText(Resource.Id.MainListLayoutName, Items[position].Name).SetText(Resource.Id.MainListLayoutUpdateTime, GetUpdate(Items[position].LastUpdate));
+            (holder as ViewHolderBase).SetText(Resource.Id.MainListLayoutName, Items[position].Name).SetText(Resource.Id.MainListLayoutUpdateTime, GetUpdate(Items[position].LastUpdateTime));
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

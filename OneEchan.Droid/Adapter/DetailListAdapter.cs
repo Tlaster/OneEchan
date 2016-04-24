@@ -1,20 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Android.App;
-using Android.Content;
-using Android.OS;
-using Android.Runtime;
 using Android.Views;
-using Android.Widget;
-using OneEchan.Shared.Model;
 using Android.Support.V7.Widget;
 using OneEchan.Droid.ViewHolder;
 using Android.Graphics;
 using System.Net.Http;
-using Android.Support.V7.App;
+using OneEchan.Core.Common.Api.Model;
 
 namespace OneEchan.Droid.Adapter
 {
