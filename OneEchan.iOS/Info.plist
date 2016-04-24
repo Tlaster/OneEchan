@@ -43,21 +43,13 @@
 	<string>OneEchan</string>
 	<key>UIStatusBarStyle</key>
 	<string>UIStatusBarStyleBlackOpaque</string>
-	<key>CFBundleIconFiles</key>
-	<array>
-		<string>Default.png</string>
-		<string>Default@2x.png</string>
-		<string>Default-568h@2x.png</string>
-		<string>Default-Landscape.png</string>
-		<string>Default-Landscape@2x.png</string>
-		<string>Default-Portrait.png</string>
-		<string>Default-Portrait@2x.png</string>
-	</array>
 	<key>UIPrerenderedIcon</key>
 	<true/>
 	<key>XSAppIconAssets</key>
 	<string>Resources/Icon.xcassets/AppIcons.appiconset</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
+	<key>XSLaunchImageAssets</key>
+	<string>Resources/Icon.xcassets/LaunchImages.launchimage</string>
 </dict>
 </plist>

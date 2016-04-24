@@ -26,8 +26,6 @@
     <MtouchDebug>true</MtouchDebug>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchFastDev>true</MtouchFastDev>
-    <BuildIpa>False</BuildIpa>
-    <IpaIncludeArtwork>False</IpaIncludeArtwork>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>full</DebugType>
@@ -83,15 +81,26 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Resources/Icon.xcassets/AppIcons.appiconset/Contents.json">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources/Icon.xcassets/LaunchImages.launchimage/Contents.json">
-      <InProject>false</InProject>
-    </ImageAsset>
-    <ImageAsset Include="Resources\Images.xcassets\AppIcons.appiconset\Contents.json">
-      <InProject>false</InProject>
-    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Contents.json" />
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Contents.json" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-40.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-40%402x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-40%403x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-60%402x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-60%403x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-76.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-76%402x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-83.5%402x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-Small.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-Small%402x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-Small%403x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Portrait.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Portrait%402x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Landscape.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Landscape%402x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default%402x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-568h%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
@@ -112,37 +121,15 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OneEchan.Core\OneEchan.Core.csproj">
-      <Project>{94574309-1c56-4f55-9535-7ed8f83552c1}</Project>
+      <Project>{94574309-1C56-4F55-9535-7ED8F83552C1}</Project>
       <Name>OneEchan.Core</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Default-568h%402x.png" />
-    <BundleResource Include="Resources\Default-667h%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Default-Landscape.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Default-Landscape%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Default-Portrait.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Default-Portrait%402x.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Default%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="Resources\iTunesArtwork%402x.png" />
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="Resources\iTunesArtwork.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <BundleResource Include="Resources\Default.png" />
   </ItemGroup>
   <Import Project="..\OneEchan.Shared\OneEchan.Shared.projitems" Label="Shared" Condition="Exists('..\OneEchan.Shared\OneEchan.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
