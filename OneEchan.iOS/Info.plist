@@ -51,5 +51,10 @@
 	<true/>
 	<key>XSLaunchImageAssets</key>
 	<string>Resources/Icon.xcassets/LaunchImages.launchimage</string>
+  <key>NSAppTransportSecurity</key>
+  <dict>
+    <key>NSAllowsArbitraryLoads</key>
+    <true/>
+  </dict>
 </dict>
 </plist>

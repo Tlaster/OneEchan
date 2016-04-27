@@ -81,37 +81,81 @@
     <Reference Include="Xamarin.iOS" />
   </ItemGroup>
   <ItemGroup>
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Contents.json" />
-    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Contents.json" />
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-40.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-40%402x.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-40%403x.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-60%402x.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-60%403x.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-76.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-76%402x.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-83.5%402x.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-Small.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-Small%402x.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-Small%403x.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Portrait.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Portrait%402x.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Landscape.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Landscape%402x.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default%402x.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default.png" />
-    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-568h%402x.png" />
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Contents.json">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-40.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-40%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-40%403x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-60%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-60%403x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-76.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-76%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-83.5%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-Small.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-Small%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\AppIcons.appiconset\Icon-Small%403x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Portrait.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Portrait%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Landscape.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-Landscape%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default.png">
+      <InProject>false</InProject>
+    </ImageAsset>
+    <ImageAsset Include="Resources\Icon.xcassets\LaunchImages.launchimage\Default-568h%402x.png">
+      <InProject>false</InProject>
+    </ImageAsset>
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Main.storyboard" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Info.plist" />
+    <None Include="Info.plist">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Entitlements.plist" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Event\ItemClickEventArgs.cs" />
-    <Compile Include="DataSource\MainListDataSource.cs" />
+    <Compile Include="Controller\DetailCollectionViewController.cs" />
+    <Compile Include="Controller\DetailCollectionViewController.designer.cs">
+      <DependentUpon>DetailCollectionViewController.cs</DependentUpon>
+    </Compile>
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <Compile Include="Controller\ViewController.cs" />
@@ -130,6 +174,9 @@
   </ItemGroup>
   <ItemGroup>
     <ITunesArtwork Include="Resources\iTunesArtwork.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Common\" />
   </ItemGroup>
   <Import Project="..\OneEchan.Shared\OneEchan.Shared.projitems" Label="Shared" Condition="Exists('..\OneEchan.Shared\OneEchan.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
