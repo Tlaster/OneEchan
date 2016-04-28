@@ -25,26 +25,9 @@ namespace OneEchan.Droid.Adapter
 
         public override int ItemCount => Items.Count;
 
-        private string GetUpdate(TimeSpan time)
-        {
-            if (time.Days != 0)
-            {
-                return $"{time.Days} days ago";
-            }
-            if (time.Hours != 0)
-            {
-                return $"{time.Hours} hours ago";
-            }
-            if (time.Minutes != 0)
-            {
-                return $"{time.Minutes} minutes ago";
-            }
-            return "Just now";
-        }
-
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            (holder as ViewHolderBase).SetText(Resource.Id.MainListLayoutName, Items[position].Name).SetText(Resource.Id.MainListLayoutUpdateTime, GetUpdate(Items[position].LastUpdateTime));
+            (holder as ViewHolderBase).SetText(Resource.Id.MainListLayoutName, Items[position].Name).SetText(Resource.Id.MainListLayoutUpdateTime, Shared.Common.Helper.UpdateTimeHelper.GetUpdate(Items[position].LastUpdateTime));
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

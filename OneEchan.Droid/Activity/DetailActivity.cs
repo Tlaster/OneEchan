@@ -15,6 +15,7 @@ using Android.Support.V7.App;
 using Android.Util;
 using OneEchan.Shared;
 using OneEchan.Droid.Common.Helpers;
+using OneEchan.Shared.Common.Helper;
 
 namespace OneEchan.Droid
 {

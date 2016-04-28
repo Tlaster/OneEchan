@@ -10,7 +10,7 @@ using Foundation;
 using Java.Util;
 #endif
 
-namespace OneEchan.Shared
+namespace OneEchan.Shared.Common.Helper
 {
     internal static class LanguageHelper
     {

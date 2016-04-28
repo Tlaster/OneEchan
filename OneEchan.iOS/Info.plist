@@ -7,9 +7,9 @@
 	<key>CFBundleIdentifier</key>
 	<string>moe.tlaster.oneechan</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0</string>
+	<string>1.4.0</string>
 	<key>CFBundleVersion</key>
-	<string>1.0</string>
+	<string>1.4.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>MinimumOSVersion</key>
@@ -51,10 +51,10 @@
 	<true/>
 	<key>XSLaunchImageAssets</key>
 	<string>Resources/Icon.xcassets/LaunchImages.launchimage</string>
-  <key>NSAppTransportSecurity</key>
-  <dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
-  </dict>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

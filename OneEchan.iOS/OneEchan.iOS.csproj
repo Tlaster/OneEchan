@@ -40,6 +40,8 @@
     <MtouchUseSGen>true</MtouchUseSGen>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
+    <BuildIpa>True</BuildIpa>
+    <IpaIncludeArtwork>True</IpaIncludeArtwork>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>full</DebugType>
@@ -53,6 +55,8 @@
     <MtouchUseRefCounting>true</MtouchUseRefCounting>
     <CodesignKey>iPhone Developer</CodesignKey>
     <MtouchUseSGen>true</MtouchUseSGen>
+    <BuildIpa>True</BuildIpa>
+    <IpaIncludeArtwork>True</IpaIncludeArtwork>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|iPhone' ">
     <DebugSymbols>true</DebugSymbols>
@@ -73,6 +77,10 @@
     <MtouchUseSGen>true</MtouchUseSGen>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HockeySDK, Version=0.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HockeySDK.Xamarin.4.1.0-beta1\lib\Xamarin.iOS10\HockeySDK.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="MonoTouch.Dialog-1" />
     <Reference Include="System" />
     <Reference Include="System.Runtime.Serialization" />
@@ -150,6 +158,7 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="Entitlements.plist" />
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controller\DetailCollectionViewController.cs" />
@@ -175,9 +184,7 @@
   <ItemGroup>
     <ITunesArtwork Include="Resources\iTunesArtwork.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Common\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="..\OneEchan.Shared\OneEchan.Shared.projitems" Label="Shared" Condition="Exists('..\OneEchan.Shared\OneEchan.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>

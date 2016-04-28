@@ -9,10 +9,8 @@
     <Import_RootNamespace>OneEchan.Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Helper\LanguageHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Common\Helper\UpdateTimeHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)HockeyAppKey.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)LanguageHelper.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="$(MSBuildThisFileDirectory)Common\" />
   </ItemGroup>
 </Project>

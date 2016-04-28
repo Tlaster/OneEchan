@@ -5,6 +5,7 @@ using Foundation;
 using OneEchan.Core.Common.Api.Model;
 using OneEchan.iOS.Controller;
 using OneEchan.Shared;
+using OneEchan.Shared.Common.Helper;
 using UIKit;
 
 namespace OneEchan.iOS
@@ -19,9 +20,6 @@ namespace OneEchan.iOS
         public List<AnimateListModel> List { get; private set; } = new List<AnimateListModel>();
         public ViewController (IntPtr handle) : base (handle)
         {
-            //var source = new MainListDataSource(this);
-            //source.LoadMore += (sender, e) => LoadMore();
-            //TableView.Source = source;
             RefreshControl = new UIRefreshControl();
             RefreshControl.ValueChanged += (sender, e) => Refresh();
         }
@@ -29,6 +27,8 @@ namespace OneEchan.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
+            //NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIBarButtonSystemItem.Action, (sender, e) => { });
+            //NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(new UIButton()),false);
             NavigationItem.BackBarButtonItem = new UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: null, action: null);
             NavigationController.NavigationBar.BarStyle = UIBarStyle.Black;
             NavigationController.NavigationBar.TintColor = UIColor.White;
@@ -71,7 +71,7 @@ namespace OneEchan.iOS
                 cell = new UITableViewCell(UITableViewCellStyle.Subtitle, _mainListCellId);
             var row = indexPath.Row;
             cell.TextLabel.Text = List[row].Name;
-            cell.DetailTextLabel.Text = GetUpdate(List[row].LastUpdateTime);
+            cell.DetailTextLabel.Text = UpdateTimeHelper.GetUpdate(List[row].LastUpdateTime);
             cell.DetailTextLabel.TextColor = UIColor.Gray;
             return cell;
         }
@@ -92,23 +92,7 @@ namespace OneEchan.iOS
                 this.NavigationController.PushViewController(detail, true);
             }
         }
-
-        private string GetUpdate(TimeSpan time)
-        {
-            if (time.Days != 0)
-            {
-                return $"{time.Days} days ago";
-            }
-            if (time.Hours != 0)
-            {
-                return $"{time.Hours} hours ago";
-            }
-            if (time.Minutes != 0)
-            {
-                return $"{time.Minutes} minutes ago";
-            }
-            return "Just now";
-        }
+        
         private async void LoadMore()
         {
             if (!_hasMore || _isLoading) return;

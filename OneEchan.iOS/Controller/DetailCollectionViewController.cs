@@ -5,6 +5,7 @@ using Foundation;
 using MediaPlayer;
 using OneEchan.Core.Common.Api.Model;
 using OneEchan.Shared;
+using OneEchan.Shared.Common.Helper;
 using UIKit;
 
 namespace OneEchan.iOS.Controller
@@ -12,7 +13,7 @@ namespace OneEchan.iOS.Controller
     public partial class DetailCollectionViewController : UICollectionViewController
     {
         public List<AnimateSetModel> List { get; private set; } = new List<AnimateSetModel>();
-        public UIRefreshControl RefreshControl { get; set; } = new UIRefreshControl();
+        public UIRefreshControl RefreshControl { get; } = new UIRefreshControl();
         private const string _detailCellId = "DetailCell";
         private bool _isLoading;
 
@@ -20,7 +21,6 @@ namespace OneEchan.iOS.Controller
 
         public DetailCollectionViewController(IntPtr handle) : base(handle)
         {
-            //RefreshControl = new UIRefreshControl();
         }
 
         private async void Refresh()
@@ -95,14 +95,10 @@ namespace OneEchan.iOS.Controller
             var width = UIScreen.MainScreen.Bounds.Width / colCount - 8;
             return new CGSize(width, width / 16f * 9f);
         }
-        public override nfloat GetMinimumInteritemSpacingForSection(UICollectionView collectionView, UICollectionViewLayout layout, nint section)
-        {
-            return 4f;
-        }
-        public override nfloat GetMinimumLineSpacingForSection(UICollectionView collectionView, UICollectionViewLayout layout, nint section)
-        {
-            return 4f;
-        }
+        public override nfloat GetMinimumInteritemSpacingForSection(UICollectionView collectionView, UICollectionViewLayout layout, nint section) 
+            => 4f;
+        public override nfloat GetMinimumLineSpacingForSection(UICollectionView collectionView, UICollectionViewLayout layout, nint section) 
+            => 4f;
     }
     public class DetailCell : UICollectionViewCell
     {

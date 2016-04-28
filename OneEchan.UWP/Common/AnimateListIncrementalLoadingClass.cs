@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using OneEchan.Shared;
+using OneEchan.Shared.Common.Helper;
 
 namespace OneEchan.Common
 {

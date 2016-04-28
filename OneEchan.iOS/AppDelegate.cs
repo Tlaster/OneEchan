@@ -1,4 +1,5 @@
 ﻿using Foundation;
+using HockeyApp;
 using UIKit;
 
 namespace OneEchan.iOS
@@ -20,6 +21,9 @@ namespace OneEchan.iOS
             // Override point for customization after application launch.
             // If not required for your application you can safely delete this method
             UINavigationBar.Appearance.SetTitleTextAttributes(new UITextAttributes { TextColor = UIColor.White });
+            var manager = BITHockeyManager.SharedHockeyManager;
+            manager.Configure(Shared.HockeyAppKey.ApiKey);
+            manager.StartManager();
             return true;
 		}
 

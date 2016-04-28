@@ -6,6 +6,7 @@ using System.Net.Http;
 using Windows.UI.Popups;
 using OneEchan.Shared;
 using OneEchan.Core.Common.Api.Model;
+using OneEchan.Shared.Common.Helper;
 
 namespace OneEchan.ViewModel
 {
