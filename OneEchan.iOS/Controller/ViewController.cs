@@ -27,7 +27,13 @@ namespace OneEchan.iOS
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            //NavigationItem.RightBarButtonItem = new UIBarButtonItem(UIBarButtonSystemItem.Action, (sender, e) => { });
+			NavigationItem.RightBarButtonItem = new UIBarButtonItem (UIImage.FromBundle ("ic_info_white"), UIBarButtonItemStyle.Bordered, ((sender, e) => {
+				var about = this.Storyboard.InstantiateViewController(nameof(AboutViewController)) as AboutViewController;
+				if (about != null)
+				{
+					this.NavigationController.PushViewController(about, true);
+				}
+			}));
             //NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(new UIButton()),false);
             NavigationItem.BackBarButtonItem = new UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: null, action: null);
             NavigationController.NavigationBar.BarStyle = UIBarStyle.Black;

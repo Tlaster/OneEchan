@@ -33,7 +33,6 @@ namespace OneEchan.Droid
         protected override async void OnCreate(Bundle bundle)
         {
             base.OnCreate(bundle);
-            InitHockeyApp();
             SetContentView(Resource.Layout.MainPage);
             var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
             ((LinearLayout.LayoutParams)toolbar.LayoutParameters).SetMargins(0, StatusBarHelper.GetStatusBarHeight(this), 0, 0);
@@ -50,19 +49,6 @@ namespace OneEchan.Droid
             await Refresh();
         }
 
-        private void InitHockeyApp()
-        {
-            HockeyApp.CrashManager.Register(this, HockeyAppKey.ApiKey);
-            HockeyApp.UpdateManager.Register(this, HockeyAppKey.ApiKey);
-            HockeyApp.TraceWriter.Initialize();
-            AndroidEnvironment.UnhandledExceptionRaiser += (sender, args) =>
-            {
-                HockeyApp.TraceWriter.WriteTrace(args.Exception);
-                args.Handled = true;
-            };
-            AppDomain.CurrentDomain.UnhandledException += (sender, args) => HockeyApp.TraceWriter.WriteTrace(args.ExceptionObject);
-            TaskScheduler.UnobservedTaskException += (sender, args) => HockeyApp.TraceWriter.WriteTrace(args.Exception);
-        }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
         {

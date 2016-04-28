@@ -11,6 +11,5 @@
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Common\Helper\LanguageHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Common\Helper\UpdateTimeHelper.cs" />
-    <Compile Include="$(MSBuildThisFileDirectory)HockeyAppKey.cs" />
   </ItemGroup>
 </Project>

@@ -45,16 +45,16 @@
 	<string>UIStatusBarStyleBlackOpaque</string>
 	<key>UIPrerenderedIcon</key>
 	<true/>
-	<key>XSAppIconAssets</key>
-	<string>Resources/Icon.xcassets/AppIcons.appiconset</string>
 	<key>UIStatusBarHidden</key>
 	<true/>
-	<key>XSLaunchImageAssets</key>
-	<string>Resources/Icon.xcassets/LaunchImages.launchimage</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>XSAppIconAssets</key>
+	<string>Resources/Images.xcassets/AppIcons.appiconset</string>
+	<key>XSLaunchImageAssets</key>
+	<string>Resources/Images.xcassets/LaunchImages.launchimage</string>
 </dict>
 </plist>

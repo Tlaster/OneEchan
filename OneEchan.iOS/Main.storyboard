@@ -45,6 +45,7 @@
                     <navigationItem title="OneEchan" id="1041" key="navigationItem"/>
                     <connections>
                         <segue id="1505" destination="1048" kind="show"/>
+                        <segue id="1574" destination="1514" kind="show"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="902" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -53,7 +54,7 @@
         </scene>
         <scene sceneID="1047">
             <objects>
-                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="1048" sceneMemberID="viewController" customClass="DetailCollectionViewController" storyboardIdentifier="DetailCollectionViewController" restorationIdentifier="DetailCollectionViewController">
+                <collectionViewController autoresizesArchivedViewToFullSize="NO" id="1048" sceneMemberID="viewController" customClass="DetailCollectionViewController" storyboardIdentifier="DetailCollectionViewController" useStoryboardIdentifierAsRestorationIdentifier="YES">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" id="1049">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -83,10 +84,54 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="1054" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="86" y="56"/>
+            <point key="canvasLocation" x="138" y="-88"/>
+        </scene>
+        <scene sceneID="1513">
+            <objects>
+                <viewController id="1514" sceneMemberID="viewController" title="About" customClass="AboutViewController" storyboardIdentifier="AboutViewController" useStoryboardIdentifierAsRestorationIdentifier="YES">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="1511"/>
+                        <viewControllerLayoutGuide type="bottom" id="1512"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1515">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <subviews>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1576" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" text="Thanks">
+                                <rect key="frame" x="20" y="0.0" width="300" height="125"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="50"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="1577" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES" text="That's all">
+                                <rect key="frame" x="27" y="133" width="293" height="29"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="1579" translatesAutoresizingMaskIntoConstraints="NO" fixedFrame="YES">
+                                <rect key="frame" x="0.0" y="165" width="320" height="30"/>
+                                <state key="normal" title="Github">
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections/>
+                            </button>
+                        </subviews>
+                    </view>
+                    <connections>
+                        <outlet property="OpenGithub" destination="1579" id="name-outlet-1579"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1516" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="460"/>
         </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <resources>
+        <image name="ic_info_white" width="54" height="54"/>
+    </resources>
 </document>
