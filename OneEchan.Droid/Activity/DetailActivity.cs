@@ -3,9 +3,6 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Widget;
-using System.Net.Http;
-using Newtonsoft.Json;
-using Newtonsoft.Json.Linq;
 using OneEchan.Droid.Adapter;
 using System.Net;
 using System;
@@ -16,6 +13,7 @@ using Android.Util;
 using OneEchan.Shared;
 using OneEchan.Droid.Common.Helpers;
 using OneEchan.Shared.Common.Helper;
+using System.Net.Http;
 
 namespace OneEchan.Droid
 {

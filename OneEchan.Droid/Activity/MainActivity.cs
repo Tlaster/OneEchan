@@ -6,7 +6,6 @@ using Android.Views;
 using Android.Widget;
 using Android.OS;
 using OneEchan.Droid.Adapter;
-using System.Net.Http;
 using System.Linq;
 using Android.Support.V4.Widget;
 using System.Net;
@@ -17,6 +16,7 @@ using OneEchan.Shared;
 using OneEchan.Droid.Common.Helpers;
 using System.Threading.Tasks;
 using OneEchan.Shared.Common.Helper;
+using System.Net.Http;
 
 namespace OneEchan.Droid
 {

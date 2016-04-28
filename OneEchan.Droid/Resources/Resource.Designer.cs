@@ -763,35 +763,35 @@ namespace OneEchan.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0c0047
-			public const int MediumVioletRed = 2131492935;
+			// aapt resource value: 0x7f0c003d
+			public const int MediumVioletRed = 2131492925;
 			
-			// aapt resource value: 0x7f0c0048
-			public const int abc_background_cache_hint_selector_material_dark = 2131492936;
+			// aapt resource value: 0x7f0c003e
+			public const int abc_background_cache_hint_selector_material_dark = 2131492926;
 			
-			// aapt resource value: 0x7f0c0049
-			public const int abc_background_cache_hint_selector_material_light = 2131492937;
+			// aapt resource value: 0x7f0c003f
+			public const int abc_background_cache_hint_selector_material_light = 2131492927;
 			
-			// aapt resource value: 0x7f0c004a
-			public const int abc_color_highlight_material = 2131492938;
+			// aapt resource value: 0x7f0c0040
+			public const int abc_color_highlight_material = 2131492928;
 			
 			// aapt resource value: 0x7f0c0000
 			public const int abc_input_method_navigation_guard = 2131492864;
 			
-			// aapt resource value: 0x7f0c004b
-			public const int abc_primary_text_disable_only_material_dark = 2131492939;
+			// aapt resource value: 0x7f0c0041
+			public const int abc_primary_text_disable_only_material_dark = 2131492929;
 			
-			// aapt resource value: 0x7f0c004c
-			public const int abc_primary_text_disable_only_material_light = 2131492940;
+			// aapt resource value: 0x7f0c0042
+			public const int abc_primary_text_disable_only_material_light = 2131492930;
 			
-			// aapt resource value: 0x7f0c004d
-			public const int abc_primary_text_material_dark = 2131492941;
+			// aapt resource value: 0x7f0c0043
+			public const int abc_primary_text_material_dark = 2131492931;
 			
-			// aapt resource value: 0x7f0c004e
-			public const int abc_primary_text_material_light = 2131492942;
+			// aapt resource value: 0x7f0c0044
+			public const int abc_primary_text_material_light = 2131492932;
 			
-			// aapt resource value: 0x7f0c004f
-			public const int abc_search_url_text = 2131492943;
+			// aapt resource value: 0x7f0c0045
+			public const int abc_search_url_text = 2131492933;
 			
 			// aapt resource value: 0x7f0c0001
 			public const int abc_search_url_text_normal = 2131492865;
@@ -802,11 +802,11 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f0c0003
 			public const int abc_search_url_text_selected = 2131492867;
 			
-			// aapt resource value: 0x7f0c0050
-			public const int abc_secondary_text_material_dark = 2131492944;
+			// aapt resource value: 0x7f0c0046
+			public const int abc_secondary_text_material_dark = 2131492934;
 			
-			// aapt resource value: 0x7f0c0051
-			public const int abc_secondary_text_material_light = 2131492945;
+			// aapt resource value: 0x7f0c0047
+			public const int abc_secondary_text_material_light = 2131492935;
 			
 			// aapt resource value: 0x7f0c0004
 			public const int accent_material_dark = 2131492868;
@@ -850,14 +850,14 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f0c0011
 			public const int button_material_light = 2131492881;
 			
-			// aapt resource value: 0x7f0c0046
-			public const int colorAccent = 2131492934;
+			// aapt resource value: 0x7f0c003c
+			public const int colorAccent = 2131492924;
 			
-			// aapt resource value: 0x7f0c0044
-			public const int colorPrimary = 2131492932;
+			// aapt resource value: 0x7f0c003a
+			public const int colorPrimary = 2131492922;
 			
-			// aapt resource value: 0x7f0c0045
-			public const int colorPrimaryDark = 2131492933;
+			// aapt resource value: 0x7f0c003b
+			public const int colorPrimaryDark = 2131492923;
 			
 			// aapt resource value: 0x7f0c0012
 			public const int dim_foreground_disabled_material_dark = 2131492882;
@@ -888,36 +888,6 @@ namespace OneEchan.Droid
 			
 			// aapt resource value: 0x7f0c001b
 			public const int hint_foreground_material_light = 2131492891;
-			
-			// aapt resource value: 0x7f0c003a
-			public const int hockeyapp_background_header = 2131492922;
-			
-			// aapt resource value: 0x7f0c003b
-			public const int hockeyapp_background_light = 2131492923;
-			
-			// aapt resource value: 0x7f0c003c
-			public const int hockeyapp_background_white = 2131492924;
-			
-			// aapt resource value: 0x7f0c003d
-			public const int hockeyapp_button_background = 2131492925;
-			
-			// aapt resource value: 0x7f0c003e
-			public const int hockeyapp_button_background_pressed = 2131492926;
-			
-			// aapt resource value: 0x7f0c003f
-			public const int hockeyapp_button_background_selected = 2131492927;
-			
-			// aapt resource value: 0x7f0c0040
-			public const int hockeyapp_text_black = 2131492928;
-			
-			// aapt resource value: 0x7f0c0041
-			public const int hockeyapp_text_light = 2131492929;
-			
-			// aapt resource value: 0x7f0c0042
-			public const int hockeyapp_text_normal = 2131492930;
-			
-			// aapt resource value: 0x7f0c0043
-			public const int hockeyapp_text_white = 2131492931;
 			
 			// aapt resource value: 0x7f0c001c
 			public const int material_blue_grey_800 = 2131492892;
@@ -1003,11 +973,11 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f0c0037
 			public const int switch_thumb_disabled_material_light = 2131492919;
 			
-			// aapt resource value: 0x7f0c0052
-			public const int switch_thumb_material_dark = 2131492946;
+			// aapt resource value: 0x7f0c0048
+			public const int switch_thumb_material_dark = 2131492936;
 			
-			// aapt resource value: 0x7f0c0053
-			public const int switch_thumb_material_light = 2131492947;
+			// aapt resource value: 0x7f0c0049
+			public const int switch_thumb_material_light = 2131492937;
 			
 			// aapt resource value: 0x7f0c0038
 			public const int switch_thumb_normal_material_dark = 2131492920;
@@ -1500,14 +1470,11 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f02004a
 			public const int abc_textfield_search_material = 2130837578;
 			
-			// aapt resource value: 0x7f02004b
-			public const int hockeyapp_btn_background = 2130837579;
-			
-			// aapt resource value: 0x7f02004d
-			public const int notification_template_icon_bg = 2130837581;
-			
 			// aapt resource value: 0x7f02004c
-			public const int SplashScreen = 2130837580;
+			public const int notification_template_icon_bg = 2130837580;
+			
+			// aapt resource value: 0x7f02004b
+			public const int SplashScreen = 2130837579;
 			
 			static Drawable()
 			{
@@ -1534,23 +1501,23 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f070053
 			public const int DetailListLayoutName = 2131165267;
 			
-			// aapt resource value: 0x7f070071
-			public const int MainListLayoutName = 2131165297;
+			// aapt resource value: 0x7f070055
+			public const int MainListLayoutName = 2131165269;
 			
-			// aapt resource value: 0x7f070072
-			public const int MainListLayoutUpdateTime = 2131165298;
+			// aapt resource value: 0x7f070056
+			public const int MainListLayoutUpdateTime = 2131165270;
 			
-			// aapt resource value: 0x7f070075
-			public const int MainPageRecyclerView = 2131165301;
+			// aapt resource value: 0x7f070059
+			public const int MainPageRecyclerView = 2131165273;
 			
-			// aapt resource value: 0x7f070074
-			public const int MainPageRefresher = 2131165300;
+			// aapt resource value: 0x7f070058
+			public const int MainPageRefresher = 2131165272;
 			
-			// aapt resource value: 0x7f070083
-			public const int Menu_About = 2131165315;
+			// aapt resource value: 0x7f070067
+			public const int Menu_About = 2131165287;
 			
-			// aapt resource value: 0x7f070076
-			public const int action0 = 2131165302;
+			// aapt resource value: 0x7f07005a
+			public const int action0 = 2131165274;
 			
 			// aapt resource value: 0x7f070042
 			public const int action_bar = 2131165250;
@@ -1576,8 +1543,8 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f070043
 			public const int action_context_bar = 2131165251;
 			
-			// aapt resource value: 0x7f07007a
-			public const int action_divider = 2131165306;
+			// aapt resource value: 0x7f07005e
+			public const int action_divider = 2131165278;
 			
 			// aapt resource value: 0x7f070003
 			public const int action_menu_divider = 2131165187;
@@ -1609,32 +1576,14 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f07002c
 			public const int buttonPanel = 2131165228;
 			
-			// aapt resource value: 0x7f070062
-			public const int button_add_response = 2131165282;
-			
-			// aapt resource value: 0x7f07005d
-			public const int button_attachment = 2131165277;
-			
-			// aapt resource value: 0x7f070067
-			public const int button_login = 2131165287;
-			
-			// aapt resource value: 0x7f070063
-			public const int button_refresh = 2131165283;
-			
-			// aapt resource value: 0x7f07005e
-			public const int button_send = 2131165278;
-			
-			// aapt resource value: 0x7f07006b
-			public const int button_update = 2131165291;
-			
-			// aapt resource value: 0x7f070077
-			public const int cancel_action = 2131165303;
+			// aapt resource value: 0x7f07005b
+			public const int cancel_action = 2131165275;
 			
 			// aapt resource value: 0x7f07003a
 			public const int checkbox = 2131165242;
 			
-			// aapt resource value: 0x7f07007d
-			public const int chronometer = 2131165309;
+			// aapt resource value: 0x7f070061
+			public const int chronometer = 2131165281;
 			
 			// aapt resource value: 0x7f07001e
 			public const int collapseActionView = 2131165214;
@@ -1663,8 +1612,8 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f07001b
 			public const int end = 2131165211;
 			
-			// aapt resource value: 0x7f070082
-			public const int end_padder = 2131165314;
+			// aapt resource value: 0x7f070066
+			public const int end_padder = 2131165286;
 			
 			// aapt resource value: 0x7f070026
 			public const int expand_activities_button = 2131165222;
@@ -1687,68 +1636,26 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f070027
 			public const int image = 2131165223;
 			
-			// aapt resource value: 0x7f070081
-			public const int info = 2131165313;
-			
-			// aapt resource value: 0x7f070059
-			public const int input_email = 2131165273;
-			
-			// aapt resource value: 0x7f07005b
-			public const int input_message = 2131165275;
-			
-			// aapt resource value: 0x7f070058
-			public const int input_name = 2131165272;
-			
-			// aapt resource value: 0x7f070066
-			public const int input_password = 2131165286;
-			
-			// aapt resource value: 0x7f07005a
-			public const int input_subject = 2131165274;
+			// aapt resource value: 0x7f070065
+			public const int info = 2131165285;
 			
 			// aapt resource value: 0x7f070000
 			public const int item_touch_helper_previous_elevation = 2131165184;
 			
-			// aapt resource value: 0x7f07006d
-			public const int label_author = 2131165293;
+			// aapt resource value: 0x7f07005f
+			public const int line1 = 2131165279;
 			
-			// aapt resource value: 0x7f07006e
-			public const int label_date = 2131165294;
-			
-			// aapt resource value: 0x7f070060
-			public const int label_last_updated = 2131165280;
-			
-			// aapt resource value: 0x7f070055
-			public const int label_message = 2131165269;
-			
-			// aapt resource value: 0x7f07006f
-			public const int label_text = 2131165295;
-			
-			// aapt resource value: 0x7f070069
-			public const int label_title = 2131165289;
-			
-			// aapt resource value: 0x7f07006a
-			public const int label_version = 2131165290;
-			
-			// aapt resource value: 0x7f07007b
-			public const int line1 = 2131165307;
-			
-			// aapt resource value: 0x7f07007f
-			public const int line3 = 2131165311;
+			// aapt resource value: 0x7f070063
+			public const int line3 = 2131165283;
 			
 			// aapt resource value: 0x7f07000a
 			public const int listMode = 2131165194;
 			
-			// aapt resource value: 0x7f070070
-			public const int list_attachments = 2131165296;
-			
-			// aapt resource value: 0x7f070064
-			public const int list_feedback_messages = 2131165284;
-			
 			// aapt resource value: 0x7f070029
 			public const int list_item = 2131165225;
 			
-			// aapt resource value: 0x7f070079
-			public const int media_actions = 2131165305;
+			// aapt resource value: 0x7f07005d
+			public const int media_actions = 2131165277;
 			
 			// aapt resource value: 0x7f07001c
 			public const int middle = 2131165212;
@@ -1849,8 +1756,8 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f070019
 			public const int src_over = 2131165209;
 			
-			// aapt resource value: 0x7f070078
-			public const int status_bar_latest_event_content = 2131165304;
+			// aapt resource value: 0x7f07005c
+			public const int status_bar_latest_event_content = 2131165276;
 			
 			// aapt resource value: 0x7f07004d
 			public const int submit_area = 2131165261;
@@ -1858,20 +1765,17 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f07000c
 			public const int tabMode = 2131165196;
 			
-			// aapt resource value: 0x7f070080
-			public const int text = 2131165312;
+			// aapt resource value: 0x7f070064
+			public const int text = 2131165284;
 			
-			// aapt resource value: 0x7f07007e
-			public const int text2 = 2131165310;
+			// aapt resource value: 0x7f070062
+			public const int text2 = 2131165282;
 			
 			// aapt resource value: 0x7f070035
 			public const int textSpacerNoButtons = 2131165237;
 			
-			// aapt resource value: 0x7f070065
-			public const int text_headline = 2131165285;
-			
-			// aapt resource value: 0x7f07007c
-			public const int time = 2131165308;
+			// aapt resource value: 0x7f070060
+			public const int time = 2131165280;
 			
 			// aapt resource value: 0x7f07002b
 			public const int title = 2131165227;
@@ -1879,8 +1783,8 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f070030
 			public const int title_template = 2131165232;
 			
-			// aapt resource value: 0x7f070073
-			public const int toolbar = 2131165299;
+			// aapt resource value: 0x7f070057
+			public const int toolbar = 2131165271;
 			
 			// aapt resource value: 0x7f07002f
 			public const int topPanel = 2131165231;
@@ -1891,32 +1795,11 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f070013
 			public const int useLogo = 2131165203;
 			
-			// aapt resource value: 0x7f070068
-			public const int view_header = 2131165288;
-			
-			// aapt resource value: 0x7f07006c
-			public const int web_update_details = 2131165292;
-			
 			// aapt resource value: 0x7f070021
 			public const int withText = 2131165217;
 			
 			// aapt resource value: 0x7f070014
 			public const int wrap_content = 2131165204;
-			
-			// aapt resource value: 0x7f07005c
-			public const int wrapper_attachments = 2131165276;
-			
-			// aapt resource value: 0x7f070057
-			public const int wrapper_feedback = 2131165271;
-			
-			// aapt resource value: 0x7f070056
-			public const int wrapper_feedback_scroll = 2131165270;
-			
-			// aapt resource value: 0x7f07005f
-			public const int wrapper_messages = 2131165279;
-			
-			// aapt resource value: 0x7f070061
-			public const int wrapper_messages_buttons = 2131165281;
 			
 			static Id()
 			{
@@ -2041,64 +1924,46 @@ namespace OneEchan.Droid
 			public const int DetailListLayout = 2130968602;
 			
 			// aapt resource value: 0x7f04001b
-			public const int hockeyapp_activity_expiry_info = 2130968603;
+			public const int MainListLayout = 2130968603;
 			
 			// aapt resource value: 0x7f04001c
-			public const int hockeyapp_activity_feedback = 2130968604;
+			public const int MainPage = 2130968604;
 			
 			// aapt resource value: 0x7f04001d
-			public const int hockeyapp_activity_login = 2130968605;
+			public const int notification_media_action = 2130968605;
 			
 			// aapt resource value: 0x7f04001e
-			public const int hockeyapp_activity_update = 2130968606;
+			public const int notification_media_cancel_action = 2130968606;
 			
 			// aapt resource value: 0x7f04001f
-			public const int hockeyapp_fragment_update = 2130968607;
+			public const int notification_template_big_media = 2130968607;
 			
 			// aapt resource value: 0x7f040020
-			public const int hockeyapp_view_feedback_message = 2130968608;
+			public const int notification_template_big_media_narrow = 2130968608;
 			
 			// aapt resource value: 0x7f040021
-			public const int MainListLayout = 2130968609;
+			public const int notification_template_lines = 2130968609;
 			
 			// aapt resource value: 0x7f040022
-			public const int MainPage = 2130968610;
+			public const int notification_template_media = 2130968610;
 			
 			// aapt resource value: 0x7f040023
-			public const int notification_media_action = 2130968611;
+			public const int notification_template_part_chronometer = 2130968611;
 			
 			// aapt resource value: 0x7f040024
-			public const int notification_media_cancel_action = 2130968612;
+			public const int notification_template_part_time = 2130968612;
 			
 			// aapt resource value: 0x7f040025
-			public const int notification_template_big_media = 2130968613;
+			public const int select_dialog_item_material = 2130968613;
 			
 			// aapt resource value: 0x7f040026
-			public const int notification_template_big_media_narrow = 2130968614;
+			public const int select_dialog_multichoice_material = 2130968614;
 			
 			// aapt resource value: 0x7f040027
-			public const int notification_template_lines = 2130968615;
+			public const int select_dialog_singlechoice_material = 2130968615;
 			
 			// aapt resource value: 0x7f040028
-			public const int notification_template_media = 2130968616;
-			
-			// aapt resource value: 0x7f040029
-			public const int notification_template_part_chronometer = 2130968617;
-			
-			// aapt resource value: 0x7f04002a
-			public const int notification_template_part_time = 2130968618;
-			
-			// aapt resource value: 0x7f04002b
-			public const int select_dialog_item_material = 2130968619;
-			
-			// aapt resource value: 0x7f04002c
-			public const int select_dialog_multichoice_material = 2130968620;
-			
-			// aapt resource value: 0x7f04002d
-			public const int select_dialog_singlechoice_material = 2130968621;
-			
-			// aapt resource value: 0x7f04002e
-			public const int support_simple_spinner_dropdown_item = 2130968622;
+			public const int support_simple_spinner_dropdown_item = 2130968616;
 			
 			static Layout()
 			{
@@ -2148,8 +2013,8 @@ namespace OneEchan.Droid
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f08005b
-			public const int ApplicationName = 2131230811;
+			// aapt resource value: 0x7f080014
+			public const int ApplicationName = 2131230740;
 			
 			// aapt resource value: 0x7f080000
 			public const int abc_action_bar_home_description = 2131230720;
@@ -2208,219 +2073,6 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f080012
 			public const int abc_toolbar_collapse_description = 2131230738;
 			
-			// aapt resource value: 0x7f080014
-			public const int hockeyapp_crash_dialog_app_name_fallback = 2131230740;
-			
-			// aapt resource value: 0x7f080015
-			public const int hockeyapp_crash_dialog_message = 2131230741;
-			
-			// aapt resource value: 0x7f080016
-			public const int hockeyapp_crash_dialog_negative_button = 2131230742;
-			
-			// aapt resource value: 0x7f080017
-			public const int hockeyapp_crash_dialog_neutral_button = 2131230743;
-			
-			// aapt resource value: 0x7f080018
-			public const int hockeyapp_crash_dialog_positive_button = 2131230744;
-			
-			// aapt resource value: 0x7f080019
-			public const int hockeyapp_crash_dialog_title = 2131230745;
-			
-			// aapt resource value: 0x7f08001a
-			public const int hockeyapp_dialog_error_message = 2131230746;
-			
-			// aapt resource value: 0x7f08001b
-			public const int hockeyapp_dialog_error_title = 2131230747;
-			
-			// aapt resource value: 0x7f08001c
-			public const int hockeyapp_dialog_negative_button = 2131230748;
-			
-			// aapt resource value: 0x7f08001d
-			public const int hockeyapp_dialog_positive_button = 2131230749;
-			
-			// aapt resource value: 0x7f08001e
-			public const int hockeyapp_download_failed_dialog_message = 2131230750;
-			
-			// aapt resource value: 0x7f08001f
-			public const int hockeyapp_download_failed_dialog_negative_button = 2131230751;
-			
-			// aapt resource value: 0x7f080020
-			public const int hockeyapp_download_failed_dialog_positive_button = 2131230752;
-			
-			// aapt resource value: 0x7f080021
-			public const int hockeyapp_download_failed_dialog_title = 2131230753;
-			
-			// aapt resource value: 0x7f080022
-			public const int hockeyapp_error_no_network_message = 2131230754;
-			
-			// aapt resource value: 0x7f080023
-			public const int hockeyapp_expiry_info_text = 2131230755;
-			
-			// aapt resource value: 0x7f080024
-			public const int hockeyapp_expiry_info_title = 2131230756;
-			
-			// aapt resource value: 0x7f080025
-			public const int hockeyapp_feedback_attach_file = 2131230757;
-			
-			// aapt resource value: 0x7f080026
-			public const int hockeyapp_feedback_attach_picture = 2131230758;
-			
-			// aapt resource value: 0x7f080027
-			public const int hockeyapp_feedback_attachment_button_text = 2131230759;
-			
-			// aapt resource value: 0x7f080028
-			public const int hockeyapp_feedback_attachment_error = 2131230760;
-			
-			// aapt resource value: 0x7f080029
-			public const int hockeyapp_feedback_attachment_loading = 2131230761;
-			
-			// aapt resource value: 0x7f08002a
-			public const int hockeyapp_feedback_email_hint = 2131230762;
-			
-			// aapt resource value: 0x7f08002b
-			public const int hockeyapp_feedback_failed_text = 2131230763;
-			
-			// aapt resource value: 0x7f08002c
-			public const int hockeyapp_feedback_failed_title = 2131230764;
-			
-			// aapt resource value: 0x7f08002d
-			public const int hockeyapp_feedback_fetching_feedback_text = 2131230765;
-			
-			// aapt resource value: 0x7f08002e
-			public const int hockeyapp_feedback_generic_error = 2131230766;
-			
-			// aapt resource value: 0x7f08002f
-			public const int hockeyapp_feedback_last_updated_text = 2131230767;
-			
-			// aapt resource value: 0x7f080030
-			public const int hockeyapp_feedback_max_attachments_allowed = 2131230768;
-			
-			// aapt resource value: 0x7f080031
-			public const int hockeyapp_feedback_message_hint = 2131230769;
-			
-			// aapt resource value: 0x7f080032
-			public const int hockeyapp_feedback_name_hint = 2131230770;
-			
-			// aapt resource value: 0x7f080033
-			public const int hockeyapp_feedback_refresh_button_text = 2131230771;
-			
-			// aapt resource value: 0x7f080034
-			public const int hockeyapp_feedback_response_button_text = 2131230772;
-			
-			// aapt resource value: 0x7f080035
-			public const int hockeyapp_feedback_select_file = 2131230773;
-			
-			// aapt resource value: 0x7f080036
-			public const int hockeyapp_feedback_select_picture = 2131230774;
-			
-			// aapt resource value: 0x7f080037
-			public const int hockeyapp_feedback_send_button_text = 2131230775;
-			
-			// aapt resource value: 0x7f080038
-			public const int hockeyapp_feedback_send_generic_error = 2131230776;
-			
-			// aapt resource value: 0x7f080039
-			public const int hockeyapp_feedback_send_network_error = 2131230777;
-			
-			// aapt resource value: 0x7f08003a
-			public const int hockeyapp_feedback_sending_feedback_text = 2131230778;
-			
-			// aapt resource value: 0x7f08003b
-			public const int hockeyapp_feedback_subject_hint = 2131230779;
-			
-			// aapt resource value: 0x7f08003c
-			public const int hockeyapp_feedback_title = 2131230780;
-			
-			// aapt resource value: 0x7f08003d
-			public const int hockeyapp_feedback_validate_email_empty = 2131230781;
-			
-			// aapt resource value: 0x7f08003e
-			public const int hockeyapp_feedback_validate_email_error = 2131230782;
-			
-			// aapt resource value: 0x7f08003f
-			public const int hockeyapp_feedback_validate_name_error = 2131230783;
-			
-			// aapt resource value: 0x7f080040
-			public const int hockeyapp_feedback_validate_subject_error = 2131230784;
-			
-			// aapt resource value: 0x7f080041
-			public const int hockeyapp_feedback_validate_text_error = 2131230785;
-			
-			// aapt resource value: 0x7f080042
-			public const int hockeyapp_login_email_hint = 2131230786;
-			
-			// aapt resource value: 0x7f080043
-			public const int hockeyapp_login_headline_text = 2131230787;
-			
-			// aapt resource value: 0x7f080044
-			public const int hockeyapp_login_headline_text_email_only = 2131230788;
-			
-			// aapt resource value: 0x7f080045
-			public const int hockeyapp_login_login_button_text = 2131230789;
-			
-			// aapt resource value: 0x7f080046
-			public const int hockeyapp_login_missing_credentials_toast = 2131230790;
-			
-			// aapt resource value: 0x7f080047
-			public const int hockeyapp_login_password_hint = 2131230791;
-			
-			// aapt resource value: 0x7f080048
-			public const int hockeyapp_paint_dialog_message = 2131230792;
-			
-			// aapt resource value: 0x7f080049
-			public const int hockeyapp_paint_dialog_negative_button = 2131230793;
-			
-			// aapt resource value: 0x7f08004a
-			public const int hockeyapp_paint_dialog_neutral_button = 2131230794;
-			
-			// aapt resource value: 0x7f08004b
-			public const int hockeyapp_paint_dialog_positive_button = 2131230795;
-			
-			// aapt resource value: 0x7f08004c
-			public const int hockeyapp_paint_indicator_toast = 2131230796;
-			
-			// aapt resource value: 0x7f08004d
-			public const int hockeyapp_paint_menu_clear = 2131230797;
-			
-			// aapt resource value: 0x7f08004e
-			public const int hockeyapp_paint_menu_save = 2131230798;
-			
-			// aapt resource value: 0x7f08004f
-			public const int hockeyapp_paint_menu_undo = 2131230799;
-			
-			// aapt resource value: 0x7f080050
-			public const int hockeyapp_permission_dialog_negative_button = 2131230800;
-			
-			// aapt resource value: 0x7f080051
-			public const int hockeyapp_permission_dialog_positive_button = 2131230801;
-			
-			// aapt resource value: 0x7f080052
-			public const int hockeyapp_permission_update_message = 2131230802;
-			
-			// aapt resource value: 0x7f080053
-			public const int hockeyapp_permission_update_title = 2131230803;
-			
-			// aapt resource value: 0x7f080054
-			public const int hockeyapp_update_button = 2131230804;
-			
-			// aapt resource value: 0x7f080055
-			public const int hockeyapp_update_dialog_message = 2131230805;
-			
-			// aapt resource value: 0x7f080056
-			public const int hockeyapp_update_dialog_negative_button = 2131230806;
-			
-			// aapt resource value: 0x7f080057
-			public const int hockeyapp_update_dialog_positive_button = 2131230807;
-			
-			// aapt resource value: 0x7f080058
-			public const int hockeyapp_update_dialog_title = 2131230808;
-			
-			// aapt resource value: 0x7f080059
-			public const int hockeyapp_update_mandatory_toast = 2131230809;
-			
-			// aapt resource value: 0x7f08005a
-			public const int hockeyapp_update_version_details_label = 2131230810;
-			
 			// aapt resource value: 0x7f080013
 			public const int status_bar_notification_info_overflow = 2131230739;
 			
@@ -2449,17 +2101,17 @@ namespace OneEchan.Droid
 			// aapt resource value: 0x7f0a0089
 			public const int Animation_AppCompat_DropDownUp = 2131361929;
 			
+			// aapt resource value: 0x7f0a013e
+			public const int AppTheme = 2131362110;
+			
+			// aapt resource value: 0x7f0a0140
+			public const int AppTheme_AppBarOverlay = 2131362112;
+			
+			// aapt resource value: 0x7f0a013f
+			public const int AppTheme_NoActionBar = 2131362111;
+			
 			// aapt resource value: 0x7f0a0141
-			public const int AppTheme = 2131362113;
-			
-			// aapt resource value: 0x7f0a0143
-			public const int AppTheme_AppBarOverlay = 2131362115;
-			
-			// aapt resource value: 0x7f0a0142
-			public const int AppTheme_NoActionBar = 2131362114;
-			
-			// aapt resource value: 0x7f0a0144
-			public const int AppTheme_PopupOverlay = 2131362116;
+			public const int AppTheme_PopupOverlay = 2131362113;
 			
 			// aapt resource value: 0x7f0a008a
 			public const int Base_AlertDialog_AppCompat = 2131361930;
@@ -2886,15 +2538,6 @@ namespace OneEchan.Droid
 			
 			// aapt resource value: 0x7f0a0079
 			public const int Base_Widget_AppCompat_Toolbar_Button_Navigation = 2131361913;
-			
-			// aapt resource value: 0x7f0a013e
-			public const int HockeyApp_ButtonStyle = 2131362110;
-			
-			// aapt resource value: 0x7f0a013f
-			public const int HockeyApp_EditTextStyle = 2131362111;
-			
-			// aapt resource value: 0x7f0a0140
-			public const int HockeyApp_SingleLineInputStyle = 2131362112;
 			
 			// aapt resource value: 0x7f0a0017
 			public const int Platform_AppCompat = 2131361815;

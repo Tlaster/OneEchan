@@ -1,6 +1,5 @@
 ﻿{
   "dependencies": {
-    "HockeySDK.UWP": "3.2.1-build60573",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "PullToRefresh.UWP": "0.3.4"
   },

@@ -48,7 +48,6 @@ namespace OneEchan
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
-            Microsoft.HockeyApp.HockeyClient.Current.Configure(Shared.HockeyAppKey.ApiKey);
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
                 Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundColor = Color.FromArgb(255, 139, 14, 93);

@@ -34,7 +34,6 @@ namespace OneEchan.iOS
 					this.NavigationController.PushViewController(about, true);
 				}
 			}));
-            //NavigationItem.SetRightBarButtonItem(new UIBarButtonItem(new UIButton()),false);
             NavigationItem.BackBarButtonItem = new UIBarButtonItem(title: "", style: UIBarButtonItemStyle.Plain, target: null, action: null);
             NavigationController.NavigationBar.BarStyle = UIBarStyle.Black;
             NavigationController.NavigationBar.TintColor = UIColor.White;
