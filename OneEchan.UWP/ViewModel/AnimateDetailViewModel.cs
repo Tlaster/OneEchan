@@ -13,7 +13,7 @@ namespace OneEchan.ViewModel
     public class AnimateDetailViewModel:INotifyPropertyChanged
     {
         public string Name { get; }
-        public List<AnimateSetModel> SetList { get; private set; }
+        public List<DetailList> SetList { get; private set; }
         public bool IsLoading { get; private set; }
         private int _id;
 
@@ -33,7 +33,7 @@ namespace OneEchan.ViewModel
             try
             {
                 var item = await Core.Common.Api.Detail.GetDetail(_id, LanguageHelper.PrefLang);
-                SetList = item.SetList;
+                SetList = item.List;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SetList)));
             }
             catch (Exception e) when (e is WebException || e is HttpRequestException)
@@ -44,9 +44,6 @@ namespace OneEchan.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLoading)));
         }
         public void Refresh() => Init();
-        internal async void Click(int fileName)
-        {
-            await Core.Common.Api.Detail.AddClick(_id, fileName, LanguageHelper.PrefLang);
-        }
+
     }
 }

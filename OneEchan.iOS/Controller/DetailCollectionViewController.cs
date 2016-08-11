@@ -55,7 +55,7 @@ namespace OneEchan.iOS.Controller
             var deletate = new CustomFlowLayoutDelegate();
             deletate.ItemClick += (sender,e) =>
              {
-                 Core.Common.Api.Detail.AddClick(ID, int.Parse(List[e.Index].FileName), LanguageHelper.PrefLang);
+                 Core.Common.Api.Detail.GetVideo(ID, int.Parse(List[e.Index].FileName), LanguageHelper.PrefLang);
                  if (moviePlayer == null)
                  {
                      moviePlayer = new MPMoviePlayerController();

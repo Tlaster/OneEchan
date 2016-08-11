@@ -12,14 +12,10 @@ namespace OneEchan.Core.Common.Api
 {
     public class Home
     {
-        public static async Task<AnimateListResult> GetList(int page = 0,string prefLang = "JP")
+        public static async Task<PagedListResult<ListResult>> GetList(int page = 0,string prefLang = "ja-JP")
         {
-            string _serverLink = $"http://oneechan.moe/api/list?page={page}&prefLang={prefLang}";
             using (var client = new HttpClient())
-            {
-                var jsstr = await client.GetStringAsync(_serverLink);
-                return JsonConvert.DeserializeObject<AnimateListResult>(jsstr);
-            }
+                return JsonConvert.DeserializeObject<PagedListResult<ListResult>>(await client.GetStringAsync($"https://oneechan.moe/{prefLang}/api/list?page={page}"));
         }
     }
 }

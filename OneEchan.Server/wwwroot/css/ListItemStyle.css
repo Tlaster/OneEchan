@@ -1,0 +1,16 @@
+.ListTitle
+{
+    font-size:large;
+}
+.ListSubTitle
+{
+    font-size:small;
+    color:darkgray;
+    padding-left:4px;
+}
+.ListItem.mdl-button
+{
+	text-align: left;
+	text-transform: none;
+	display: block;
+}

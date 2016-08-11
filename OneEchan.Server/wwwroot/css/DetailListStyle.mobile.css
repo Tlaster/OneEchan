@@ -1,0 +1,35 @@
+ul 
+{
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+li
+{
+    float:left;
+    padding: 2vw;
+}
+.mdl-card.CardViewItem
+{
+    width:46vw;
+    height: 25.875vw;
+    min-height: unset;
+}
+.CardViewItem > .mdl-card__actions 
+{
+  padding: 2vw;
+  background: rgba(0, 0, 0, 0.2);
+}
+.CardText
+{
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+.CardSubText
+{
+    color: lightgray;
+    font-size: 14px;
+    font-weight: 500;
+    float:right;
+}

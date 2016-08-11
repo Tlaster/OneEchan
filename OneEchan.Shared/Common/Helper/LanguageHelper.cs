@@ -27,19 +27,19 @@ namespace OneEchan.Shared.Common.Helper
 #endif
                 if (lang.Contains("en"))
                 {
-                    lang = "en";
+                    lang = "en-US";
                 }
                 else if (lang.Contains("zh"))
                 {
-                    lang = "zh";
+                    lang = "zh-TW";
                 }
                 else if (lang.Contains("ru"))
                 {
-                    lang = "ru";
+                    lang = "ru-RU";
                 }
                 else
                 {
-                    lang = "jp";
+                    lang = "ja-JP";
                 }
                 return lang;
             }

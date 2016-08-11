@@ -214,3 +214,5 @@ ModelManifest.xml
 /OneEchan.UWP/_language-zh-hans.appx
 /OneEchan.Shared/XamarinInsights.cs
 /OneEchan.Shared/HockeyAppKey.cs
+/OneEchan.Server/Properties/PublishProfiles
+/OneEchan.Server.zip

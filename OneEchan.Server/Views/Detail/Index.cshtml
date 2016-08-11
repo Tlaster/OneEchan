@@ -1,0 +1,27 @@
+﻿@model DetailResult
+@section head{
+    @if (ViewBag.IsMobile)
+    {
+        <link rel="stylesheet" href="~/css/DetailListStyle.mobile.css" />
+    }
+    else
+    {
+        <link rel="stylesheet" href="/css/DetailListStyle.css" />
+    }
+    <link rel="stylesheet" href="/css/ListItemStyle.css" />
+}
+
+<ul>
+    @foreach (var item in Model.List)
+    {
+        <li>
+            <div onclick="location.href='/Watch?id=@Model.ID&set=@item.Set'" class="CardViewItem mdl-card mdl-shadow--2dp" style="background: url(@item.FileThumb) 0% 0% / 100% no-repeat;">
+                <div class="mdl-card__title mdl-card--expand"></div>
+                <div class="mdl-card__actions">
+                    <span class="CardText">@item.Set</span>
+                    <span class="CardSubText">@item.ClickCount Views</span>
+                </div>
+            </div>
+        </li>
+    }
+</ul>

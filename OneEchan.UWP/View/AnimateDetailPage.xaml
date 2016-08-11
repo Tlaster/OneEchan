@@ -12,10 +12,6 @@
         <BitmapImage x:Key="DefaultImage" UriSource="ms-appx:///Assets/SplashScreen.png" />
 
         <converter:BoolToFavorIconConverter x:Key="BoolToFavorIconConverter"/>
-        <MenuFlyout x:Key="RightClickMenu">
-            <MenuFlyoutItem x:Uid="CopyLink" Text="Copy link" Click="MenuFlyoutItem_Click"/>
-            <MenuFlyoutItem x:Uid="OpenWith" Text="Open with other player" Click="MenuFlyoutItem_Click_1"/>
-        </MenuFlyout>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <Grid.RowDefinitions>
@@ -34,9 +30,9 @@
             </Button>
         </Grid>
         <ProgressBar Grid.Row="1" VerticalAlignment="Top" IsIndeterminate="{x:Bind DetailVM.IsLoading,Mode=OneWay}" Visibility="{x:Bind DetailVM.IsLoading,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
-        <GridView Padding="8" RightTapped="{x:Bind RightClick}" Holding="{x:Bind RightClick}" Grid.Row="1" SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick"  ItemsSource="{x:Bind DetailVM.SetList,Mode=OneWay}">
+        <GridView Padding="8" Grid.Row="1" SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick"  ItemsSource="{x:Bind DetailVM.SetList,Mode=OneWay}">
             <GridView.ItemTemplate>
-                <DataTemplate x:DataType="model:AnimateSetModel">
+                <DataTemplate x:DataType="model:DetailList">
                     <Grid>
                         <Grid.RowDefinitions>
                             <RowDefinition Height="*"/>
@@ -45,7 +41,7 @@
                         </Grid.RowDefinitions>
                         <Border Background="MediumVioletRed"/>
                         <Image Width="196" Height="110" Source="{Binding FileThumb,TargetNullValue={StaticResource DefaultImage},FallbackValue={StaticResource DefaultImage}}" />
-                        <TextBlock HorizontalAlignment="Center" Grid.Row="1" Text="{x:Bind FileName}" Style="{ThemeResource SubtitleTextBlockStyle}" TextTrimming="WordEllipsis"/>
+                        <TextBlock HorizontalAlignment="Center" Grid.Row="1" Text="{x:Bind Set}" Style="{ThemeResource SubtitleTextBlockStyle}" TextTrimming="WordEllipsis"/>
                         <TextBlock Grid.Row="2" HorizontalAlignment="Right" Foreground="Gray">
                             <Run>Click Count:</Run>
                             <Run Text="{x:Bind ClickCount}"/>

@@ -9,17 +9,15 @@ namespace OneEchan.Common
 {
     public class AnimateListIncrementalLoadingClass : IncrementalLoadingBase
     {
-        private bool _hasMore = true;
+        private int _maxPage;
         private int _page = 0;
 
-        protected override bool HasMoreItemsOverride() => _hasMore;
+        protected override bool HasMoreItemsOverride() => _page < _maxPage;
 
         protected override async Task<IList<object>> LoadMoreItemsOverrideAsync(CancellationToken c, uint count)
         {
             var item = await Core.Common.Api.Home.GetList(_page++, LanguageHelper.PrefLang);
-            if (!item.Success)
-                return null;
-            _hasMore = item.HasMore;
+            _maxPage = item.MaxPage;
             return item.List.ToArray();
         }
     }

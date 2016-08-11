@@ -36,15 +36,13 @@
   <ItemGroup>
     <Compile Include="Common\Api\Detail.cs" />
     <Compile Include="Common\Api\Home.cs" />
-    <Compile Include="Common\Api\Model\AnimateInfoModel.cs" />
-    <Compile Include="Common\Api\Model\AnimateListModel.cs" />
-    <Compile Include="Common\Api\Model\AnimateListResult.cs" />
-    <Compile Include="Common\Api\Model\AnimateSetModel.cs" />
+    <Compile Include="Common\Api\Model\DetailResult.cs" />
+    <Compile Include="Common\Api\Model\PagedListResult.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Newtonsoft.Json, Version=8.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
-      <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\portable-net45+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="NodaTime, Version=1.3.0.0, Culture=neutral, PublicKeyToken=4226afe0d9b296d1, processorArchitecture=MSIL">

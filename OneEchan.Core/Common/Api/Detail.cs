@@ -12,20 +12,17 @@ namespace OneEchan.Core.Common.Api
 {
     public class Detail
     {
-        public static async Task<AnimateInfoModel> GetDetail(int id, string prefLang = "JP")
+        public static async Task<DetailResult> GetDetail(int id, string prefLang = "ja-JP")
         {
             using (var client = new HttpClient())
-            {
-                var jsstr = await client.GetStringAsync($"http://oneechan.moe/api/detail?id={id}&prefLang={prefLang}");
-                return JsonConvert.DeserializeObject<AnimateInfoModel>(jsstr);
-            }
+                return JsonConvert.DeserializeObject<DetailResult>(await client.GetStringAsync($"https://oneechan.moe/{prefLang}/api/detail?id={id}"));
         }
 
-        public static async Task<string> AddClick(int id, int fileName, string prefLang = "JP")
+        public static async Task<SetResult> GetVideo(int id, double set, string prefLang = "ja-JP")
         {
 
             using (var client = new HttpClient())
-                return ((JObject)JsonConvert.DeserializeObject(await client.GetStringAsync($"http://oneechan.moe/api/detail?id={id}&filename={fileName}&prefLang={prefLang}"))).Value<string>("FilePath");
+                return JsonConvert.DeserializeObject<SetResult>(await client.GetStringAsync($"https://oneechan.moe/{prefLang}/api/watch?id={id}&set={set}"));
         }
     }
 }

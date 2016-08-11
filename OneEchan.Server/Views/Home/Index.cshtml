@@ -1,0 +1,57 @@
+﻿@model PagedListResult<ListResult>
+@section head {
+    <link rel="stylesheet" href="~/css/ListItemStyle.css" />
+}
+
+@section header{
+    <div class="mdl-layout-spacer"></div>
+    <form action="/home/search" method="get" style="margin:0 auto;">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+            <label class="mdl-button mdl-js-button mdl-button--icon" for="search">
+                <i class="material-icons">search</i>
+            </label>
+            <div class="mdl-textfield__expandable-holder">
+                <input value="@(ViewBag.SearchText ?? "")" class="mdl-textfield__input" id="search" onkeydown="if (event.keyCode == 13) { this.form.submit(); return false; }" name="keyword" type="text">
+                <label class="mdl-textfield__label" for="search-expandable">Search...</label>
+            </div>
+        </div>
+    </form>
+    <button id="app" onclick="location.href='https://github.com/Tlaster/OneEchan'" class="mdl-button mdl-js-button mdl-button--icon">
+        <i class="material-icons">get_app</i>
+    </button>
+    <div class="mdl-tooltip" for="app">
+        Download App For Your Phone
+    </div>
+}
+
+
+<div id="data">
+    @foreach (var item in Model.List)
+    {
+        <a href="/Detail?id=@item.ID" class="ListItem mdl-button mdl-js-button mdl-js-ripple-effect">
+            <span class="ListTitle">@item.Name</span>
+            <span class="ListSubTitle">@item.Updated_At</span>
+        </a>
+    }
+</div>
+<div style="margin: 0 auto;display: table;">
+    @if (Model.CurrentPage > 0)
+    {
+        <button style="margin:8;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--icon" onclick="location.href='@(ViewBag.SearchText == null ? $"/Home/Index?page={Model.CurrentPage-1}" : $"/Home/Search?keyword={ViewBag.SearchText}&page={Model.CurrentPage-1}")'">
+            <i class="material-icons">arrow_back</i>
+        </button>
+    }
+    @if (Model.MaxPage > 1)
+    {
+        for (int i = 0; i <= Model.MaxPage; i++)
+        {
+            <button style="margin:8;" class="mdl-button mdl-js-button mdl-button--icon @(Model.CurrentPage == i ? "mdl-button--colored" : "")" onclick="location.href='@(ViewBag.SearchText == null ? $"/Home/Index?page={i}" : $"/Home/Search?keyword={ViewBag.SearchText}&page={i}")'">@i</button>
+        }
+    }
+    @if (Model.CurrentPage != Model.MaxPage && Model.MaxPage > 0)
+    {
+        <button style="margin:8;" class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect mdl-button--icon" onclick="location.href='@(ViewBag.SearchText == null ? $"/Home/Index?page={Model.CurrentPage+1}" : $"/Home/Search?keyword={ViewBag.SearchText}&page={Model.CurrentPage+1}")'">
+            <i class="material-icons">arrow_forward</i>
+        </button>
+    }
+</div>
