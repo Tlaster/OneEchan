@@ -8,6 +8,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <converter:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter" />
+            <converter:TimeSpanToDoubleConverter x:Key="TimeSpanToDoubleConverter"/>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

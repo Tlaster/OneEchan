@@ -6,19 +6,20 @@ namespace OneEchan.Shared.Common.Helper
 {
     internal static class UpdateTimeHelper
     {
-        public static string GetUpdate(TimeSpan time)
+        public static string GetUpdate(TimeSpan? time)
         {
-            if (time.Days != 0)
+			if (time == null) return "";
+			if (time.Value.Days != 0)
             {
-                return $"{time.Days} days ago";
+				return $"{time.Value.Days} days ago";
             }
-            if (time.Hours != 0)
+			if (time.Value.Hours != 0)
             {
-                return $"{time.Hours} hours ago";
+				return $"{time.Value.Hours} hours ago";
             }
-            if (time.Minutes != 0)
+			if (time.Value.Minutes != 0)
             {
-                return $"{time.Minutes} minutes ago";
+				return $"{time.Value.Minutes} minutes ago";
             }
             return "Just now";
         }

@@ -77,10 +77,8 @@ namespace OneEchan.Droid
             try
             {
                 var item = await Core.Common.Api.Home.GetList(_page++, LanguageHelper.PrefLang);
-                if (!item.Success)
-                    return;
-                _hasMore = item.HasMore;
-                (_recyclerView.ViewAdapter as MainListAdapter).Add(item.List.ToList());
+				_hasMore = _page > item.MaxPage;
+				(_recyclerView.ViewAdapter as MainListAdapter).Add(item.List);
             }
             catch (Exception e) when (e is WebException || e is HttpRequestException)
             {
@@ -95,10 +93,8 @@ namespace OneEchan.Droid
             {
                 _page = 0;
                 var item = await Core.Common.Api.Home.GetList(_page++, LanguageHelper.PrefLang);
-                if (!item.Success)
-                    return;
-                _hasMore = item.HasMore;
-                var ada = new MainListAdapter(item.List.ToList());
+				_hasMore = _page > item.MaxPage;
+                var ada = new MainListAdapter(item.List);
                 ada.ItemClick += Ada_ItemClick;
                 _recyclerView.ViewAdapter = ada;
             }

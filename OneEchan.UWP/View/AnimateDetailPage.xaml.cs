@@ -8,6 +8,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using OneEchan.Core.Common.Api.Model;
+using OneEchan.UWP.ViewModel;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 
@@ -32,7 +33,7 @@ namespace OneEchan
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
             var item = e.ClickedItem as DetailList;
-            Frame.Navigate(typeof(AnimatePlayPage), item.FilePath);
+            Frame.Navigate(typeof(AnimatePlayPage), new WatchPageViewModel(DetailVM.ID, item.Set));
         }
     }
 }

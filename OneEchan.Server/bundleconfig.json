@@ -1,0 +1,68 @@
+[
+  {
+    "outputFileName": "wwwroot/css/DetailListStyle.min.css",
+    "inputFiles": [
+      "wwwroot/css/DetailListStyle.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/HeaderStyle.min.css",
+    "inputFiles": [
+      "wwwroot/css/HeaderStyle.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/iconfont.min.css",
+    "inputFiles": [
+      "wwwroot/css/iconfont.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/ListItemStyle.min.css",
+    "inputFiles": [
+      "wwwroot/css/ListItemStyle.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/material.min.min.css",
+    "inputFiles": [
+      "wwwroot/css/material.min.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/videojs-resolution-switcher.min.css",
+    "inputFiles": [
+      "wwwroot/css/videojs-resolution-switcher.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/VideoStyle.min.css",
+    "inputFiles": [
+      "wwwroot/css/VideoStyle.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/VideoStyle.mobile.min.css",
+    "inputFiles": [
+      "wwwroot/css/VideoStyle.mobile.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/css/DetailListStyle.mobile.min.css",
+    "inputFiles": [
+      "wwwroot/css/DetailListStyle.mobile.css"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/material.min.min.js",
+    "inputFiles": [
+      "wwwroot/js/material.min.js"
+    ]
+  },
+  {
+    "outputFileName": "wwwroot/js/videojs-resolution-switcher.min.js",
+    "inputFiles": [
+      "wwwroot/js/videojs-resolution-switcher.js"
+    ]
+  }
+]

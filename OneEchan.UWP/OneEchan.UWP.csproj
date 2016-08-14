@@ -98,6 +98,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common\AnimateListIncrementalLoadingClass.cs" />
+    <Compile Include="Converter\TimeSpanToDoubleConverter.cs" />
+    <Compile Include="ViewModel\WatchPageViewModel.cs" />
     <Compile Include="View\AboutPage.xaml.cs">
       <DependentUpon>AboutPage.xaml</DependentUpon>
     </Compile>

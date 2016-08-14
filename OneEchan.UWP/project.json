@@ -1,6 +1,7 @@
 ﻿{
   "dependencies": {
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "Nito.AsyncEx": "3.0.1",
     "PullToRefresh.UWP": "0.3.4"
   },
   "frameworks": {

@@ -11,12 +11,12 @@ namespace OneEchan.Droid.Adapter
     {
         public event EventHandler<int> ItemClick;
 
-        public List<AnimateListModel> Items { get; }
-        public MainListAdapter(List<AnimateListModel> items) : base()
+		public List<ListResult> Items { get; }
+		public MainListAdapter(List<ListResult> items) : base()
         {
             Items = items;
         }
-        public void Add(List<AnimateListModel> list)
+		public void Add(List<ListResult> list)
         {
             Items.AddRange(list);
             NotifyDataSetChanged();
@@ -27,7 +27,7 @@ namespace OneEchan.Droid.Adapter
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-            (holder as ViewHolderBase).SetText(Resource.Id.MainListLayoutName, Items[position].Name).SetText(Resource.Id.MainListLayoutUpdateTime, Shared.Common.Helper.UpdateTimeHelper.GetUpdate(Items[position].LastUpdateTime));
+			(holder as ViewHolderBase).SetText(Resource.Id.MainListLayoutName, Items[position].Name).SetText(Resource.Id.MainListLayoutUpdateTime, Shared.Common.Helper.UpdateTimeHelper.GetUpdate(Items[position].Updated_At));
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

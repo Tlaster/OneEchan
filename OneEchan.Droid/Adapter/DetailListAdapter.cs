@@ -12,8 +12,8 @@ namespace OneEchan.Droid.Adapter
     public class DetailListAdapter : RecyclerView.Adapter
     {
         public event EventHandler<int> ItemClick;
-        public List<AnimateSetModel> Items { get; }
-        public DetailListAdapter(List<AnimateSetModel> items) : base()
+		public List<DetailList> Items { get; }
+		public DetailListAdapter(List<DetailList> items) : base()
         {
             Items = items;
         }
@@ -24,7 +24,7 @@ namespace OneEchan.Droid.Adapter
         public override async void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             var vh = holder as ViewHolderBase;
-            vh.SetText(Resource.Id.DetailListLayoutName,Items[position].FileName).SetText(Resource.Id.DetailListLayoutClickCount, $"Click Count:{Items[position].ClickCount}");
+			vh.SetText(Resource.Id.DetailListLayoutName,Items[position].Set.ToString()).SetText(Resource.Id.DetailListLayoutClickCount, $"Click Count:{Items[position].ClickCount}");
             if (string.IsNullOrEmpty(Items[position].FileThumb))
             {
                 vh.SetBackgroundColor(Resource.Id.DetailListImage, Color.MediumVioletRed).SetImageResource(Resource.Id.DetailListImage, Resource.Drawable.SplashScreen);

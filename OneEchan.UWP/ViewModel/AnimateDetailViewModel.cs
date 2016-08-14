@@ -15,13 +15,13 @@ namespace OneEchan.ViewModel
         public string Name { get; }
         public List<DetailList> SetList { get; private set; }
         public bool IsLoading { get; private set; }
-        private int _id;
+        public int ID { get; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 
         public AnimateDetailViewModel(int id,string name)
         {
-            _id = id;
+            ID = id;
             Name = name;
             Init();
         }
@@ -32,7 +32,7 @@ namespace OneEchan.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLoading)));
             try
             {
-                var item = await Core.Common.Api.Detail.GetDetail(_id, LanguageHelper.PrefLang);
+                var item = await Core.Common.Api.Detail.GetDetail(ID, LanguageHelper.PrefLang);
                 SetList = item.List;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SetList)));
             }

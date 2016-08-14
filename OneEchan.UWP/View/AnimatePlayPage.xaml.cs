@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using OneEchan.UWP.ViewModel;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,6 +23,8 @@ namespace OneEchan
     /// </summary>
     public sealed partial class AnimatePlayPage : Page
     {
+        public WatchPageViewModel ViewModel { get; set; }
+
         public AnimatePlayPage()
         {
             this.InitializeComponent();
@@ -29,8 +32,7 @@ namespace OneEchan
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            var path = e.Parameter as string;
-            mediaElement.Source = new Uri(path);
+            ViewModel = e.Parameter as WatchPageViewModel;
         }
     }
 }

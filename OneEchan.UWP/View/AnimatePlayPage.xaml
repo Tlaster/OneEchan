@@ -6,6 +6,35 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
-
-    <MediaElement x:Name="mediaElement" AutoPlay="True" AreTransportControlsEnabled="True" />
+    <Grid>
+        <MediaElement x:Name="mediaElement" AutoPlay="True"/>
+        <StackPanel RequestedTheme="Dark" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="{x:Bind ViewModel.Item.IsNotCompleted,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
+            <ProgressRing IsActive="{x:Bind ViewModel.Item.IsNotCompleted,Mode=OneWay}" Height="100" Width="100"/>
+            <TextBlock Style="{ThemeResource SubheaderTextBlockStyle}" Text="载入视频信息中..."/>
+        </StackPanel>
+        <Grid Visibility="{x:Bind ViewModel.Item.IsCompleted,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Grid RequestedTheme="Dark" Padding="16" Background="#BF000000" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Button Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
+                    <SymbolIcon Symbol="Play"/>
+                </Button>
+                <Slider Grid.Column="1" Value="{Binding Position, Converter={StaticResource TimeSpanToDoubleConverter}, ElementName=mediaElement, Mode=TwoWay}" Maximum="{Binding NaturalDuration.TimeSpan.TotalSeconds, ElementName=mediaElement, Mode=OneWay}" />
+                <Button Grid.Column="2" Style="{ThemeResource DateTimePickerFlyoutButtonStyle}">
+                    <SymbolIcon Symbol="Volume"/>
+                </Button>
+                <ComboBox VerticalAlignment="Center" Grid.Column="3"/>
+            </Grid>
+        </Grid>
+    </Grid>
 </Page>

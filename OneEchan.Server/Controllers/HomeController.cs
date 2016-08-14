@@ -10,7 +10,6 @@ using OneEchan.Server.Models;
 
 namespace OneEchan.Server.Controllers
 {
-    [RequireHttps]
     public class HomeController : Controller
     {
         private const int PAGESIZE = 20;
