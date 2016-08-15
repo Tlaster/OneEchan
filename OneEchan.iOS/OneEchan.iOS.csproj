@@ -241,12 +241,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\OneEchan.Core\OneEchan.Core.csproj">
-      <Project>{94574309-1C56-4F55-9535-7ED8F83552C1}</Project>
-      <Name>OneEchan.Core</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <ITunesArtwork Include="Resources\iTunesArtwork%402x.png" />
   </ItemGroup>
   <ItemGroup>
@@ -259,7 +253,12 @@
       <Install>true</Install>
     </BootstrapperPackage>
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\OneEchan.Core\OneEchan.Core.csproj">
+      <Project>{94574309-1c56-4f55-9535-7ed8f83552c1}</Project>
+      <Name>OneEchan.Core</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="..\OneEchan.Shared\OneEchan.Shared.projitems" Label="Shared" Condition="Exists('..\OneEchan.Shared\OneEchan.Shared.projitems')" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
-  <ItemGroup />
 </Project>

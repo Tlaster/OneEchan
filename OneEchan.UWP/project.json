@@ -1,7 +1,8 @@
 ﻿{
   "dependencies": {
+    "Fody": "1.29.4",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
-    "Nito.AsyncEx": "3.0.1",
+    "PropertyChanged.Fody": "1.51.3",
     "PullToRefresh.UWP": "0.3.4"
   },
   "frameworks": {

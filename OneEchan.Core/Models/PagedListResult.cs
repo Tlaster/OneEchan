@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
-namespace OneEchan.Server.Models
+namespace OneEchan.Core.Models
 {
     public class PagedListResult<T>
     {
@@ -34,4 +35,5 @@ namespace OneEchan.Server.Models
             };
         }
     }
+
 }

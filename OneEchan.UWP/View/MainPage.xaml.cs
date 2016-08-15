@@ -4,7 +4,7 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using OneEchan.ViewModel;
 using OneEchan.View;
-using OneEchan.Core.Common.Api.Model;
+using OneEchan.Core.Models;
 
 //“空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409 上有介绍
 
@@ -25,7 +25,7 @@ namespace OneEchan
 
         private void ListView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var item = e.ClickedItem as AnimateListModel;
+            var item = e.ClickedItem as ListResult;
             Frame.Navigate(typeof(AnimateDetailPage), new AnimateDetailViewModel(item.ID,item.Name));
         }
 

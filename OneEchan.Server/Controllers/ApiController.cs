@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OneEchan.Core.Models;
 using OneEchan.Server.Common.Helpers;
 using OneEchan.Server.Models;
 

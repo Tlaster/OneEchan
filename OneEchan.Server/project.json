@@ -35,13 +35,20 @@
       "imports": [
         "dotnet5.6",
         "portable-net45+win8"
-      ]
+      ],
+      "dependencies": {
+        "OneEchan.Core": {
+          "target": "project"
+        }
+
+      }
     }
   },
 
   "buildOptions": {
     "emitEntryPoint": true,
-    "preserveCompilationContext": true
+    "preserveCompilationContext": true,
+    "define": [ "DEBUG", "SERVER" ]
   },
 
   "runtimeOptions": {
@@ -52,6 +59,7 @@
 
   "publishOptions": {
     "include": [
+      "../OneEchan.Shared/**/*.cs",
       "wwwroot",
       "Views",
       "Areas/**/Views",

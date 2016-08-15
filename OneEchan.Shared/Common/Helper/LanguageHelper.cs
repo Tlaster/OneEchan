@@ -22,8 +22,10 @@ namespace OneEchan.Shared.Common.Helper
                 var lang = GlobalizationPreferences.Languages[0].ToLower();
 #elif __IOS__
                 var lang = NSLocale.PreferredLanguages[0].ToLower();
-#else
+#elif ANDROID
                 var lang = Locale.Default.Language.ToLower();
+#else 
+                throw Exception("You should not call this");
 #endif
                 if (lang.Contains("en"))
                 {

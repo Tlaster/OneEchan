@@ -6,11 +6,11 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
-    xmlns:model="using:OneEchan.Core.Common.Api.Model"
+    xmlns:model="using:OneEchan.Core.Models"
     xmlns:converter="using:OneEchan.Converter"
     xmlns:ptr="using:PullToRefresh.UWP">
     <Page.Resources>
-        <converter:TimeSpanToShortTimeConverter x:Key="TimeSpanToShortTimeConverter"/>
+        <converter:DateTimeToShortTimeConverter x:Key="DateTimeToShortTimeConverter"/>
         <MenuFlyout x:Key="TitleMenu">
             <MenuFlyoutItem Text="About" Click="MenuFlyoutItem_Click"/>
         </MenuFlyout>
@@ -50,10 +50,10 @@
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
-                    <DataTemplate x:DataType="model:AnimateListModel">
+                    <DataTemplate x:DataType="model:ListResult">
                         <StackPanel>
                             <TextBlock Style="{ThemeResource SubtitleTextBlockStyle}" Text="{x:Bind Name}" TextTrimming="WordEllipsis"/>
-                            <TextBlock Padding="6,0" Foreground="Gray" Text="{x:Bind LastUpdateTime,Converter={StaticResource TimeSpanToShortTimeConverter}}"/>
+                            <TextBlock Padding="6,0" Foreground="Gray" Text="{x:Bind Updated_At,Converter={StaticResource DateTimeToShortTimeConverter}}"/>
                         </StackPanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

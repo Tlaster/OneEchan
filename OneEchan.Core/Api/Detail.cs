@@ -6,9 +6,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
-using OneEchan.Core.Common.Api.Model;
+using OneEchan.Core.Models;
 
-namespace OneEchan.Core.Common.Api
+namespace OneEchan.Core.Api
 {
     public class Detail
     {

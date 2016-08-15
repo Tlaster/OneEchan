@@ -5,7 +5,7 @@
     xmlns:local="using:OneEchan"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:model="using:OneEchan.Core.Common.Api.Model"
+    xmlns:model="using:OneEchan.Core.Models"
     xmlns:converter="using:OneEchan.Converter"
     mc:Ignorable="d">
     <Page.Resources>

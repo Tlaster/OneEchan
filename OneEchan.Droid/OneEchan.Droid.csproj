@@ -135,7 +135,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\OneEchan.Core\OneEchan.Core.csproj">
-      <Project>{94574309-1C56-4F55-9535-7ED8F83552C1}</Project>
+      <Project>{94574309-1c56-4f55-9535-7ed8f83552c1}</Project>
       <Name>OneEchan.Core</Name>
     </ProjectReference>
   </ItemGroup>

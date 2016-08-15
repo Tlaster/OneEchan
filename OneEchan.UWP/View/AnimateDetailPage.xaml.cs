@@ -1,14 +1,8 @@
 ﻿using OneEchan.ViewModel;
-using System;
-using Windows.ApplicationModel.DataTransfer;
-using Windows.Foundation;
-using Windows.System;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using OneEchan.Core.Common.Api.Model;
 using OneEchan.UWP.ViewModel;
+using OneEchan.Core.Models;
 
 // “空白页”项模板在 http://go.microsoft.com/fwlink/?LinkId=234238 上提供
 

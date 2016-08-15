@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Reflection;
 
-namespace OneEchan.Core.Common.Api.Model
+namespace OneEchan.Core.Models
 {
     public class DetailResult
     {
@@ -25,5 +26,19 @@ namespace OneEchan.Core.Common.Api.Model
         public string LowQuality { get; set; }
         public string MediumQuality { get; set; }
         public string OriginalQuality { get; set; }
+        public Dictionary<string, string> ToDictionary()
+        {
+            var dic = new Dictionary<string, string>
+            {
+                { "Source", OriginalQuality },
+            };
+            if (HighQuality != null)
+                dic.Add("720P", HighQuality);
+            if (MediumQuality != null)
+                dic.Add("480P", MediumQuality);
+            if (LowQuality != null)
+                dic.Add("240P", LowQuality);
+            return dic;
+        }
     }
 }

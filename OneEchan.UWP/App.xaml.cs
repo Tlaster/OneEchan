@@ -50,14 +50,14 @@ namespace OneEchan
 #endif
             if (Windows.Foundation.Metadata.ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
             {
-                Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundColor = Color.FromArgb(255, 139, 14, 93);
+                Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundColor = ((SolidColorBrush)Resources["AppTheme"]).Color;
                 Windows.UI.ViewManagement.StatusBar.GetForCurrentView().BackgroundOpacity = 1d;
                 Windows.UI.ViewManagement.StatusBar.GetForCurrentView().ForegroundColor = Colors.White;
             }
             else
             {
-                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = Color.FromArgb(255, 139, 14, 93);
-                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = Color.FromArgb(255, 139, 14, 93);
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.BackgroundColor = ((SolidColorBrush)Resources["AppTheme"]).Color;
+                Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonBackgroundColor = ((SolidColorBrush)Resources["AppTheme"]).Color;
             }
             Frame rootFrame = Window.Current.Content as Frame;
 

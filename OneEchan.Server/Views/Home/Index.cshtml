@@ -30,7 +30,7 @@
     {
         <a href="/Detail?id=@item.ID" class="ListItem mdl-button mdl-js-button mdl-js-ripple-effect">
             <span class="ListTitle">@item.Name</span>
-            <span class="ListSubTitle">@item.Updated_At</span>
+            <span class="ListSubTitle">@item.Updated_At?.DiffForHumans()</span>
         </a>
     }
 </div>

@@ -4,9 +4,9 @@ using System.ComponentModel;
 using System.Net;
 using System.Net.Http;
 using Windows.UI.Popups;
-using OneEchan.Shared;
-using OneEchan.Core.Common.Api.Model;
 using OneEchan.Shared.Common.Helper;
+using OneEchan.Core.Models;
+using OneEchan.Core.Api;
 
 namespace OneEchan.ViewModel
 {
@@ -32,7 +32,7 @@ namespace OneEchan.ViewModel
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsLoading)));
             try
             {
-                var item = await Core.Common.Api.Detail.GetDetail(ID, LanguageHelper.PrefLang);
+                var item = await Detail.GetDetail(ID, LanguageHelper.PrefLang);
                 SetList = item.List;
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(SetList)));
             }

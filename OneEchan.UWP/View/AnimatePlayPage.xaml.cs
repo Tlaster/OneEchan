@@ -23,7 +23,7 @@ namespace OneEchan
     /// </summary>
     public sealed partial class AnimatePlayPage : Page
     {
-        public WatchPageViewModel ViewModel { get; set; }
+        public WatchPageViewModel ViewModel { get; private set; }
 
         public AnimatePlayPage()
         {
@@ -33,6 +33,7 @@ namespace OneEchan
         {
             base.OnNavigatedTo(e);
             ViewModel = e.Parameter as WatchPageViewModel;
+            this.DataContext = this;
         }
     }
 }

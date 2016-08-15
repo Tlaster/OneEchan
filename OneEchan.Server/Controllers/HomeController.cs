@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OneEchan.Core.Common.Extensions;
+using OneEchan.Core.Models;
 using OneEchan.Server.Common.Helpers;
 using OneEchan.Server.Models;
 
@@ -25,7 +27,7 @@ namespace OneEchan.Server.Controllers
         {
             ViewBag.CanBack = false;
             var language = Request.Headers["Accept-Language"];
-            var model = _context.AnimateList.OrderByDescending(item => item.UpdatedAt).Select(item => new ListResult { ID = item.Id, Updated_At = item.UpdatedAt, Name = LanguageHelper.GetLanguegeName(language, item) }).ToPagedList(page, PAGESIZE);
+            var model = _context.AnimateList.OrderByDescending(item => item.UpdatedAt).Select(item => new ListResult { ID = item.Id, Updated_At = item.UpdatedAt.ToUtc(), Name = LanguageHelper.GetLanguegeName(language, item) }).ToPagedList(page, PAGESIZE);
             return View(model);
         }
 
@@ -34,7 +36,7 @@ namespace OneEchan.Server.Controllers
             ViewBag.Title = $"OneEchan - {keyword}";
             ViewBag.SearchText = keyword;
             var language = Request.Headers["Accept-Language"];
-            var model = _context.AnimateList.Where(item => (item.EnUs != null && item.EnUs.Contains(keyword)) || (item.JaJp != null && item.JaJp.Contains(keyword)) || (item.RuRu != null && item.RuRu.Contains(keyword)) || (item.ZhTw != null && item.ZhTw.Contains(keyword))).OrderByDescending(item => item.UpdatedAt).Select(item => new ListResult { ID = item.Id, Updated_At = item.UpdatedAt, Name = LanguageHelper.GetLanguegeName(language, item) }).ToPagedList(page, PAGESIZE);
+            var model = _context.AnimateList.Where(item => (item.EnUs != null && item.EnUs.Contains(keyword)) || (item.JaJp != null && item.JaJp.Contains(keyword)) || (item.RuRu != null && item.RuRu.Contains(keyword)) || (item.ZhTw != null && item.ZhTw.Contains(keyword))).OrderByDescending(item => item.UpdatedAt).Select(item => new ListResult { ID = item.Id, Updated_At = item.UpdatedAt.ToUtc(), Name = LanguageHelper.GetLanguegeName(language, item) }).ToPagedList(page, PAGESIZE);
             return View("index", model);
         }
     }
