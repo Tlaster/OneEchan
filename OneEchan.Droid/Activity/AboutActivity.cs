@@ -21,9 +21,7 @@ namespace OneEchan.Droid.Activity
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.AboutPage);
-            var toolbar = FindViewById<global::Android.Support.V7.Widget.Toolbar>(Resource.Id.AboutToolbar);
-            ((LinearLayout.LayoutParams)toolbar.LayoutParameters).SetMargins(0, StatusBarHelper.GetStatusBarHeight(this), 0, 0);
-            SetSupportActionBar(toolbar);
+            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.AboutToolbar));
             SupportActionBar.Title = "About";
         }
         [Java.Interop.Export("Github_Click")]

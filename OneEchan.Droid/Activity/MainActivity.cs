@@ -17,6 +17,7 @@ using OneEchan.Droid.Common.Helpers;
 using System.Threading.Tasks;
 using OneEchan.Shared.Common.Helper;
 using System.Net.Http;
+using OneEchan.Core.Api;
 
 namespace OneEchan.Droid
 {
@@ -34,9 +35,7 @@ namespace OneEchan.Droid
         {
             base.OnCreate(bundle);
             SetContentView(Resource.Layout.MainPage);
-            var toolbar = FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar);
-            ((LinearLayout.LayoutParams)toolbar.LayoutParameters).SetMargins(0, StatusBarHelper.GetStatusBarHeight(this), 0, 0);
-            SetSupportActionBar(toolbar);
+            SetSupportActionBar(FindViewById<Android.Support.V7.Widget.Toolbar>(Resource.Id.toolbar));
             SupportActionBar.Title = "OneEchan";
             _recyclerView = FindViewById<ExRecyclerView>(Resource.Id.MainPageRecyclerView);
             _layoutManager = new LinearLayoutManager(this);
@@ -76,7 +75,7 @@ namespace OneEchan.Droid
             _isLoading = true;
             try
             {
-                var item = await Core.Common.Api.Home.GetList(_page++, LanguageHelper.PrefLang);
+                var item = await Home.GetList(_page++, LanguageHelper.PrefLang);
 				_hasMore = _page > item.MaxPage;
 				(_recyclerView.ViewAdapter as MainListAdapter).Add(item.List);
             }
@@ -92,8 +91,8 @@ namespace OneEchan.Droid
             try
             {
                 _page = 0;
-                var item = await Core.Common.Api.Home.GetList(_page++, LanguageHelper.PrefLang);
-				_hasMore = _page > item.MaxPage;
+                var item = await Home.GetList(_page++, LanguageHelper.PrefLang);
+				_hasMore = _page < item.MaxPage;
                 var ada = new MainListAdapter(item.List);
                 ada.ItemClick += Ada_ItemClick;
                 _recyclerView.ViewAdapter = ada;

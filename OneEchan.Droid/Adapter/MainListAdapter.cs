@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using Android.Views;
 using Android.Support.V7.Widget;
 using OneEchan.Droid.ViewHolder;
-using OneEchan.Core.Common.Api.Model;
+using OneEchan.Core.Common.Extensions;
+using OneEchan.Core.Models;
 
 namespace OneEchan.Droid.Adapter
 {
@@ -27,7 +28,7 @@ namespace OneEchan.Droid.Adapter
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
-			(holder as ViewHolderBase).SetText(Resource.Id.MainListLayoutName, Items[position].Name).SetText(Resource.Id.MainListLayoutUpdateTime, Shared.Common.Helper.UpdateTimeHelper.GetUpdate(Items[position].Updated_At));
+			(holder as ViewHolderBase).SetText(Resource.Id.MainListLayoutName, Items[position].Name).SetText(Resource.Id.MainListLayoutUpdateTime, Items[position].Updated_At?.DiffForHumans());
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)

@@ -5,7 +5,7 @@ using Android.Support.V7.Widget;
 using OneEchan.Droid.ViewHolder;
 using Android.Graphics;
 using System.Net.Http;
-using OneEchan.Core.Common.Api.Model;
+using OneEchan.Core.Models;
 
 namespace OneEchan.Droid.Adapter
 {
@@ -24,7 +24,7 @@ namespace OneEchan.Droid.Adapter
         public override async void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
             var vh = holder as ViewHolderBase;
-			vh.SetText(Resource.Id.DetailListLayoutName,Items[position].Set.ToString()).SetText(Resource.Id.DetailListLayoutClickCount, $"Click Count:{Items[position].ClickCount}");
+			vh.SetText(Resource.Id.DetailListLayoutName,Items[position].Set.ToString()).SetText(Resource.Id.DetailListLayoutClickCount, $"{Items[position].ClickCount} Views");
             if (string.IsNullOrEmpty(Items[position].FileThumb))
             {
                 vh.SetBackgroundColor(Resource.Id.DetailListImage, Color.MediumVioletRed).SetImageResource(Resource.Id.DetailListImage, Resource.Drawable.SplashScreen);

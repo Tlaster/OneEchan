@@ -21,7 +21,8 @@
     "Microsoft.Extensions.Options.ConfigurationExtensions": "1.0.0",
     "Microsoft.VisualStudio.Web.BrowserLink.Loader": "14.0.0",
     "Microsoft.EntityFrameworkCore": "1.0.0",
-    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0"
+    "Microsoft.EntityFrameworkCore.SqlServer": "1.0.0",
+    "BundlerMinifier.Core": "2.2.281"
   },
 
   "tools": {
