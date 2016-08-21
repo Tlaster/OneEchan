@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
-namespace OneEchan.Server.Models
+namespace OneEchan.Core.Models
 {
     public partial class SetDetail
     {
+        [Key]
         public int Id { get; set; }
+        [Key]
         public double SetName { get; set; }
         public string FilePath { get; set; }
         public int ClickCount { get; set; }

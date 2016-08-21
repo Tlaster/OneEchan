@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using Foundation;
-using OneEchan.Core.Common.Api.Model;
+using OneEchan.Core.Api;
+using OneEchan.Core.Models;
 using OneEchan.iOS.Controller;
 using OneEchan.Shared;
 using OneEchan.Shared.Common.Helper;
+using OneEchan.Core.Common.Extensions;
 using UIKit;
+using System.Threading.Tasks;
 
 namespace OneEchan.iOS
 {
@@ -17,11 +20,11 @@ namespace OneEchan.iOS
         private bool _hasMore = true;
         private bool _isLoading;
 
-        public List<AnimateListModel> List { get; private set; } = new List<AnimateListModel>();
+        public List<ListResult> List { get; private set; } = new List<ListResult>();
         public ViewController (IntPtr handle) : base (handle)
         {
             RefreshControl = new UIRefreshControl();
-            RefreshControl.ValueChanged += (sender, e) => Refresh();
+            RefreshControl.ValueChanged += (sender, e) => Task.Run(async () => await Refresh());
         }
 
         public override void ViewDidLoad()
@@ -38,32 +41,19 @@ namespace OneEchan.iOS
             NavigationController.NavigationBar.BarStyle = UIBarStyle.Black;
             NavigationController.NavigationBar.TintColor = UIColor.White;
             NavigationController.NavigationBar.BarTintColor = UIColor.FromRGB(199, 21, 133);
-            Refresh();
+            Task.Run(async () => await Refresh());
         }
 
-        public override void DidReceiveMemoryWarning()
-        {
-            base.DidReceiveMemoryWarning();
-            // Release any cached data, images, etc that aren't in use.
-        }
-
-        private async void Refresh()
+        private async Task Refresh()
         {
             if (_isLoading) return;
             _isLoading = true;
             InvokeOnMainThread(() => RefreshControl.BeginRefreshing());
             _page = 0;
-            var item = await Core.Common.Api.Home.GetList(_page++, LanguageHelper.PrefLang);
-            if (!item.Success)
-            {
-                InvokeOnMainThread(() => RefreshControl.EndRefreshing());
-                _isLoading = false;
-                return;
-            }
+            var item = await Home.GetList(_page++, LanguageHelper.PrefLang);
             List = item.List.ToList();
-            _hasMore = item.HasMore;
-            TableView.ReloadData();
-            InvokeOnMainThread(() => RefreshControl.EndRefreshing());
+            _hasMore = _page < item.MaxPage;
+            InvokeOnMainThread(() => { TableView.ReloadData(); RefreshControl.EndRefreshing(); });
             _isLoading = false;
         }
 
@@ -76,7 +66,7 @@ namespace OneEchan.iOS
                 cell = new UITableViewCell(UITableViewCellStyle.Subtitle, _mainListCellId);
             var row = indexPath.Row;
             cell.TextLabel.Text = List[row].Name;
-            cell.DetailTextLabel.Text = UpdateTimeHelper.GetUpdate(List[row].LastUpdateTime);
+            cell.DetailTextLabel.Text = List[row].Updated_At?.DiffForHumans();
             cell.DetailTextLabel.TextColor = UIColor.Gray;
             return cell;
         }
@@ -84,7 +74,7 @@ namespace OneEchan.iOS
         public override void WillDisplay(UITableView tableView, UITableViewCell cell, NSIndexPath indexPath)
         {
             if (indexPath.Row == List.Count - 1)
-                LoadMore();
+                Task.Run(async() => await LoadMore());
         }
 
         public override void RowSelected(UITableView tableView, NSIndexPath indexPath)
@@ -98,15 +88,14 @@ namespace OneEchan.iOS
             }
         }
         
-        private async void LoadMore()
+        private async Task LoadMore()
         {
             if (!_hasMore || _isLoading) return;
             _isLoading = true;
-            var item = await Core.Common.Api.Home.GetList(_page++, LanguageHelper.PrefLang);
-            if (!item.Success) return;
-            _hasMore = item.HasMore;
+            var item = await Home.GetList(_page++, LanguageHelper.PrefLang);
+            _hasMore = _page < item.MaxPage;
             List.AddRange(item.List);
-            TableView.ReloadData();
+            InvokeOnMainThread(() => TableView.ReloadData());
             _isLoading = false;
         }   
     }

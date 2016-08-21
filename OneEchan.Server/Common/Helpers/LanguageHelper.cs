@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using OneEchan.Core.Models;
 using OneEchan.Server.Models;
 
 namespace OneEchan.Server.Common.Helpers

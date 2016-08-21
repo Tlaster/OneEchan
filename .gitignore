@@ -216,3 +216,4 @@ ModelManifest.xml
 /OneEchan.Shared/HockeyAppKey.cs
 /OneEchan.Server/Properties/PublishProfiles
 /OneEchan.Server.zip
+/OneEchan.Backend/appsettings.json

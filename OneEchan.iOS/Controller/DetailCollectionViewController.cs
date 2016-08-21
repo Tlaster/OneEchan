@@ -3,16 +3,19 @@ using System.Collections.Generic;
 using CoreGraphics;
 using Foundation;
 using MediaPlayer;
-using OneEchan.Core.Common.Api.Model;
+using OneEchan.Core.Api;
+using OneEchan.Core.Models;
 using OneEchan.Shared;
 using OneEchan.Shared.Common.Helper;
 using UIKit;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace OneEchan.iOS.Controller
 {
     public partial class DetailCollectionViewController : UICollectionViewController
     {
-        public List<AnimateSetModel> List { get; private set; } = new List<AnimateSetModel>();
+        public List<DetailList> List { get; private set; } = new List<DetailList>();
         public UIRefreshControl RefreshControl { get; } = new UIRefreshControl();
         private const string _detailCellId = "DetailCell";
         private bool _isLoading;
@@ -23,56 +26,83 @@ namespace OneEchan.iOS.Controller
         {
         }
 
-        private async void Refresh()
+        private async Task Refresh()
         {
             if (_isLoading) return;
             _isLoading = true;
             InvokeOnMainThread(() => RefreshControl.BeginRefreshing());
-            var item = await Core.Common.Api.Detail.GetDetail(ID, LanguageHelper.PrefLang);
-            List = item.SetList;
-            CollectionView.ReloadData();
-            InvokeOnMainThread(() => RefreshControl.EndRefreshing());
+            var item = await Detail.GetDetail(ID, LanguageHelper.PrefLang);
+            List = item.List;
+            InvokeOnMainThread(() => { CollectionView.ReloadData(); RefreshControl.EndRefreshing(); });
             _isLoading = false;
         }
 
-        public override void DidReceiveMemoryWarning()
-        {
-            base.DidReceiveMemoryWarning();
-        }
         public override nint GetItemsCount(UICollectionView collectionView, nint section) => List.Count;
         public override UICollectionViewCell GetCell(UICollectionView collectionView, NSIndexPath indexPath)
         {
             var cell = (DetailCell)CollectionView.DequeueReusableCell(_detailCellId, indexPath);
-            cell.SetImage(List[indexPath.Row].FileThumb,List[indexPath.Row].FileName);
+            cell.SetImage(List[indexPath.Row].FileThumb,List[indexPath.Row].Set.ToString());
             return cell;
         }
         MPMoviePlayerController moviePlayer;
         public override void ViewDidLoad()
         {
             base.ViewDidLoad();
-            RefreshControl.ValueChanged += (sender, e) => Refresh();
+            RefreshControl.ValueChanged += (sender, e) => Task.Run(async () => await Refresh());
             CollectionView.AddSubview(RefreshControl);
             var deletate = new CustomFlowLayoutDelegate();
-            deletate.ItemClick += (sender,e) =>
+            deletate.ItemClick += async (sender, e) =>
              {
-                 Core.Common.Api.Detail.GetVideo(ID, int.Parse(List[e.Index].FileName), LanguageHelper.PrefLang);
-                 if (moviePlayer == null)
+                 var item = await Detail.GetVideo(ID, List[e.Index].Set, LanguageHelper.PrefLang);
+                 var picker = new UIPickerView();
+                 var model = new QualityPickerViewModel(item);
+                 model.ItemClick += (s2, e2) =>
                  {
-                     moviePlayer = new MPMoviePlayerController();
-                     View.AddSubview(moviePlayer.View);
-                     moviePlayer.ShouldAutoplay = true;
-                 }
-                 moviePlayer.ContentUrl = NSUrl.FromString(List[e.Index].FilePath);
-                 moviePlayer.SetFullscreen(true, false);
-                 moviePlayer.PrepareToPlay();
-                 moviePlayer.Play();
+                     View.WillRemoveSubview(picker);
+                     if (moviePlayer == null)
+                     {
+                         moviePlayer = new MPMoviePlayerController();
+                         View.AddSubview(moviePlayer.View);
+                         moviePlayer.ShouldAutoplay = true;
+                     }
+                     moviePlayer.ContentUrl = NSUrl.FromString(item.ToDictionary().Values.ToArray()[e2.Index]);
+                     moviePlayer.SetFullscreen(true, false);
+                     moviePlayer.PrepareToPlay();
+                     moviePlayer.Play();
+                 };
+                 View.AddSubview(picker);
+                 picker.Hidden = false;
              };
             CollectionView.Delegate = deletate;
             CollectionView.RegisterClassForCell(typeof(DetailCell), _detailCellId);
             CollectionView.ContentInset = new UIEdgeInsets(4, 4, 4, 4);
-            Refresh();
+            Task.Run(async () => await Refresh());
         }
     }
+
+    public class QualityPickerViewModel : UIPickerViewModel
+    {
+        public event EventHandler<ItemClickEventArgs> ItemClick;
+
+        private Dictionary<string, string> _item;
+
+        public QualityPickerViewModel(SetResult item)
+        {
+            _item = item.ToDictionary();
+        }
+
+        public override nint GetComponentCount(UIPickerView picker) => 1;
+
+        public override nint GetRowsInComponent(UIPickerView picker, nint component) => _item.Count;
+
+        public override string GetTitle(UIPickerView picker, nint row, nint component) => _item.Keys.ToArray()[row];
+        public override void Selected(UIPickerView pickerView, nint row, nint component)
+        {
+            ItemClick?.Invoke(this, new ItemClickEventArgs(Convert.ToInt32(row)));
+        }
+    }
+
+
     public class ItemClickEventArgs : EventArgs
     {
         public int Index { get; }

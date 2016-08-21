@@ -37,10 +37,12 @@
   <ItemGroup>
     <Compile Include="Api\Detail.cs" />
     <Compile Include="Api\Home.cs" />
+    <Compile Include="Models\AnimateList.cs" />
     <Compile Include="Models\DetailResult.cs" />
     <Compile Include="Models\PagedListResult.cs" />
     <Compile Include="Common\DateTimeSpan.cs" />
     <Compile Include="Common\Extensions\DateTimeExtension.cs" />
+    <Compile Include="Models\SetDetail.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

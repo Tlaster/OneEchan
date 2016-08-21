@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "exports": {
+    "OneEchan.Core/1.0.0": {
+      "type": "project",
+      "framework": ".NETStandard,Version=v1.1",
+      "compile": {
+        "bin/Debug/OneEchan.Core.dll": {}
+      },
+      "runtime": {
+        "bin/Debug/OneEchan.Core.dll": {}
+      },
+      "contentFiles": {
+        "bin/Debug/OneEchan.Core.pdb": {
+          "buildAction": "None",
+          "codeLanguage": "any",
+          "copyToOutput": true
+        }
+      }
+    }
+  }
+}

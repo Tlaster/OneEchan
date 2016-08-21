@@ -22,7 +22,7 @@ namespace OneEchan.Server.Controllers
             _context = context;
         }
         public PagedListResult<ListResult> List(string language, int page = 0) 
-            => _context.AnimateList.OrderByDescending(item => item.UpdatedAt).Select(item => new ListResult { ID = item.Id, Updated_At = item.UpdatedAt, Name = LanguageHelper.GetLanguegeName(language, item) }).ToPagedList(page, PAGESIZE);
+            => _context.AnimateList.OrderByDescending(item => item.Updated_At).Select(item => new ListResult { ID = item.Id, Updated_At = item.Updated_At, Name = LanguageHelper.GetLanguegeName(language, item) }).ToPagedList(page, PAGESIZE);
 
         public DetailResult Detail(string language, int id)
         {
@@ -50,6 +50,6 @@ namespace OneEchan.Server.Controllers
         }
 
         public PagedListResult<ListResult> Search(string language, string keyword, int page = 0) 
-            => _context.AnimateList.Where(item => (item.EnUs != null && item.EnUs.Contains(keyword)) || (item.JaJp != null && item.JaJp.Contains(keyword)) || (item.RuRu != null && item.RuRu.Contains(keyword)) || (item.ZhTw != null && item.ZhTw.Contains(keyword))).OrderByDescending(item => item.UpdatedAt).Select(item => new ListResult { ID = item.Id, Updated_At = item.UpdatedAt, Name = LanguageHelper.GetLanguegeName(language, item) }).ToPagedList(page, PAGESIZE);
+            => _context.AnimateList.Where(item => (item.EnUs != null && item.EnUs.Contains(keyword)) || (item.JaJp != null && item.JaJp.Contains(keyword)) || (item.RuRu != null && item.RuRu.Contains(keyword)) || (item.ZhTw != null && item.ZhTw.Contains(keyword))).OrderByDescending(item => item.Updated_At).Select(item => new ListResult { ID = item.Id, Updated_At = item.Updated_At, Name = LanguageHelper.GetLanguegeName(language, item) }).ToPagedList(page, PAGESIZE);
     }
 }

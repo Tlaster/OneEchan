@@ -1,1 +1,1 @@
-C:\Users\Tlaster\Documents\Visual Studio 2015\Projects\AnimateRaw\OneEchan.UWP\AppPackages\OneEchan.UWP_1.4.0.0\OneEchan.UWP_1.4.0.0_x86_x64_arm.appxbundle
+C:\Users\Tlaster\Documents\Visual Studio 2015\Projects\OneEchan\OneEchan.UWP\AppPackages\OneEchan.UWP_1.5.0.0\OneEchan.UWP_1.5.0.0_x86_x64_arm.appxbundle

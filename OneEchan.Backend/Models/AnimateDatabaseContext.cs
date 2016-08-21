@@ -3,14 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using OneEchan.Core.Models;
 
-namespace OneEchan.Server.Models
+namespace OneEchan.Backend.Models
 {
     public partial class AnimateDatabaseContext : DbContext
     {
-        public AnimateDatabaseContext(DbContextOptions<AnimateDatabaseContext> options)
-            : base(options)
-        { }
-
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=AnimateDatabase;Trusted_Connection=True;");
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
