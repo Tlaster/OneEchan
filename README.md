@@ -24,4 +24,10 @@ About
 -----------
 This application is designed for myself who is tired of downloading anime everyday.  
 Support:  
-　　alipay:myy421108033@gmail.com
+　　alipay:myy421108033@gmail.com  
+　　
+License
+------------
+<a href="http://www.wtfpl.net/"><img
+       src="http://www.wtfpl.net/wp-content/uploads/2012/12/wtfpl-badge-4.png"
+       width="80" height="15" alt="WTFPL" /></a>
