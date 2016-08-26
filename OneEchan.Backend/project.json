@@ -1,7 +1,20 @@
 {
   "version": "1.0.0-*",
   "buildOptions": {
-    "emitEntryPoint": true
+    "emitEntryPoint": true,
+    "copyToOutput": {
+      "includeFiles": [
+        "NLog.config",
+        "appsettings.json"
+      ]
+    }
+  },
+
+  "publishOptions": {
+    "includeFiles": [
+      "NLog.config",
+      "appsettings.json"
+    ]
   },
 
   "dependencies": {
@@ -19,6 +32,8 @@
       "version": "1.0.0"
     },
     "Newtonsoft.Json": "9.0.1",
+    "NLog": "4.4.0-betaV15",
+    "NLog.Config": "4.3.7",
     "OpenWeen.Core": "1.3.1",
     "System.Security.Cryptography.Algorithms": "4.2.0"
   },

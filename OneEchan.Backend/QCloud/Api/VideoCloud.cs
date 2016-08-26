@@ -9,12 +9,15 @@ using System.Threading.Tasks;
 using System.Net;
 using OneEchan.Backend.QCloud.Common;
 using System.Net.Http;
+using NLog;
 
 namespace OneEchan.Backend.QCloud.Api
 {
     public enum FolderPattern { File = 0, Folder, Both };
     public class VideoCloud
     {
+        private static Logger Logger { get; } = LogManager.GetCurrentClassLogger();
+
         const string VIDEOAPI_CGI_URL = "http://web.video.myqcloud.com/files/v1/";
         private int appId;
         private string secretId;
@@ -405,6 +408,7 @@ namespace OneEchan.Backend.QCloud.Api
                         //当上传失败后会重试3次
                         if (retryCount < 3)
                         {
+                            Logger.Error("retry...");
                             //retryCount++;
                             //Console.WriteLine("重试....");
                         }

@@ -2,6 +2,7 @@
   "dependencies": {
     "Fody": "1.29.4",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.2.2",
+    "Microsoft.Toolkit.Uwp.UI.Controls": "1.0.0",
     "PropertyChanged.Fody": "1.51.3",
     "PullToRefresh.UWP": "0.3.4"
   },

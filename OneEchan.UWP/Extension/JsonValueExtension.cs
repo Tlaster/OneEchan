@@ -9,19 +9,7 @@ namespace OneEchan.Extension
 {
     public static class JsonValueExtension
     {
-        public static JsonArray GetNamedArray(this IJsonValue value, string name)
-        {
-            try
-            {
-                return value.GetObject()[name].GetArray();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public static JsonArray GetNamedArray(this IJsonValue value, string name, JsonArray defaultValue)
+        public static JsonArray GetNamedArray(this IJsonValue value, string name, JsonArray defaultValue = null)
         {
             try
             {
@@ -33,19 +21,7 @@ namespace OneEchan.Extension
             }
         }
 
-        public static JsonObject GetNamedObject(this IJsonValue value, string name)
-        {
-            try
-            {
-                return value.GetObject()[name].GetObject();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public static JsonObject GetNamedObject(this IJsonValue value, string name, JsonObject defaultValue)
+        public static JsonObject GetNamedObject(this IJsonValue value, string name, JsonObject defaultValue = null)
         {
             try
             {
@@ -57,19 +33,7 @@ namespace OneEchan.Extension
             }
         }
 
-        public static double GetNamedNumber(this IJsonValue value, string name)
-        {
-            try
-            {
-                return value.GetObject()[name].GetNumber();
-            }
-            catch (Exception)
-            {
-                return -1d;
-            }
-        }
-
-        public static double GetNamedNumber(this IJsonValue value, string name, double defaultValue)
+        public static double GetNamedNumber(this IJsonValue value, string name, double defaultValue = -1d)
         {
             try
             {
@@ -81,19 +45,7 @@ namespace OneEchan.Extension
             }
         }
 
-        public static bool GetNamedBoolean(this IJsonValue value, string name)
-        {
-            try
-            {
-                return value.GetObject()[name].GetBoolean();
-            }
-            catch (Exception)
-            {
-                return false;
-            }
-        }
-
-        public static bool GetNamedBoolean(this IJsonValue value, string name, bool defaultValue)
+        public static bool GetNamedBoolean(this IJsonValue value, string name, bool defaultValue = false)
         {
             try
             {
@@ -105,19 +57,7 @@ namespace OneEchan.Extension
             }
         }
 
-        public static string GetNamedString(this IJsonValue value, string name)
-        {
-            try
-            {
-                return value.GetObject()[name].GetString();
-            }
-            catch (Exception)
-            {
-                return null;
-            }
-        }
-
-        public static string GetNamedString(this IJsonValue value, string name, string defaultValue)
+        public static string GetNamedString(this IJsonValue value, string name, string defaultValue = null)
         {
             try
             {

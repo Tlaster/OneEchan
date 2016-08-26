@@ -7,6 +7,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:model="using:OneEchan.Core.Models"
     xmlns:converter="using:OneEchan.Converter"
+    xmlns:controls="using:Microsoft.Toolkit.Uwp.UI.Controls"
     mc:Ignorable="d">
     <Page.Resources>
         <BitmapImage x:Key="DefaultImage" UriSource="ms-appx:///Assets/SplashScreen.png" />
@@ -30,8 +31,8 @@
             </Button>
         </Grid>
         <ProgressBar Grid.Row="1" VerticalAlignment="Top" IsIndeterminate="{x:Bind DetailVM.IsLoading,Mode=OneWay}" Visibility="{x:Bind DetailVM.IsLoading,Mode=OneWay,Converter={StaticResource BoolToVisibilityConverter}}"/>
-        <GridView Padding="8" Grid.Row="1" SelectionMode="None" IsItemClickEnabled="True" ItemClick="ListView_ItemClick"  ItemsSource="{x:Bind DetailVM.SetList,Mode=OneWay}">
-            <GridView.ItemTemplate>
+        <controls:AdaptiveGridView Padding="8" Grid.Row="1" DesiredWidth="300" ItemHeight="214" ItemClick="ListView_ItemClick"  ItemsSource="{x:Bind DetailVM.SetList,Mode=OneWay}">
+            <controls:AdaptiveGridView.ItemTemplate>
                 <DataTemplate x:DataType="model:DetailList">
                     <Grid>
                         <Grid.RowDefinitions>
@@ -40,7 +41,7 @@
                             <RowDefinition Height="auto"/>
                         </Grid.RowDefinitions>
                         <Border Background="MediumVioletRed"/>
-                        <Image Width="196" Height="110" Source="{Binding FileThumb,TargetNullValue={StaticResource DefaultImage},FallbackValue={StaticResource DefaultImage}}" />
+                        <Image Stretch="UniformToFill" Source="{Binding FileThumb,TargetNullValue={StaticResource DefaultImage},FallbackValue={StaticResource DefaultImage}}" />
                         <TextBlock HorizontalAlignment="Center" Grid.Row="1" Text="{x:Bind Set}" Style="{ThemeResource SubtitleTextBlockStyle}" TextTrimming="WordEllipsis"/>
                         <TextBlock Grid.Row="2" HorizontalAlignment="Right" Foreground="Gray">
                             <Run>Click Count:</Run>
@@ -48,18 +49,18 @@
                         </TextBlock>
                     </Grid>
                 </DataTemplate>
-            </GridView.ItemTemplate>
-            <GridView.ItemContainerStyle>
+            </controls:AdaptiveGridView.ItemTemplate>
+            <!--<controls:AdaptiveGridView.ItemContainerStyle>
                 <Style TargetType="GridViewItem">
                     <Setter Property="HorizontalAlignment" Value="Stretch" />
                     <Setter Property="VerticalAlignment" Value="Stretch" />
                 </Style>
-            </GridView.ItemContainerStyle>
-            <GridView.ItemsPanel>
+            </controls:AdaptiveGridView.ItemContainerStyle>
+            <controls:AdaptiveGridView.ItemsPanel>
                 <ItemsPanelTemplate>
                     <WrapGrid Orientation="Horizontal"/>
                 </ItemsPanelTemplate>
-            </GridView.ItemsPanel>
-        </GridView>
+            </controls:AdaptiveGridView.ItemsPanel>-->
+        </controls:AdaptiveGridView>
     </Grid>
 </Page>
