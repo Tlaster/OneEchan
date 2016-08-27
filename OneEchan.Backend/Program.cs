@@ -37,7 +37,6 @@ namespace OneEchan.Backend
 
         public static void Main(string[] args)
         {
-            //NOTICE: THIS BACKEND SCRIPT HAS NOT BEEN FULLY TESTED
             var builder = new ConfigurationBuilder()
                 .SetBasePath(AppContext.BaseDirectory)
                 .AddJsonFile("appsettings.json")
@@ -91,7 +90,7 @@ namespace OneEchan.Backend
                 Logger.Info("checking for weibo share");
                 for (int i = 0; i < ctx.WeiboList.Count(); i++)
                 {
-                    var item = ctx.WeiboList.ElementAt(i);
+                    var item = ctx.WeiboList.ToList()[i];
                     Logger.Info($"checking for {item} weibo");
                     dynamic obj = await UnlimitedRetry(Cloud.GetFileStat(BucketName, $"/{item.Name}/{item.SetName}"));
                     if (!string.IsNullOrEmpty((string)obj.data?.video_cover))
@@ -129,7 +128,7 @@ namespace OneEchan.Backend
                 Logger.Info("checking for quality");
                 for (int i = 0; i < ctx.CheckList.Count(); i++)
                 {
-                    var item = ctx.CheckList.ElementAt(i);
+                    var item = ctx.CheckList.ToList()[i];
                     Logger.Info($"checking for {item} quality");
                     if (CheckForVideoQuality(item.Name, item.SetName, await UnlimitedRetry(Cloud.GetFileStat(BucketName, $"/{item.Name}/{item.SetName}"))))
                     {
@@ -204,8 +203,9 @@ namespace OneEchan.Backend
                             context.SaveChanges();
                             using (var ctx = new CheckContext())
                             {
-                                ctx.CheckList.Add(new CheckModel { ItemID = id, Name = title, SetName = setName, ZhTW = animeItem.ZhTw });
-                                if (ShareToWeibo)
+                                if (ctx.CheckList.Count(check => check.ID == id && check.SetName == setName) == 0)
+                                    ctx.CheckList.Add(new CheckModel { ItemID = id, Name = title, SetName = setName, ZhTW = animeItem.ZhTw });
+                                if (ShareToWeibo && ctx.WeiboList.Count(check => check.ID == id && check.SetName == setName) == 0)
                                     ctx.WeiboList.Add(new CheckModel { ItemID = id, Name = title, SetName = setName, ZhTW = animeItem.ZhTw });
                                 ctx.SaveChanges();
                             }
