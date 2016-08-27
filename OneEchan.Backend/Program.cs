@@ -18,16 +18,6 @@ using OneEchan.Core.Models;
 
 namespace OneEchan.Backend
 {
-    public class CheckModel
-    {
-        public string Name { get; set; }
-        public int ID { get; set; }
-        public string SetName { get; set; }
-        public string ZhTW { get; set; }
-
-        public override string ToString() 
-            => $"{Name} {SetName}";
-    }
     public class Program
     {
         private static VideoCloud Cloud { get; set; } 
@@ -44,8 +34,6 @@ namespace OneEchan.Backend
         private static string ZhSite => Configuration[nameof(ZhSite)];
         private static string RuSite => Configuration[nameof(RuSite)];
         private static IConfigurationRoot Configuration { get; set; }
-        private static List<CheckModel> CheckList { get; } = new List<CheckModel>();
-        private static List<CheckModel> WeiboList { get; } = new List<CheckModel>();
 
         public static void Main(string[] args)
         {
@@ -68,7 +56,7 @@ namespace OneEchan.Backend
                     await UploadTask();
                     Logger.Info("Waiting...");
                     await Task.Delay(TimeSpan.FromMinutes(5d));
-                } 
+                }
             });
             Console.WriteLine("Running...");
             do
@@ -78,11 +66,16 @@ namespace OneEchan.Backend
                     switch (Console.ReadLine())
                     {
                         case "status":
-                            Console.WriteLine($"{nameof(CheckList)} {CheckList.Count}");
-                            CheckList.ForEach(item => Console.WriteLine(item));
-                            Console.WriteLine($"{nameof(WeiboList)} {WeiboList.Count}");
-                            WeiboList.ForEach(item => Console.WriteLine(item));
-                            Console.WriteLine(File.ReadLines("log.txt").LastOrDefault());
+                            using (var ctx = new CheckContext())
+                            {
+                                Console.WriteLine($"{nameof(ctx.CheckList)} {ctx.CheckList.Count()}");
+                                foreach (var item in ctx.CheckList)
+                                    Console.WriteLine(item);
+                                Console.WriteLine($"{nameof(ctx.WeiboList)} {ctx.WeiboList.Count()}");
+                                foreach (var item in ctx.WeiboList)
+                                    Console.WriteLine(item);
+                                Console.WriteLine(File.ReadLines("log.txt").LastOrDefault());
+                            }
                             break;
                         default:
                             break;
@@ -93,52 +86,60 @@ namespace OneEchan.Backend
 
         private static async Task CheckWeiboShare()
         {
-            Logger.Info("checking for weibo share");
-            for (int i = 0; i < WeiboList.Count; i++)
+            using (var ctx = new CheckContext())
             {
-                var item = WeiboList[i];
-                Logger.Info($"checking for {item} weibo");
-                dynamic obj = await UnlimitedRetry(Cloud.GetFileStat(BucketName, $"/{item.Name}/{item.SetName}"));
-                if (!string.IsNullOrEmpty(obj.data?.video_cover))
+                Logger.Info("checking for weibo share");
+                for (int i = 0; i < ctx.WeiboList.Count(); i++)
                 {
-                    Logger.Info($"sending weibo {item}");
-                    try
+                    var item = ctx.WeiboList.ElementAt(i);
+                    Logger.Info($"checking for {item} weibo");
+                    dynamic obj = await UnlimitedRetry(Cloud.GetFileStat(BucketName, $"/{item.Name}/{item.SetName}"));
+                    if (!string.IsNullOrEmpty((string)obj.data?.video_cover))
                     {
-                        var url = $"http://OneEchan.moe/Watch?id={item.ID}&set={double.Parse(item.SetName)}";
-                        var shorturl = await OpenWeen.Core.Api.ShortUrl.Shorten(url);
-                        using (var client = new HttpClient())
-                        using (Stream stream = await client.GetStreamAsync(obj.data?.video_cover))
-                        using (var memStream = new MemoryStream())
+                        Logger.Info($"sending weibo {item}");
+                        try
                         {
-                            await stream.CopyToAsync(memStream);
-                            await OpenWeen.Core.Api.Statuses.PostWeibo.PostWithPic($"{item.ZhTW} - {item.SetName} {shorturl}", memStream.ToArray());
+                            var url = $"http://OneEchan.moe/Watch?id={item.ItemID}&set={double.Parse(item.SetName)}";
+                            var shorturl = await OpenWeen.Core.Api.ShortUrl.Shorten(url);
+                            using (var client = new HttpClient())
+                            using (Stream stream = await client.GetStreamAsync((string)obj.data?.video_cover))
+                            using (var memStream = new MemoryStream())
+                            {
+                                await stream.CopyToAsync(memStream);
+                                await OpenWeen.Core.Api.Statuses.PostWeibo.PostWithPic($"{item.ZhTW} - {item.SetName} {shorturl}", memStream.ToArray());
+                            }
+                            ctx.WeiboList.Remove(item);
+                            ctx.SaveChanges();
+                            Logger.Info($"weibo {item} sended");
                         }
-                        WeiboList.RemoveAt(i);
-                        Logger.Info($"weibo {item} sended");
-                    }
-                    catch (Exception e)
-                    {
-                        Logger.Error($"can not share to weibo {e.Message}");
+                        catch (Exception e)
+                        {
+                            Logger.Error($"can not share to weibo {e.Message}");
+                        }
                     }
                 }
+                Logger.Info("checking for weibo is done");
             }
-            Logger.Info("checking for weibo is done");
         }
 
         private static async Task CheckQuality()
         {
-            Logger.Info("checking for quality");
-            for (int i = 0; i < CheckList.Count; i++)
+            using (var ctx = new CheckContext())
             {
-                var item = CheckList[i];
-                Logger.Info($"checking for {item} quality");
-                if (CheckForVideoQuality(item.Name, item.SetName, await UnlimitedRetry(Cloud.GetFileStat(BucketName, $"/{item.Name}/{item.SetName}"))))
+                Logger.Info("checking for quality");
+                for (int i = 0; i < ctx.CheckList.Count(); i++)
                 {
-                    CheckList.RemoveAt(i);
-                    Logger.Info($"{item} quality is done, remove");
+                    var item = ctx.CheckList.ElementAt(i);
+                    Logger.Info($"checking for {item} quality");
+                    if (CheckForVideoQuality(item.Name, item.SetName, await UnlimitedRetry(Cloud.GetFileStat(BucketName, $"/{item.Name}/{item.SetName}"))))
+                    {
+                        ctx.CheckList.Remove(item);
+                        ctx.SaveChanges();
+                        Logger.Info($"{item} quality is done, remove");
+                    }
                 }
+                Logger.Info("checking for quality is done");
             }
-            Logger.Info("checking for quality is done");
         }
 
         private static async Task UploadTask()
@@ -171,6 +172,7 @@ namespace OneEchan.Backend
                 {
                     await CheckForVideoFile(item, title, setName, obj);
                 }
+                Logger.Info($"file {title} {setName} complete");
             }
         }
 
@@ -179,7 +181,7 @@ namespace OneEchan.Backend
             Logger.Info($"adding {title} {setName} into database");
             using (var context = new AnimateDatabaseContext())
             {
-                if (context.AnimateList.Any(anime => anime.EnUs == title))
+                if (!context.AnimateList.Any(anime => anime.EnUs == title))
                 {
                     Logger.Info("cannot find id, create new");
                     context.AnimateList.Add(new AnimateList { EnUs = title, Updated_At = DateTime.Now });
@@ -200,9 +202,13 @@ namespace OneEchan.Backend
                             animeItem = await GetAnimeTitle(title, animeItem);
                             context.Entry(animeItem).State = EntityState.Modified;
                             context.SaveChanges();
-                            CheckList.Add(new CheckModel { ID = id, Name = title, SetName = setName, ZhTW = animeItem.ZhTw });
-                            if (ShareToWeibo)
-                                WeiboList.Add(new CheckModel { ID = id, Name = title, SetName = setName, ZhTW = animeItem.ZhTw });
+                            using (var ctx = new CheckContext())
+                            {
+                                ctx.CheckList.Add(new CheckModel { ItemID = id, Name = title, SetName = setName, ZhTW = animeItem.ZhTw });
+                                if (ShareToWeibo)
+                                    ctx.WeiboList.Add(new CheckModel { ItemID = id, Name = title, SetName = setName, ZhTW = animeItem.ZhTw });
+                                ctx.SaveChanges();
+                            }
                             Logger.Info("add set complete");
                         }
                     }
@@ -212,11 +218,11 @@ namespace OneEchan.Backend
 
         private static async Task<AnimateList> GetAnimeTitle(string title, AnimateList animeItem)
         {
-            Logger.Info($"getting anime title for {title}");
             try
             {
                 if (string.IsNullOrEmpty(animeItem.JaJp) || string.IsNullOrEmpty(animeItem.RuRu) || string.IsNullOrEmpty(animeItem.ZhTw))
                 {
+                    Logger.Info($"getting anime title for {title}");
                     animeItem.JaJp = await GetLName(title, EnSite, (node) =>
                     {
                         return new
@@ -241,14 +247,13 @@ namespace OneEchan.Backend
                             Name = node.NextSibling.NextSibling.FirstChild.TextContent.Trim(),
                         };
                     });
+                    Logger.Info($"get anime name complete, {animeItem.JaJp} {animeItem.RuRu} {animeItem.ZhTw}");
                 }
-
             }
             catch (Exception e)
             {
                 Logger.Warn($"can not get JName {e.Message}");
             }
-            Logger.Info($"get anime name complete, {animeItem.JaJp} {animeItem.RuRu} {animeItem.ZhTw}");
             return animeItem;
         }
 
@@ -274,7 +279,7 @@ namespace OneEchan.Backend
         private static async Task CheckForVideoFile(string item, string title, string setName, dynamic obj)
         {
             var file = new FileInfo(item);
-            if (obj != null && obj.data?.filesize != file.Length)
+            if (obj != null && obj.data?.filelen != file.Length)
             {
                 Logger.Warn($"file {title} {setName} reuploading");
                 await Cloud.DeleteFile(BucketName, $"/{title}/{setName}");
@@ -285,7 +290,6 @@ namespace OneEchan.Backend
 
         private static bool CheckForVideoQuality(string title, string setName, dynamic obj)
         {
-            Logger.Info($"checking for {title} {setName} video quality");
             using (var context = new AnimateDatabaseContext())
             {
                 var id = context.AnimateList.FirstOrDefault(anime => anime.EnUs == title).Id;
@@ -294,27 +298,27 @@ namespace OneEchan.Backend
                     var set = context.SetDetail.FirstOrDefault(anime => anime.Id == id && anime.SetName == double.Parse(setName));
                     if (set != null)
                     {
-                        if (string.IsNullOrEmpty(set.FileThumb) && !string.IsNullOrEmpty(obj.data?.video_cover))
+                        if (string.IsNullOrEmpty(set.FileThumb) && !string.IsNullOrEmpty((string)obj.data?.video_cover))
                         {
                             Logger.Info("add file thumb");
                             set.FileThumb = obj.data.video_cover;
                         }
-                        if (string.IsNullOrEmpty(set.LowQuality) && !string.IsNullOrEmpty(obj.data?.video_play_url?.f10))
+                        if (string.IsNullOrEmpty(set.LowQuality) && !string.IsNullOrEmpty((string)obj.data?.video_play_url?.f10))
                         {
                             Logger.Info("add LowQuality");
                             set.LowQuality = obj.data.video_play_url.f10;
                         }
-                        if (string.IsNullOrEmpty(set.MediumQuality) && !string.IsNullOrEmpty(obj.data?.video_play_url?.f20))
+                        if (string.IsNullOrEmpty(set.MediumQuality) && !string.IsNullOrEmpty((string)obj.data?.video_play_url?.f20))
                         {
                             Logger.Info("add MediumQuality");
                             set.MediumQuality = obj.data.video_play_url.f20;
                         }
-                        if (string.IsNullOrEmpty(set.HighQuality) && !string.IsNullOrEmpty(obj.data?.video_play_url?.f30))
+                        if (string.IsNullOrEmpty(set.HighQuality) && !string.IsNullOrEmpty((string)obj.data?.video_play_url?.f30))
                         {
                             Logger.Info("add HighQuality");
                             set.HighQuality = obj.data.video_play_url.f30;
                         }
-                        if (string.IsNullOrEmpty(set.OriginalQuality) && !string.IsNullOrEmpty(obj.data?.video_play_url?.f0))
+                        if (string.IsNullOrEmpty(set.OriginalQuality) && !string.IsNullOrEmpty((string)obj.data?.video_play_url?.f0))
                         {
                             Logger.Info("add OriginalQuality");
                             set.OriginalQuality = obj.data.video_play_url.f0;
