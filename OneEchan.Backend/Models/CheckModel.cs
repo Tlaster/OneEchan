@@ -9,7 +9,6 @@ namespace OneEchan.Backend.Models
 
     public class CheckModel
     {
-        [Key]
         public int ID { get; set; }
         [Required]
         public string Name { get; set; }

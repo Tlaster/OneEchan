@@ -8,7 +8,7 @@ using OneEchan.Backend.Models;
 namespace OneEchan.Backend.Migrations
 {
     [DbContext(typeof(CheckContext))]
-    [Migration("20160826230345_Init")]
+    [Migration("20160828142459_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -18,21 +18,19 @@ namespace OneEchan.Backend.Migrations
 
             modelBuilder.Entity("OneEchan.Backend.Models.CheckModel", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd();
+                    b.Property<int>("ID");
 
                     b.Property<int>("ItemID");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<string>("SetName");
 
-                    b.Property<string>("SetName")
+                    b.Property<string>("Name")
                         .IsRequired();
 
                     b.Property<string>("ZhTW")
                         .IsRequired();
 
-                    b.HasKey("ID");
+                    b.HasKey("ID", "ItemID", "SetName");
 
                     b.ToTable("CheckModel");
                 });

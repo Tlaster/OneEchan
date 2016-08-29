@@ -12,16 +12,15 @@ namespace OneEchan.Backend.Migrations
                 name: "CheckModel",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("Autoincrement", true),
+                    ID = table.Column<int>(nullable: false),
                     ItemID = table.Column<int>(nullable: false),
-                    Name = table.Column<string>(nullable: false),
                     SetName = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false),
                     ZhTW = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CheckModel", x => x.ID);
+                    table.PrimaryKey("PK_CheckModel", x => new { x.ID, x.ItemID, x.SetName });
                 });
         }
 

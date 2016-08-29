@@ -15,5 +15,10 @@ namespace OneEchan.Backend.Models
         {
             optionsBuilder.UseSqlite("Filename=./check.db");
         }
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+            modelBuilder.Entity<CheckModel>().HasKey(x => new { x.ID, x.ItemID, x.SetName });
+        }
     }
 }
