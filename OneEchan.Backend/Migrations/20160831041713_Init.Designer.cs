@@ -8,7 +8,7 @@ using OneEchan.Backend.Models;
 namespace OneEchan.Backend.Migrations
 {
     [DbContext(typeof(CheckContext))]
-    [Migration("20160828142459_Init")]
+    [Migration("20160831041713_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -27,12 +27,28 @@ namespace OneEchan.Backend.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.HasKey("ID", "ItemID", "SetName");
+
+                    b.ToTable("CheckList");
+                });
+
+            modelBuilder.Entity("OneEchan.Backend.Models.WeiboModel", b =>
+                {
+                    b.Property<int>("ID");
+
+                    b.Property<int>("ItemID");
+
+                    b.Property<string>("SetName");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
                     b.Property<string>("ZhTW")
                         .IsRequired();
 
                     b.HasKey("ID", "ItemID", "SetName");
 
-                    b.ToTable("CheckModel");
+                    b.ToTable("WeiboList");
                 });
         }
     }

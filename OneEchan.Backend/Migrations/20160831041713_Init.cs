@@ -9,7 +9,21 @@ namespace OneEchan.Backend.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "CheckModel",
+                name: "CheckList",
+                columns: table => new
+                {
+                    ID = table.Column<int>(nullable: false),
+                    ItemID = table.Column<int>(nullable: false),
+                    SetName = table.Column<string>(nullable: false),
+                    Name = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CheckList", x => new { x.ID, x.ItemID, x.SetName });
+                });
+
+            migrationBuilder.CreateTable(
+                name: "WeiboList",
                 columns: table => new
                 {
                     ID = table.Column<int>(nullable: false),
@@ -20,14 +34,17 @@ namespace OneEchan.Backend.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CheckModel", x => new { x.ID, x.ItemID, x.SetName });
+                    table.PrimaryKey("PK_WeiboList", x => new { x.ID, x.ItemID, x.SetName });
                 });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "CheckModel");
+                name: "CheckList");
+
+            migrationBuilder.DropTable(
+                name: "WeiboList");
         }
     }
 }

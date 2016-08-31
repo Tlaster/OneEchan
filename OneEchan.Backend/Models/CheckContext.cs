@@ -8,7 +8,7 @@ namespace OneEchan.Backend.Models
 {
     public class CheckContext : DbContext
     {
-        public DbSet<CheckModel> WeiboList { get; set; }
+        public DbSet<WeiboModel> WeiboList { get; set; }
         public DbSet<CheckModel> CheckList { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -19,6 +19,7 @@ namespace OneEchan.Backend.Models
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<CheckModel>().HasKey(x => new { x.ID, x.ItemID, x.SetName });
+            modelBuilder.Entity<WeiboModel>().HasKey(x => new { x.ID, x.ItemID, x.SetName });
         }
     }
 }

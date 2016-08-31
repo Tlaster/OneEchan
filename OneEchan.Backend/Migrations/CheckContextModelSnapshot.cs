@@ -26,12 +26,28 @@ namespace OneEchan.Backend.Migrations
                     b.Property<string>("Name")
                         .IsRequired();
 
+                    b.HasKey("ID", "ItemID", "SetName");
+
+                    b.ToTable("CheckList");
+                });
+
+            modelBuilder.Entity("OneEchan.Backend.Models.WeiboModel", b =>
+                {
+                    b.Property<int>("ID");
+
+                    b.Property<int>("ItemID");
+
+                    b.Property<string>("SetName");
+
+                    b.Property<string>("Name")
+                        .IsRequired();
+
                     b.Property<string>("ZhTW")
                         .IsRequired();
 
                     b.HasKey("ID", "ItemID", "SetName");
 
-                    b.ToTable("CheckModel");
+                    b.ToTable("WeiboList");
                 });
         }
     }
