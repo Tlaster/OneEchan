@@ -6,7 +6,7 @@
   </PropertyGroup>
   <Import Project="$(VSToolsPath)\DotNet\Microsoft.DotNet.Props" Condition="'$(VSToolsPath)' != ''" />
   <PropertyGroup Label="Globals">
-    <ProjectGuid>500fd253-1d68-42f1-8aee-77c9abf22c1f</ProjectGuid>
+    <ProjectGuid>92c9dd33-7f4b-44fc-9403-8c2d7528c269</ProjectGuid>
     <RootNamespace>OneEchan.Server</RootNamespace>
     <BaseIntermediateOutputPath Condition="'$(BaseIntermediateOutputPath)'=='' ">.\obj</BaseIntermediateOutputPath>
     <OutputPath Condition="'$(OutputPath)'=='' ">.\bin\</OutputPath>

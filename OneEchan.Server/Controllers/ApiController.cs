@@ -3,14 +3,17 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OneEchan.Core.Common.Extensions;
 using OneEchan.Core.Models;
 using OneEchan.Server.Common.Helpers;
+using OneEchan.Server.Data;
 using OneEchan.Server.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OneEchan.Server.Controllers
 {
+    [RequireHttps]
     [Route("{language:regex(zh-TW|en-US|ja-JP|ru-RU)}/[controller]/[action]")]
     public class ApiController : Controller
     {
@@ -22,7 +25,7 @@ namespace OneEchan.Server.Controllers
             _context = context;
         }
         public PagedListResult<ListResult> List(string language, int page = 0) 
-            => _context.AnimateList.OrderByDescending(item => item.Updated_At).Select(item => new ListResult { ID = item.Id, Updated_At = item.Updated_At, Name = LanguageHelper.GetLanguegeName(language, item) }).ToPagedList(page, PAGESIZE);
+            => _context.AnimateList.OrderByDescending(item => item.Updated_At).Select(item => new ListResult { ID = item.Id, Updated_At = item.Updated_At.ToUtc(), Name = LanguageHelper.GetLanguegeName(language, item) }).ToPagedList(page, PAGESIZE);
 
         public DetailResult Detail(string language, int id)
         {
@@ -32,7 +35,7 @@ namespace OneEchan.Server.Controllers
             {
                 ID = id,
                 Name = LanguageHelper.GetLanguegeName(language, _context.AnimateList.FirstOrDefault(item => item.Id == id)),
-                List = _context.SetDetail.Where(item => item.Id == id).OrderBy(item => item.SetName).Select(item => new DetailList { ClickCount = item.ClickCount, Created_At = item.Created_At, FileThumb = item.FileThumb, Set = item.SetName }).ToList(),
+                List = _context.SetDetail.Where(item => item.Id == id).OrderBy(item => item.SetName).Select(item => new DetailList { ClickCount = item.ClickCount, Created_At = item.Created_At.ToUtc(), FileThumb = item.FileThumb, Set = item.SetName }).ToList(),
             };
         }
 

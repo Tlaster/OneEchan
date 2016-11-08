@@ -37,8 +37,10 @@
   <ItemGroup>
     <Compile Include="Api\Detail.cs" />
     <Compile Include="Api\Home.cs" />
+    <Compile Include="AppModel.cs" />
     <Compile Include="Models\AnimateList.cs" />
     <Compile Include="Models\DetailResult.cs" />
+    <Compile Include="Models\Interfaces\IPagedModel.cs" />
     <Compile Include="Models\PagedListResult.cs" />
     <Compile Include="Common\DateTimeSpan.cs" />
     <Compile Include="Common\Extensions\DateTimeExtension.cs" />

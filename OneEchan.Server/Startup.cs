@@ -4,11 +4,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using OneEchan.Server.Data;
 using OneEchan.Server.Models;
+using OneEchan.Server.Services;
 
 namespace OneEchan.Server
 {
@@ -19,8 +22,16 @@ namespace OneEchan.Server
             var builder = new ConfigurationBuilder()
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
+                .AddJsonFile("authenticationkeys.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true);
+
+            if (env.IsDevelopment())
+            {
+                // For more details on using the user secret store see http://go.microsoft.com/fwlink/?LinkID=532709
+                builder.AddUserSecrets();
+            }
+
+            builder.AddEnvironmentVariables();
             Configuration = builder.Build();
         }
 
@@ -30,8 +41,19 @@ namespace OneEchan.Server
         public void ConfigureServices(IServiceCollection services)
         {
             // Add framework services.
+            services.AddDbContext<ApplicationDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
             services.AddDbContext<AnimateDatabaseContext>(options => options.UseSqlServer(Configuration.GetConnectionString("AnimateDatabase")));
+
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddMvc();
+
+            // Add application services.
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -43,6 +65,7 @@ namespace OneEchan.Server
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseDatabaseErrorPage();
                 app.UseBrowserLink();
             }
             else
@@ -51,6 +74,19 @@ namespace OneEchan.Server
             }
 
             app.UseStaticFiles();
+
+            app.UseIdentity();
+
+            // Add external authentication middleware below. To configure them please see http://go.microsoft.com/fwlink/?LinkID=532715
+
+            app.UseGoogleAuthentication(new GoogleOptions()
+            {
+                ClientId = Configuration["Google:AppID"],
+                ClientSecret = Configuration["Google:AppSecret"],
+                SaveTokens = true,
+                Scope = { "https://www.googleapis.com/auth/plus.me" }
+            });
+
 
             app.UseMvc(routes =>
             {

@@ -1,0 +1,32 @@
+﻿@model IPagedModel
+
+@if (Model.MaxPage > 1)
+{
+    <div class="text-center">
+        <nav aria-label="Page navigation">
+            <ul class="pagination">
+                <li @(Model.CurrentPage > 0 ? null : "class=disabled")>
+                    <a href="?page=@(Model.CurrentPage-1)@(ViewBag.SearchText == null ? null : $"&keyword={ViewBag.SearchText}")" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                @for (int i = 0; i < Model.MaxPage; i++)
+                {
+                    if (i == Model.CurrentPage)
+                    {
+                        <li class="active" : null><span>@(i + 1) <span class="sr-only">(current)</span></span></li>
+                    }
+                    else
+                    {
+                        <li><a href="?page=@i@(ViewBag.SearchText == null ? null : $"&keyword={ViewBag.SearchText}")">@(i + 1)</a></li>
+                    }
+                }
+                <li @(Model.CurrentPage != Model.MaxPage && Model.MaxPage > 0 ? null : "class=disabled")>
+                    <a href="?page=@(Model.CurrentPage+1)@(ViewBag.SearchText == null ? null : $"&keyword={ViewBag.SearchText}")" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+}

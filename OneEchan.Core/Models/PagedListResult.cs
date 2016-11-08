@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using OneEchan.Core.Models.Interfaces;
 
 namespace OneEchan.Core.Models
 {
-    public class PagedListResult<T>
+    public class PagedListResult<T> : IPagedModel
     {
         public int CurrentPage { get; set; }
         public int MaxPage { get; set; }
@@ -17,6 +18,7 @@ namespace OneEchan.Core.Models
     public class ListResult
     {
         public string Name { get; set; }
+        public string Thumb { get; set; }
         public DateTime? Updated_At { get; set; }
         public int ID { get; set; }
     }

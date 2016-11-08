@@ -766,6 +766,15 @@
                                                             </Flyout>
                                                         </AppBarButton.Flyout>
                                                     </AppBarButton>
+                                                    <AppBarButton x:Name="EnableTitleButton" Style="{StaticResource AppBarButtonStyle}" MediaTransportControlsHelper.DropoutOrder="3">
+                                                        <AppBarButton.Icon>
+                                                            <SymbolIcon Symbol="DockBottom" RenderTransformOrigin="0.5,0.5">
+                                                                <SymbolIcon.RenderTransform>
+                                                                    <CompositeTransform Rotation="180"/>
+                                                                </SymbolIcon.RenderTransform>
+                                                            </SymbolIcon>
+                                                        </AppBarButton.Icon>
+                                                    </AppBarButton>
                                                     <AppBarButton x:Name='ZoomButton'
                                                 Style='{StaticResource AppBarButtonStyle}'
                                                 MediaTransportControlsHelper.DropoutOrder='9'>

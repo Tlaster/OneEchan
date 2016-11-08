@@ -1,0 +1,18 @@
+﻿@model IEnumerable<ICardItemModel>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-xs-6 col-sm-4 carditem">
+            <a href="@item.Href">
+                <div class="card-container mdl-shadow--2dp">
+                    <img src="@(item.Thumb ?? "/Assets/empty-item-image.png")" class="img-responsive" />
+                    <div class="card-text-container">
+                        <span class="card-text">@item.Text</span>
+                        <span class="card-sub-text">@item.SubText</span>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

@@ -1,0 +1,42 @@
+﻿.carousel {
+  margin-bottom: 30px;
+  margin-left: -15px;
+  margin-right: -15px
+}
+.carousel-caption {
+  z-index: 10;
+}
+.carousel-img {
+    width: 100%;
+}
+
+.carousel .item {
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+@media (min-width: 768px) {
+  .navbar-wrapper {
+    margin-top: 20px;
+  }
+  .navbar-wrapper .container {
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+  .navbar-wrapper .navbar {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .navbar-wrapper .navbar {
+    border-radius: 4px;
+  }
+}
+
+@media (max-width: 767px) {
+  .carousel-control {
+    display: none;
+  }
+  .carousel-caption h1 {
+      font-size: 20px;
+  }
+}

@@ -219,3 +219,5 @@ ModelManifest.xml
 /OneEchan.Backend/appsettings.json
 /OneEchan.Backend/Properties/PublishProfiles
 /OneEchan.Backend/log.txt
+/oneechan.moe_sha256_en.zip
+/OneEchan.Server/authenticationkeys.json

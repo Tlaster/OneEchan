@@ -81,7 +81,7 @@ namespace OneEchan
             rootFrame.Navigated += RootFrame_Navigated;
             Windows.ApplicationModel.Core.CoreApplication.GetCurrentView().TitleBar.ExtendViewIntoTitleBar = false;
             SystemNavigationManager.GetForCurrentView().BackRequested += App_BackRequested;
-
+            Windows.UI.ViewManagement.ApplicationView.GetForCurrentView().TitleBar.ButtonInactiveBackgroundColor = Colors.Transparent;
             if (rootFrame.Content == null)
             {
                 // 当导航堆栈尚未还原时，导航到第一页，

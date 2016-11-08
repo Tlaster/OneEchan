@@ -11,7 +11,6 @@
     mc:Ignorable="d">
     <Page.Resources>
         <BitmapImage x:Key="DefaultImage" UriSource="ms-appx:///Assets/SplashScreen.png" />
-
         <converter:BoolToFavorIconConverter x:Key="BoolToFavorIconConverter"/>
     </Page.Resources>
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">

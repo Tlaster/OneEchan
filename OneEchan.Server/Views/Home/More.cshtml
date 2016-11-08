@@ -1,0 +1,9 @@
+﻿@model More
+
+@*TODO:A Watching TV Image*@  
+@section banner{
+    <img class="img-full-width" src="~/Assets/banner.png" alt="Alternate Text" />
+}
+
+@await Html.PartialAsync("_ItemList", Model.Result.List)
+@await Html.PartialAsync("_Pagination", Model.Result)

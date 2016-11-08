@@ -1,0 +1,11 @@
+﻿.img-full-width{
+    width: 100%;
+}
+.detail-header{
+    padding: 16px 0px;
+    margin: 16px 0px;
+}
+
+.wrap-span{
+    word-wrap: break-word;
+}

@@ -6,12 +6,14 @@ using Microsoft.AspNetCore.Mvc;
 using OneEchan.Core.Models;
 using OneEchan.Server.Common.Extensions;
 using OneEchan.Server.Common.Helpers;
+using OneEchan.Server.Data;
 using OneEchan.Server.Models;
 
 // For more information on enabling MVC for empty projects, visit http://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace OneEchan.Server.Controllers
 {
+    [RequireHttps]
     public class WatchController : Controller
     {
         private AnimateDatabaseContext _context;

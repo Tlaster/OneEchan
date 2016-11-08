@@ -1,0 +1,29 @@
+﻿.col-xs-6.carditem, .col-sm-4.carditem{
+    padding : 8px;
+    border-radius: 4px;
+}
+.card-container{
+   position: relative;
+}
+.card-text-container{
+    position: absolute;
+    z-index: 100;
+    bottom: 0px;
+    right: 0px;
+    left: 0px;
+    background: rgba(0, 0, 0, 0.66);
+    padding: 8px;
+}
+.card-text
+{
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+.card-sub-text
+{
+    color: lightgray;
+    font-size: 14px;
+    font-weight: 500;
+    float:right;
+}

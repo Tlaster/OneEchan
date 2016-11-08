@@ -1,58 +1,92 @@
 ﻿<!DOCTYPE html>
 <html>
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <meta charset="UTF-8">
-    <script src="~/js/material.min.js"></script>
-    <link rel="stylesheet" href="~/css/HeaderStyle.css" />
-    <link rel="stylesheet" href="~/css/material.min.css">
-    <link rel="stylesheet" href="~/css/iconfont.css">
-    <link rel="apple-touch-icon" sizes="57x57" href="~/Assets/apple-touch-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="~/Assets/apple-touch-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="~/Assets/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="~/Assets/apple-touch-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="~/Assets/apple-touch-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="~/Assets/apple-touch-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="~/Assets/apple-touch-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="~/Assets/apple-touch-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="~/Assets/apple-touch-icon-180x180.png">
-    <link rel="icon" type="image/png" href="~/Assets/favicon-32x32.png" sizes="32x32">
-    <link rel="icon" type="image/png" href="~/Assets/android-chrome-192x192.png" sizes="192x192">
-    <link rel="icon" type="image/png" href="~/Assets/favicon-96x96.png" sizes="96x96">
-    <link rel="icon" type="image/png" href="~/Assets/favicon-16x16.png" sizes="16x16">
-    <link rel="manifest" href="~/Assets/manifest.json">
-    <link rel="mask-icon" href="~/Assets/safari-pinned-tab.svg" color="#c71585">
-    <link rel="shortcut icon" href="~/Assets/favicon.ico">
-    <meta name="apple-mobile-web-app-title" content="OneEchan">
-    <meta name="application-name" content="OneEchan">
-    <meta name="msapplication-TileColor" content="#c71585">
-    <meta name="msapplication-TileImage" content="~/Assets/mstile-144x144.png">
-    <meta name="msapplication-config" content="~/Assets/browserconfig.xml">
-    <meta name="theme-color" content="#c71585">
-    <title>@(ViewBag.Title ?? "OneEchan")</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    @*<title>@(ViewBag.Title ?? "OneEchan")</title>*@
+    <title>OneEchan</title>
+    <environment names="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment names="Staging,Production">
+        <link rel="stylesheet" href="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.7/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+    <link href="~/css/carousel.css" rel="stylesheet" />
+    <link href="~/css/navbar.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://code.getmdl.io/1.2.0/material.pink-blue.min.css" /> 
+    <link href="~/css/card.css" rel="stylesheet" />
     @RenderSection("head", false)
 </head>
 <body>
-    <div class="mdl-layout mdl-js-layout mdl-layout--fixed-header">
-        <header class="mdl-layout__header">
-            <div class="mdl-layout__header-row Header">
-                @if (ViewBag.CanBack == null || ViewBag.CanBack)
-                {
-                    <button style="margin: 0 20 0 -12;" onclick="history.back();" class="mdl-button mdl-js-button mdl-button--icon">
-                        <i class="material-icons">arrow_back</i>
-                    </button>
-                }
-                <button class="mdl-button" onclick="location.href='/'">
-                    <span class="mdl-layout-title Header-Text">@(ViewBag.Title ?? "OneEchan")</span>
-                </button>
-                @RenderSection("header",false)
-            </div>
-        </header>
-        <main class="mdl-layout__content">
-            @RenderBody()
-        </main>
+    <div class="navbar-wrapper">
+        <div class="container">
+            <nav class="navbar navbar-default navbar-static-top mdl-shadow--6dp">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        @*<a class="navbar-brand" href="/">@(ViewBag.Title ?? "OneEchan")</a>*@
+                        <a class="navbar-brand" href="/">OneEchan</a>
+                    </div>
+                    <div id="navbar" class="navbar-collapse collapse">
+                        @*<ul class="nav navbar-nav navbar-right">
+                            <li><a href="#">Dashboard</a></li>
+                            <li><a href="#">Settings</a></li>
+                            <li><a href="#">Profile</a></li>
+                            <li><a href="#">Help</a></li>
+                        </ul>*@
+                        @if (ViewBag.CanBack == null || ViewBag.CanBack)
+                        {
+                            <button type="button" class="navbar-toggle navbar-left"><span class="glyphicon glyphicon-chevron-left"></span></button>
+                        }
+                        @await Html.PartialAsync("_LoginPartial")
+                        <form asp-controller="Home" asp-action="Search" method="get" class="navbar-form navbar-right">
+                            <div class="form-group is-empty">
+                                <input value="@(ViewBag.SearchText ?? "")" name="keyword" type="text" class="form-control col-sm-8" placeholder="Search...">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </nav>
+        </div>
     </div>
-    @RenderSection("footer",false)
+
+    <div class="mdl-shadow--6dp">
+        @RenderSection("banner", false)
+    </div>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; 2016 - OneEchan.Server</p>
+        </footer>
+    </div>
+
+    <environment names="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment names="Staging,Production">
+        <script src="https://ajax.aspnetcdn.com/ajax/jquery/jquery-2.2.0.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery">
+        </script>
+        <script src="https://ajax.aspnetcdn.com/ajax/bootstrap/3.3.6/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal">
+        </script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("scripts", required: false)
 </body>
 </html>
