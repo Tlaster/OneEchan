@@ -1,0 +1,17 @@
+﻿@model IEnumerable<IItemsView>
+
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <div class="thumbnail">
+                <a href="@Url.Action(item.Action, item.Controller.Replace("Controller", ""), item.Values)">
+                    <img src="@item.Thumb" style="width:100%">
+                    <div class="caption">
+                        <p>@item.Title</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    }
+</div>
