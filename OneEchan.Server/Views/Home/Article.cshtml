@@ -1,0 +1,12 @@
+﻿@model IPagedList<Article>
+@{
+    ViewData["Title"] = "Article";
+}
+@await Html.PartialAsync("_ArticleItemsTemplate", Model)
+
+<cs-pager cs-paging-pagesize="@Model.PageSize"
+          cs-paging-pagenumber="@Model.PageNumber"
+          cs-paging-totalitems="@Model.TotalItemCount"
+          cs-pagenumber-param="page"
+          asp-controller="Home"
+          asp-action="Article"></cs-pager>

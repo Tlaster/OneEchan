@@ -1,0 +1,20 @@
+﻿@model OneEchan.Server.Models.AccountViewModel.AccountIndexViewModel
+@using cloudscribe.Web.Navigation
+@{
+    ViewData["Title"] = "My Account";
+}
+
+<div class="row" style="padding: 2em;">
+    <!-- Tab panes -->
+    <div class="col-md-10 col-md-push-2">
+        @Html.Partial("_EditProfile", Model)
+    </div>
+    <!-- Nav tabs -->
+    <div class="col-md-2 col-md-pull-10">
+        @await Component.InvokeAsync("Navigation", new { viewName = "SideNavAlt1", filterName = NamedNavigationFilters.ParentTree, startingNodeKey = "Account" })
+    </div>
+</div>
+
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

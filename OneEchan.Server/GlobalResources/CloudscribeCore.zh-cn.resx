@@ -354,6 +354,9 @@
   <data name="Change Password" xml:space="preserve">
     <value>修改密码</value>
   </data>
+  <data name="Change Password Form" xml:space="preserve">
+    <value>修改密码</value>
+  </data>
   <data name="Code" xml:space="preserve">
     <value>验证码</value>
   </data>
@@ -376,7 +379,7 @@
     <value>创建新账户</value>
   </data>
   <data name="Edit" xml:space="preserve">
-    <value>编辑</value>
+    <value>修改</value>
   </data>
   <data name="Edit State" xml:space="preserve">
     <value>编辑州</value>
@@ -950,5 +953,17 @@
   </data>
   <data name="Log off" xml:space="preserve">
     <value>注销</value>
+  </data>
+  <data name="Change Profile Form" xml:space="preserve">
+    <value>修改个人资料</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>性别</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>简介</value>
+  </data>
+  <data name="WebSiteUrl" xml:space="preserve">
+    <value>个人网站</value>
   </data>
 </root>

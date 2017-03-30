@@ -17,6 +17,7 @@ namespace OneEchan.Server.Models
         public string Url { get; set; }
         public TimeSpan Duration { get; set; }
         public string Thumb { get; set; }
+        public string Type { get; set; }
 
         public virtual Video Video { get; set; }
     }

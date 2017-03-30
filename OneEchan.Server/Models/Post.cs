@@ -1,5 +1,4 @@
-﻿using OneEchan.Server.Models.Interface;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -8,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace OneEchan.Server.Models
 {
-    public abstract class Post : IItemsView
+    public abstract class Post
     {
         public enum State
         {
             Published,
+            Publishing,
             Blocked,
             UploaderOnly,
             Editing,
@@ -33,20 +33,24 @@ namespace OneEchan.Server.Models
         [Required]
         public Guid SiteId { get; set; }
         public State PostState{ get; set; }
-        public int Rating { get; set; }
+        [Required]
         public int Language { get; set; }
+        [Required]
         public int CategoryId { get; set; }
         public long ViewCount { get; set; }
+        public bool AllowComment { get; set; }
+        [Required]
+        public string Ip { get; set; }
+        public string TagString { get; set; }
+        [NotMapped]
+        public string[] Tags
+        {
+            get => TagString.Split(',').ToArray();
+            set => TagString = string.Join(",", value);
+        }
 
         public virtual Category Category { get; set; }
         public virtual ICollection<Comment> Comment { get; set; }
-
-        public string Title => Name;
-
-        public abstract string Caption { get; }
-        public abstract string Action { get; }
-        public abstract string Controller { get; }
-        public abstract object Values { get; }
-        public abstract string Thumb { get; }
+        public virtual ICollection<Attitude> Attitude { get; set; }
     }
 }

@@ -1,0 +1,12 @@
+﻿@model IPagedList<Video>
+@{
+    ViewData["Title"] = "Video";
+}
+@await Html.PartialAsync("_VideoItemsTemplate", Model)
+
+<cs-pager cs-paging-pagesize="@Model.PageSize"
+          cs-paging-pagenumber="@Model.PageNumber"
+          cs-paging-totalitems="@Model.TotalItemCount"
+          cs-pagenumber-param="page"
+          asp-controller="Home"
+          asp-action="Video"></cs-pager>

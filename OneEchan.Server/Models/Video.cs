@@ -15,17 +15,6 @@ namespace OneEchan.Server.Models
         {
         }
         public string Description { get; set; }
-
-        public override string Caption => VideoUrl?.FirstOrDefault()?.Duration.ToString();
-
         public virtual ICollection<VideoUrl> VideoUrl { get; set; }
-
-        public override string Action => nameof(VideoController.Details);
-
-        public override string Controller => nameof(VideoController);
-
-        public override object Values => new { id = Id };
-
-        public override string Thumb => VideoUrl?.FirstOrDefault()?.Thumb;
     }
 }

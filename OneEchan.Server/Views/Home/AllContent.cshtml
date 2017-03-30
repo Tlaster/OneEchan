@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "All Content";
 }
-@await Html.PartialAsync("_GridItemView", Model)
+@await Html.PartialAsync("_VideoItemsTemplate", Model)
 
 <cs-pager cs-paging-pagesize="@Model.PageSize"
           cs-paging-pagenumber="@Model.PageNumber"

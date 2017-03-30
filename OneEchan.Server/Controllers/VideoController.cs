@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OneEchan.Server.Controllers.Interface;
 using OneEchan.Server.Data;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OneEchan.Server.Controllers
 {
-    public class VideoController : Controller
+    public class VideoController : Controller, IPostController
     {
         private readonly ApplicationDbContext _context;
 
@@ -16,9 +17,15 @@ namespace OneEchan.Server.Controllers
             _context = context;
         }
 
-        public string Details(int id)
+        public Task<IActionResult> Details(int id)
         {
-            return "Hello World";
+            throw new NotImplementedException();
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var video = await _context.Video.FindAsync(id);
+            return View(video);
         }
     }
 }

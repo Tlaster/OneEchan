@@ -16,7 +16,7 @@ namespace OneEchan.Server.Data
         public DbSet<Article> Article { get; set; }
         public DbSet<VideoUrl> VideoUrl { get; set; }
         public DbSet<Post> Post { get; set; }
-        public DbSet<SiteUserInfo> SiteUserInfo { get; set; }
+        public DbSet<Attitude> Attitude { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {

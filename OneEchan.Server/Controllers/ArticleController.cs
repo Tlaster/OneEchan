@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OneEchan.Server.Controllers.Interface;
 using OneEchan.Server.Data;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace OneEchan.Server.Controllers
 {
-    public class ArticleController : Controller
+    public class ArticleController : Controller, IPostController
     {
         private ApplicationDbContext _context;
 
@@ -16,9 +17,14 @@ namespace OneEchan.Server.Controllers
             _context = context;
         }
 
-        public IActionResult Details(int id)
+        public Task<IActionResult> Details(int id)
         {
-            return View();
+            throw new NotImplementedException();
+        }
+
+        public Task<IActionResult> Edit(int id)
+        {
+            throw new NotImplementedException();
         }
     }
 }

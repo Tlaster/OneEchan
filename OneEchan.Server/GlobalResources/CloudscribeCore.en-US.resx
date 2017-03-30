@@ -354,6 +354,9 @@
   <data name="Change Password" xml:space="preserve">
     <value>Change Password</value>
   </data>
+  <data name="Change Password Form" xml:space="preserve">
+    <value>Change Password Form</value>
+  </data>
   <data name="Code" xml:space="preserve">
     <value>Code</value>
   </data>
@@ -950,5 +953,17 @@
   </data>
   <data name="Log off" xml:space="preserve">
     <value>Log off</value>
+  </data>
+  <data name="Change Profile Form" xml:space="preserve">
+    <value>Change Profile Form</value>
+  </data>
+  <data name="Gender" xml:space="preserve">
+    <value>Gender</value>
+  </data>
+  <data name="Description" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="WebSiteUrl" xml:space="preserve">
+    <value>WebSiteUrl</value>
   </data>
 </root>

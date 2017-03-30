@@ -13,15 +13,5 @@ namespace OneEchan.Server.Models
 
         }
         public string Content { get; set; }
-
-        public override string Caption => string.Empty;
-
-        public override string Action => nameof(ArticleController.Details);
-
-        public override string Controller => nameof(ArticleController);
-
-        public override object Values => new { id = Id };
-
-        public override string Thumb => string.Empty;
     }
 }

@@ -5,6 +5,8 @@
     "bootstrap": "3.3.7",
     "jquery": "2.2.0",
     "jquery-validation": "1.14.0",
-    "jquery-validation-unobtrusive": "3.2.6"
+    "jquery-validation-unobtrusive": "3.2.6",
+    "video.js": "v5.19.1",
+    "vjs-resolution-switcher": "videojs-resolution-switcher#v0.4.2"
   }
 }

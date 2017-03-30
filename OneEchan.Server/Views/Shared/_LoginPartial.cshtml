@@ -19,7 +19,7 @@
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@string.Format(helloFormat, User.GetDisplayName()) <span class="caret"></span></a>
             <ul class="dropdown-menu">
                 <li>
-                    <a asp-controller="AccountManagement" asp-action="Index" title='@sr["Manage"]'>@sr["Manage"]</a>
+                    <a asp-controller="Account" asp-action="Index" title='@sr["Manage"]'>@sr["Manage"]</a>
                 </li>
                 <li>
                     <a href="javascript:document.getElementById('logoutForm').submit()">@sr["Log off"]</a>
@@ -37,6 +37,6 @@ else
         {
             <li><a id="registerLink" asp-controller="Account" asp-action="Register">@sr["Register"]</a></li>
         }
-        <li><a id="loginLink" asp-controller="Account" asp-action="Login" asp-route-returnurl="@Context.Request.PathAndQuery()">@sr["Log in"]</a></li>
+        <li><a id="loginLink" asp-controller="Account" asp-action="Login" asp-route-returnurl="@Context.Request.PathAndQuery()">@sr["Log In"]</a></li>
     </ul>
 }

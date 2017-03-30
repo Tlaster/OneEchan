@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Video>
+<div class="row">
+    @foreach (var item in Model)
+    {
+        <div class="col-md-4">
+            <a href="@Url.Action(nameof(VideoController.Details), nameof(VideoController).Replace("Controller", ""), new { id = item.Id })">
+                <img src="@item.VideoUrl.FirstOrDefault()?.Thumb" style="width:100%">
+                <span>@item.Name</span>
+            </a>
+            <br />
+            <span>@item.CreatedAt</span>
+            <span>
+                <span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
+                <span>@item.ViewCount</span>
+            </span>
+        </div>
+    }
+</div>

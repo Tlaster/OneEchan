@@ -1,0 +1,41 @@
+﻿@model OneEchan.Server.Models.AccountViewModel.AccountIndexViewModel
+@inject IStringLocalizer<CloudscribeCore> sr
+
+<form asp-controller="Account" asp-action="EditProfile" method="post" class="form-horizontal">
+    <h4>@sr["Change Profile Form"]</h4>
+    <hr />
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="Name" class="col-md-2 control-label">@sr["Name"]</label>
+        <div class="col-md-10">
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Gender" class="col-md-2 control-label">@sr["Gender"]</label>
+        <div class="col-md-10">
+            <input asp-for="Gender" class="form-control" />
+            <span asp-validation-for="Gender" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description" class="col-md-2 control-label">@sr["Description"]</label>
+        <div class="col-md-10">
+            <input asp-for="Description" class="form-control" />
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label asp-for="WebSiteUrl" class="col-md-2 control-label">@sr["WebSiteUrl"]</label>
+        <div class="col-md-10">
+            <input asp-for="WebSiteUrl" class="form-control" />
+            <span asp-validation-for="WebSiteUrl" class="text-danger"></span>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <button type="submit" class="btn btn-default">@sr["Edit"]</button>
+        </div>
+    </div>
+</form>

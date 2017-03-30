@@ -1,0 +1,16 @@
+﻿@model IPagedList<Article>
+<div class="row">
+    <ul class="list-group">
+        @foreach (var item in Model)
+        {
+            <li class="list-group-item">
+                <a href="@Url.Action(nameof(ArticleController.Details), nameof(ArticleController).Replace("Controller", ""), new { id = item.Id })">@item.Name</a>
+                <span>@item.CreatedAt</span>
+                <span>
+                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                    <span>@item.ViewCount</span>
+                </span>
+            </li>
+        }
+    </ul>
+</div>

@@ -221,8 +221,8 @@ namespace OneEchan.Server
                                 SiteId = (await coreDb.Sites.FirstOrDefaultAsync()).Id
                             });
                         }
+                        await applicationDb.SaveChangesAsync();
                     }
-                    await applicationDb.SaveChangesAsync();
                     if (!await applicationDb.CategoryName.AnyAsync())
                     {
                         foreach (var item in applicationDb.Category)
@@ -234,8 +234,8 @@ namespace OneEchan.Server
                                 Name = $"Name {number} {Languages.AllLanguage[0].Id}",
                             });
                         }
+                        await applicationDb.SaveChangesAsync();
                     }
-                    await applicationDb.SaveChangesAsync();
                     if (!await applicationDb.Video.AnyAsync())
                     {
                         foreach (var item in applicationDb.Category)
@@ -251,12 +251,12 @@ namespace OneEchan.Server
                                     PostState = Post.State.Published,
                                     SiteId = (await coreDb.Sites.FirstOrDefaultAsync()).Id,
                                     UploaderId = (await coreDb.Users.FirstOrDefaultAsync()).Id,
-                                    Rating = 10,
+                                    Ip = "111.111.111.111"
                                 });
                             }
                         }
+                        await applicationDb.SaveChangesAsync();
                     }
-                    await applicationDb.SaveChangesAsync();
                     if (!await applicationDb.VideoUrl.AnyAsync())
                     {
                         foreach (var item in applicationDb.Video)
@@ -264,14 +264,24 @@ namespace OneEchan.Server
                             await applicationDb.VideoUrl.AddAsync(new VideoUrl
                             {
                                 Duration = TimeSpan.Zero,
-                                QualityInfo = "h265 1080p",
-                                Url = "dsa",
+                                QualityInfo = "h265 1080P",
+                                Url = "http://www.w3school.com.cn/i/movie.ogg",
                                 Video = item,
-                                Thumb = "https://www.w3schools.com/w3images/lights.jpg"
+                                Thumb = "http://www.w3school.com.cn/i/movie.ogg",
+                                Type = "video/ogg"
+                            });
+                            await applicationDb.VideoUrl.AddAsync(new VideoUrl
+                            {
+                                Duration = TimeSpan.Zero,
+                                QualityInfo = "h265 720P",
+                                Url = "http://www.w3school.com.cn/i/movie.ogg",
+                                Video = item,
+                                Thumb = "http://www.w3school.com.cn/i/movie.ogg",
+                                Type = "video/ogg"
                             });
                         }
+                        await applicationDb.SaveChangesAsync();
                     }
-                    await applicationDb.SaveChangesAsync();
                     if (!await applicationDb.Comment.AnyAsync())
                     {
                         foreach (var item in applicationDb.Video)
@@ -282,10 +292,11 @@ namespace OneEchan.Server
                                 Language = Languages.AllLanguage[0].Id,
                                 Post = item,
                                 UploaderId = (await coreDb.Users.FirstOrDefaultAsync()).Id,
+                                Ip = "111.111.111.111"
                             });
                         }
+                        await applicationDb.SaveChangesAsync();
                     }
-                    await applicationDb.SaveChangesAsync();
                     if (!await applicationDb.Article.AnyAsync())
                     {
                         foreach (var item in applicationDb.Category)
@@ -301,7 +312,7 @@ namespace OneEchan.Server
                                     PostState = Post.State.Published,
                                     SiteId = (await coreDb.Sites.FirstOrDefaultAsync()).Id,
                                     UploaderId = (await coreDb.Users.FirstOrDefaultAsync()).Id,
-                                    Rating = 10,
+                                    Ip = "111.111.111.111"
                                 };
                                 await applicationDb.Article.AddAsync(article);
                                 await applicationDb.Comment.AddAsync(new Comment
@@ -310,11 +321,12 @@ namespace OneEchan.Server
                                     Language = Languages.AllLanguage[0].Id,
                                     Post = article,
                                     UploaderId = (await coreDb.Users.FirstOrDefaultAsync()).Id,
+                                    Ip = "111.111.111.111"
                                 });
                             }
                         }
+                        await applicationDb.SaveChangesAsync();
                     }
-                    await applicationDb.SaveChangesAsync();
                 }
             }
         }
@@ -391,10 +403,10 @@ namespace OneEchan.Server
                     template: "p/{id}",
                     defaults: new { controller = nameof(ArticleController).Replace("Controller", ""), action = nameof(ArticleController.Details) });
 
-                routes.MapRoute(
-                    name: "accountmanagemant",
-                    template: "my/{action}",
-                    defaults: new { controller = nameof(AccountManagementController).Replace("Controller", ""), action = nameof(AccountManagementController.Index) });
+                //routes.MapRoute(
+                //    name: "accountmanagemant",
+                //    template: "my/{action}",
+                //    defaults: new { controller = nameof(AccountController).Replace("Controller", ""), action = nameof(AccountController.Index) });
 
                 routes.MapRoute(
                     name: "default",

@@ -1,0 +1,48 @@
+﻿@using cloudscribe.Web.Navigation
+@model IPagedList<Video>
+@{
+    ViewData["Title"] = "My Video";
+}
+
+<div class="row" style="padding: 2em;">
+    <div class="tab-content col-md-10 col-md-push-2">
+        <div class="row">
+            @foreach (var item in Model)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action(nameof(VideoController.Edit), nameof(VideoController).Replace("Controller", ""), new { id = item.Id })">
+                        <img src="@item.VideoUrl.FirstOrDefault()?.Thumb" style="width:100%">
+                        <span>@item.Name</span>
+                    </a>
+                    <br />
+                    <span>@item.CreatedAt</span>
+                    <br />
+                    <span>
+                        <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                        <span>@item.Comment.Count</span>
+                    </span>
+                    <span>
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                        <span>@item.Attitude.Where(at => at.AttitudeType == Attitude.Type.Like).Count()</span>
+                    </span>
+                    <span>
+                        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                        <span>@item.Attitude.Where(at => at.AttitudeType == Attitude.Type.DisLike).Count()</span>
+                    </span>
+                </div>
+            }
+        </div>
+        <cs-pager cs-paging-pagesize="@Model.PageSize"
+                  cs-paging-pagenumber="@Model.PageNumber"
+                  cs-paging-totalitems="@Model.TotalItemCount"
+                  cs-pagenumber-param="page"
+                  asp-controller="Account"
+                  asp-action="Video"></cs-pager>
+    </div>
+    <div class="col-md-2 col-md-pull-10">
+        @await Component.InvokeAsync("Navigation", new { viewName = "SideNavAlt1", filterName = NamedNavigationFilters.ParentTree, startingNodeKey = "Account" })
+    </div>
+</div>
+@section Scripts {
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}

@@ -1,0 +1,52 @@
+{
+  "name": "videojs-resolution-switcher",
+  "version": "0.4.2",
+  "main": "./lib/videojs-resolution-switcher.js",
+  "author": {
+    "name": "Kasper Moskwiak",
+    "email": "kasper.moskwiak@gmail.com",
+    "url": "http://kspr.pl"
+  },
+  "contributors": [
+    {
+      "name": "Pierre Kraft"
+    }
+  ],
+  "description": "Resolution switcher for video.js 5",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:kmoskwiak/videojs-resolution-switcher.git"
+  },
+  "bugs": {
+    "url": "https://github.com/kmoskwiak/videojs-resolution-switcher/issues"
+  },
+  "license": "Apache-2.0",
+  "keywords": [
+    "videojs",
+    "html5",
+    "flash",
+    "video",
+    "player",
+    "resolution",
+    "source",
+    "videojs-plugin"
+  ],
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-clean": "^1.0",
+    "grunt-contrib-concat": "^1.0",
+    "grunt-contrib-jshint": "^1.0",
+    "grunt-contrib-qunit": "^1.1",
+    "grunt-contrib-uglify": "^1.0",
+    "grunt-contrib-watch": "^1.0",
+    "video.js": "^5.8",
+    "qunitjs": "^1.22",
+    "videojs-youtube": "^2.0.8"
+  },
+  "peerDependencies": {
+    "video.js": "^5.8"
+  }
+}

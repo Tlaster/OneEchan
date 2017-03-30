@@ -26,6 +26,8 @@ namespace OneEchan.Server.Models
         public string Content { get; set; }
         [Required]
         public int Language { get; set; }
+        [Required]
+        public string Ip { get; set; }
 
         public virtual Post Post { get; set; }
     }
