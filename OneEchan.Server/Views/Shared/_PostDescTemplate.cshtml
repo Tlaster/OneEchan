@@ -1,0 +1,10 @@
+﻿@model OneEchan.Server.Models.PostViewModel.PostDetailViewModel
+
+<div class="panel panel-default">
+    <div class="panel-body">
+        @if (Model.Post is Video)
+        {
+            <markdown>@((Model.Post as Video).Description)</markdown>
+        }
+    </div>
+</div>

@@ -1,47 +1,43 @@
-﻿@model Video
-
+﻿@model OneEchan.Server.Models.PostViewModel.PostDetailViewModel
+@{ 
+    ViewData["TItle"] = Model.Post.Name;
+}
 <div class="row">
     <div class="embed-responsive embed-responsive-16by9">
-        <video id="video" class="embed-responsive-item" src="...">
-            @foreach (var item in Model.VideoUrl)
+        <video id="video" class="embed-responsive-item video-js" controls preload="auto" data-setup='{}'>
+            @foreach (var item in (Model.Post as Video).VideoUrl)
             {
-                <source src="@item.Url" type='@item.Type' label='@item.QualityInfo'/>
+                <source src="@item.Url" type='@item.Type' label="@item.QualityInfo"/>
             }
+            <p class="vjs-no-js">
+                To view this video please enable JavaScript, and consider upgrading to a web browser that
+                <a href="http://videojs.com/html5-video-support/" target="_blank">supports HTML5 video</a>
+            </p>
+
         </video>
     </div>
-    @foreach (var item in Model.Comment)
-    {
-        <div class="media">
-            <div class="media-left">
-                <a href="#">
-                    <img class="media-object" src="@item.UploaderId" alt="...">
-                </a>
-            </div>
-            <div class="media-body">
-                <h4 class="media-heading">@item.UploaderId</h4>
-                ...
-            </div>
-        </div>
-    }
+    @Html.Partial("_PostInfoTemplate", Model)
+    @Html.Partial("_CommentItemsTemplate", Model.Post.Comment)
+    @Html.Partial("_PostCommentTemplate", Model)
 </div>
 
 @section Scripts {
-    <script src="~/lib/vjs-resolution-switcher/lib/videojs-resolution-switcher.js"></script>
     <environment names="Development">
         <script src="~/lib/video.js/dist/video.min.js"></script>
     </environment>
     <environment names="Staging,Production">
         <script src="http://vjs.zencdn.net/5.19.0/video.js"></script>
     </environment>
+    <script src="~/lib/vjs-resolution-switcher/lib/videojs-resolution-switcher.js"></script>
     <script>videojs('video').videoJsResolutionSwitcher()</script>
 }
 
 @section Styles {
-    <link href="~/lib/vjs-resolution-switcher/lib/videojs-resolution-switcher.css" rel="stylesheet" />
     <environment names="Development">
         <link href="~/lib/video.js/dist/video-js.min.css" rel="stylesheet" />
     </environment>
     <environment names="Staging,Production">
         <link href="http://vjs.zencdn.net/5.19.0/video-js.css" rel="stylesheet" />
     </environment>
+    <link href="~/lib/vjs-resolution-switcher/lib/videojs-resolution-switcher.css" rel="stylesheet" />
 }

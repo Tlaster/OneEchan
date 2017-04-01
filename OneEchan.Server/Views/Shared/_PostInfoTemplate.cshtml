@@ -1,0 +1,41 @@
+﻿@model OneEchan.Server.Models.PostViewModel.PostDetailViewModel
+<div class="panel panel-default">
+    <div class="panel-body">
+        <h2>@Model.Post.Name</h2>
+        <br />
+        <span class="glyphicon glyphicon-user"></span>
+        <span>@Model.Uploader.DisplayName</span>
+        @if (Model.Post is Video)
+        {
+            <markdown>@((Model.Post as Video).Description)</markdown>
+        }
+        <span class="glyphicon glyphicon-list-alt"></span>
+        <span>@Model.Post.Category.CategoryName</span>
+        <div>
+            <span class="glyphicon glyphicon-eye-open"></span>
+            <span>@Model.Post.ViewCount</span>
+            <span class="glyphicon glyphicon-comment"></span>
+            <span>@Model.Post.Comment.Count</span>
+        </div>
+    </div>
+
+    <div class="panel-footer">
+        <div class="progress" style="height: 4px;">
+            <div class="progress-bar" role="progressbar" aria-valuenow="@Model.LikeCount" aria-valuemin="0" aria-valuemax="@Model.TotalAttitudeCount" style="width: @((double)Model.LikeCount / (double)Model.TotalAttitudeCount * 100d)%">
+                <span class="sr-only">@Model.LikeCount like this video</span>
+            </div>
+        </div>
+        <div>
+            <span class="glyphicon glyphicon-time"></span>
+            <span>@Model.Post.CreatedAt</span>
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>@Model.LikeCount
+                </button>
+                <button type="button" class="btn btn-default">
+                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>@(Model.TotalAttitudeCount - Model.LikeCount)
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
