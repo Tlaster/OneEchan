@@ -9,32 +9,40 @@
         {
             <markdown>@((Model.Post as Video).Description)</markdown>
         }
-        <span class="glyphicon glyphicon-list-alt"></span>
-        <span>@Model.Post.Category.CategoryName</span>
-        <div>
-            <span class="glyphicon glyphicon-eye-open"></span>
-            <span>@Model.Post.ViewCount</span>
-            <span class="glyphicon glyphicon-comment"></span>
-            <span>@Model.Post.Comment.Count</span>
+        <div style="display: flex; justify-content: space-between">
+            <div>
+                <span class="glyphicon glyphicon-list-alt"></span>
+                <span>@Model.Post.Category.CategoryName.FirstOrDefault().Name</span>
+            </div>
+            <div>
+                <span class="glyphicon glyphicon-eye-open"></span>
+                <span>@Model.Post.ViewCount</span>
+                <span class="glyphicon glyphicon-comment"></span>
+                <span>@Model.Post.Comment.Count</span>
+            </div>
         </div>
     </div>
 
     <div class="panel-footer">
-        <div class="progress" style="height: 4px;">
-            <div class="progress-bar" role="progressbar" aria-valuenow="@Model.LikeCount" aria-valuemin="0" aria-valuemax="@Model.TotalAttitudeCount" style="width: @((double)Model.LikeCount / (double)Model.TotalAttitudeCount * 100d)%">
-                <span class="sr-only">@Model.LikeCount like this video</span>
+        <div style="display: flex;justify-content: space-between">
+            <div style="align-self: center;">
+                <span class="glyphicon glyphicon-time"></span>
+                <span>@Model.Post.CreatedAt</span>
             </div>
-        </div>
-        <div>
-            <span class="glyphicon glyphicon-time"></span>
-            <span>@Model.Post.CreatedAt</span>
-            <div class="btn-group" role="group">
-                <button type="button" class="btn btn-default">
-                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>@Model.LikeCount
-                </button>
-                <button type="button" class="btn btn-default">
-                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>@(Model.TotalAttitudeCount - Model.LikeCount)
-                </button>
+            <div>
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-link">
+                        <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span> <span class="badge">@Model.LikeCount</span>
+                    </button>
+                    <button type="button" class="btn btn-link">
+                        <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span> <span class="badge">@(Model.TotalAttitudeCount - Model.LikeCount)</span>
+                    </button>
+                </div>
+                <div class="progress" style="height: 4px;margin-bottom: 0">
+                    <div class="progress-bar" role="progressbar" aria-valuenow="@Model.LikeCount" aria-valuemin="0" aria-valuemax="@Model.TotalAttitudeCount" style="width: @((double)Model.LikeCount / (double)Model.TotalAttitudeCount * 100d)%">
+                        <span class="sr-only">@Model.LikeCount like this video</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

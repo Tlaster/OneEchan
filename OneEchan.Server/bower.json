@@ -7,6 +7,7 @@
     "jquery-validation": "1.14.0",
     "jquery-validation-unobtrusive": "3.2.6",
     "video.js": "v5.19.1",
-    "vjs-resolution-switcher": "videojs-resolution-switcher#v0.4.2"
+    "vjs-resolution-switcher": "videojs-resolution-switcher#v0.4.2",
+    "editor.md": "1.5.0"
   }
 }

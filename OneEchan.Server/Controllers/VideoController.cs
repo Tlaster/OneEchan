@@ -30,6 +30,7 @@ namespace OneEchan.Server.Controllers
                 .Include(v => v.Comment)
                 .Include(v => v.VideoUrl)
                 .Include(v => v.Category)
+                .Include(v => v.Category.CategoryName)
                 .FirstOrDefaultAsync(item => item.Id == id);
             var uploader = await _userManager.FindByIdAsync(video.UploaderId.ToString());
             var likeCount = video.Attitude.Where(item => item.AttitudeType == Models.Attitude.Type.Like).LongCount();
@@ -45,8 +46,18 @@ namespace OneEchan.Server.Controllers
 
         public async Task<IActionResult> Edit(int id)
         {
-            var video = await _context.Video.FindAsync(id);
+            var video = await _context.Video
+                .Include(v => v.Category)
+                .Include(v => v.Category.CategoryName)
+                .FirstOrDefaultAsync(item => item.Id == id);
             return View(video);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public Task<IActionResult> Edit(PostEditViewModel model)
+        {
+            throw new NotImplementedException();
         }
     }
 }

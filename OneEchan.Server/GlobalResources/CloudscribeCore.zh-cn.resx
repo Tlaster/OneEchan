@@ -727,7 +727,7 @@
     <value>用户管理</value>
   </data>
   <data name="Your security code is: {0}" xml:space="preserve">
-    <value>你的安全验证吗为： {0}</value>
+    <value>你的安全验证码为： {0}</value>
   </data>
   <data name="{0} - Edit Role" xml:space="preserve">
     <value>{0} - 编辑角色</value>

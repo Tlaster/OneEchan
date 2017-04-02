@@ -11,20 +11,25 @@
                 @foreach (var item in Model)
                 {
                     <li class="list-group-item">
-                        <a href="@Url.Action(nameof(ArticleController.Edit), nameof(ArticleController).Replace("Controller", ""), new { id = item.Id })">@item.Name</a>
-                        <span>@item.CreatedAt</span>
-                        <span>
-                            <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
-                            <span>@item.Comment.Count</span>
-                        </span>
-                        <span>
-                            <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                            <span>@item.Attitude.Where(at => at.AttitudeType == Attitude.Type.Like).Count()</span>
-                        </span>
-                        <span>
-                            <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-                            <span>@item.Attitude.Where(at => at.AttitudeType == Attitude.Type.DisLike).Count()</span>
-                        </span>
+
+                        <div style="display: flex; justify-content: space-between">
+                            <a href="@Url.Action(nameof(ArticleController.Edit), nameof(ArticleController).Replace("Controller", ""), new { id = item.Id })">@item.Name</a>
+                            <div>
+                                <span>@item.CreatedAt</span>
+                                <span>
+                                    <span class="glyphicon glyphicon-comment" aria-hidden="true"></span>
+                                    <span>@item.Comment.Count</span>
+                                </span>
+                                <span>
+                                    <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
+                                    <span>@item.Attitude.Where(at => at.AttitudeType == Attitude.Type.Like).Count()</span>
+                                </span>
+                                <span>
+                                    <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
+                                    <span>@item.Attitude.Where(at => at.AttitudeType == Attitude.Type.DisLike).Count()</span>
+                                </span>
+                            </div>
+                        </div>
                     </li>
                 }
             </ul>

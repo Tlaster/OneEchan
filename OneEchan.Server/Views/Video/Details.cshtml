@@ -1,5 +1,5 @@
 ﻿@model OneEchan.Server.Models.PostViewModel.PostDetailViewModel
-@{ 
+@{
     ViewData["TItle"] = Model.Post.Name;
 }
 <div class="row">
@@ -7,7 +7,7 @@
         <video id="video" class="embed-responsive-item video-js" controls preload="auto" data-setup='{}'>
             @foreach (var item in (Model.Post as Video).VideoUrl)
             {
-                <source src="@item.Url" type='@item.Type' label="@item.QualityInfo"/>
+                <source src="@item.Url" type='@item.Type' label="@item.QualityInfo" />
             }
             <p class="vjs-no-js">
                 To view this video please enable JavaScript, and consider upgrading to a web browser that
@@ -17,8 +17,8 @@
         </video>
     </div>
     @Html.Partial("_PostInfoTemplate", Model)
-    @Html.Partial("_CommentItemsTemplate", Model.Post.Comment)
     @Html.Partial("_PostCommentTemplate", Model)
+    @Html.Partial("_CommentItemsTemplate", Model.Post.Comment)
 </div>
 
 @section Scripts {

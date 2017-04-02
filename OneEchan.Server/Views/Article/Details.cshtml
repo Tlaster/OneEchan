@@ -1,0 +1,14 @@
+﻿@model OneEchan.Server.Models.PostViewModel.PostDetailViewModel
+@{
+    ViewData["TItle"] = Model.Post.Name;
+}
+<div class="row">
+    @Html.Partial("_PostInfoTemplate", Model)
+    <div class="panel panel-default">
+        <div class="panel-body">
+            <markdown>@((Model.Post as Article).Content)</markdown>
+        </div>
+    </div>
+    @Html.Partial("_PostCommentTemplate", Model)
+    @Html.Partial("_CommentItemsTemplate", Model.Post.Comment)
+</div>
