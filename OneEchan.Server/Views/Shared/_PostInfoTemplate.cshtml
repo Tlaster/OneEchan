@@ -1,7 +1,34 @@
 ﻿@model OneEchan.Server.Models.PostViewModel.PostDetailViewModel
+@inject IStringLocalizer<CloudscribeCore> sr
 <div class="panel panel-default">
     <div class="panel-body">
-        <h2>@Model.Post.Name</h2>
+        <div class="flexspace" style="justify-content: flex-start;">
+            <h2 style="margin-right: 0.4em;">@Model.Post.Name</h2>
+            @if (Model.Uploader.Id.ToString() == User.GetUserId())
+            {
+                @*
+                Razor does not support C# 7 at the time (2017-04-04)    
+                switch (Model.Post)
+                {
+                    case Video video:
+                        <a href="@Url.Action(nameof(VideoController.Edit), nameof(VideoController).Replace("Controller", ""), new { id = video.Id })">@sr["Edit"]</a>
+                        break;
+                    case Article article:
+                        <a href="@Url.Action(nameof(ArticleController.Edit), nameof(ArticleController).Replace("Controller", ""), new { id = article.Id })">@sr["Edit"]</a>
+                        break;
+                    default:
+                        break;
+                }*@
+                if (Model.Post is Video)
+                {
+                    <a href="@Url.Action(nameof(VideoController.Edit), nameof(VideoController).Replace("Controller", ""), new { id = Model.Post.Id })">@sr["Edit"]</a>
+                }
+                else if (Model.Post is Article)
+                {
+                    <a href="@Url.Action(nameof(ArticleController.Edit), nameof(ArticleController).Replace("Controller", ""), new { id = Model.Post.Id })">@sr["Edit"]</a>
+                }
+            }
+        </div>
         <br />
         <span class="glyphicon glyphicon-user"></span>
         <span>@Model.Uploader.DisplayName</span>
@@ -9,7 +36,7 @@
         {
             <markdown>@((Model.Post as Video).Description)</markdown>
         }
-        <div style="display: flex; justify-content: space-between">
+        <div class="flexspace">
             <div>
                 <span class="glyphicon glyphicon-list-alt"></span>
                 <span>@Model.Post.Category.CategoryName.FirstOrDefault().Name</span>
@@ -24,8 +51,8 @@
     </div>
 
     <div class="panel-footer">
-        <div style="display: flex;justify-content: space-between">
-            <div style="align-self: center;">
+        <div class="flexspace">
+            <div >
                 <span class="glyphicon glyphicon-time"></span>
                 <span>@Model.Post.CreatedAt</span>
             </div>

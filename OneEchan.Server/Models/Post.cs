@@ -25,6 +25,7 @@ namespace OneEchan.Server.Models
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         [Required]
+        [StringLength(140, MinimumLength = 6, ErrorMessage = "This field must between 6 and 140 characters")]
         public string Name { get; set; }
         [Column(name: "Created_At")]
         public DateTime CreatedAt { get; set; }

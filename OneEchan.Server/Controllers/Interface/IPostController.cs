@@ -10,7 +10,7 @@ namespace OneEchan.Server.Controllers.Interface
     public interface IPostController
     {
         Task<IActionResult> Edit(int id);
-        Task<IActionResult> Edit(PostEditViewModel model);
+        //Task<IActionResult> Edit(IPostEditViewModel model);
         Task<IActionResult> Details(int id);
     }
 }

@@ -39,3 +39,9 @@ textarea {
 .panel {
     margin: 4px auto;
 }
+
+.flexspace {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

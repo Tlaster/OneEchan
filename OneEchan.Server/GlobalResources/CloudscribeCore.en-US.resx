@@ -966,4 +966,22 @@
   <data name="WebSiteUrl" xml:space="preserve">
     <value>WebSiteUrl</value>
   </data>
+  <data name="Allow Comment" xml:space="preserve">
+    <value>Allow Comment</value>
+  </data>
+  <data name="Edit Video" xml:space="preserve">
+    <value>Edit Video</value>
+  </data>
+  <data name="Your video has been changed." xml:space="preserve">
+    <value>Your video has been changed.</value>
+  </data>
+  <data name="Edit Article" xml:space="preserve">
+    <value>Edit Article</value>
+  </data>
+  <data name="ArticleContent" xml:space="preserve">
+    <value>Article Content</value>
+  </data>
+  <data name="Your article has been changed." xml:space="preserve">
+    <value>Your article has been changed.</value>
+  </data>
 </root>

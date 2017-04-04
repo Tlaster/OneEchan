@@ -138,6 +138,7 @@ namespace OneEchan.Server.Controllers
                 .Include(v => v.Comment)
                 .Include(v => v.Attitude)
                 .Where(item => item.UploaderId == user.Id && string.IsNullOrEmpty(search) ? true : item.Name.Contains(search))
+                .OrderByDescending(v => v.CreatedAt)
                 .ToPagedList(page, PAGE_SIZE);
             return View(video);
         }
@@ -145,12 +146,13 @@ namespace OneEchan.Server.Controllers
         public async Task<IActionResult> Article(int page = 0, string search = "")
         {
             var user = await _userManager.FindByIdAsync(HttpContext.User.GetUserId());
-            var video = _context.Article
-                .Include(v => v.Comment)
-                .Include(v => v.Attitude)
+            var arricle = _context.Article
+                .Include(a => a.Comment)
+                .Include(a => a.Attitude)
                 .Where(item => item.UploaderId == user.Id && string.IsNullOrEmpty(search) ? true : item.Name.Contains(search))
+                .OrderByDescending(a => a.CreatedAt)
                 .ToPagedList(page, PAGE_SIZE);
-            return View(video);
+            return View(arricle);
         }
 
 
