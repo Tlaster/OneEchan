@@ -6,12 +6,17 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Localization;
+using Microsoft.Extensions.Options;
+using Newtonsoft.Json;
 using OneEchan.Server.Controllers.Interface;
 using OneEchan.Server.Data;
+using OneEchan.Server.Models;
+using OneEchan.Server.Models.Aliyun;
 using OneEchan.Server.Models.PostViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace OneEchan.Server.Controllers
@@ -21,12 +26,30 @@ namespace OneEchan.Server.Controllers
         private readonly ApplicationDbContext _context;
         private SiteUserManager<SiteUser> _userManager;
         private IStringLocalizer<CloudscribeCore> _sr;
+        private IOptions<AliyunOptions> _aliyunOptions;
 
-        public VideoController(ApplicationDbContext context, SiteUserManager<SiteUser> userManager, IStringLocalizer<CloudscribeCore> localizer)
+        public VideoController(ApplicationDbContext context, SiteUserManager<SiteUser> userManager, IStringLocalizer<CloudscribeCore> localizer, IOptions<AliyunOptions> aliyunOptions)
         {
             _context = context;
             _userManager = userManager;
             _sr = localizer;
+            _aliyunOptions = aliyunOptions;
+        }
+
+        public IActionResult Create(int id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public AliyunSignatureModel GetSignature()
+        {
+            var callbackStr = Convert.ToBase64String(Encoding.UTF8.GetBytes(JsonConvert.SerializeObject(new AliyunCallbackModel(Url.Action(nameof(UploadCallback))))));
+            var expiration = (DateTime.Now + new TimeSpan(0, 0, 10)).ToString("o");
+        }
+
+        public IActionResult UploadCallback()
+        {
+            throw new NotImplementedException();
         }
 
         public async Task<IActionResult> Details(int id)

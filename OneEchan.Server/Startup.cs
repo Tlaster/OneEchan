@@ -19,6 +19,7 @@ using OneEchan.Server.Models;
 using cloudscribe.Core.Storage.EFCore.Common;
 using OneEchan.Server.Controllers;
 using Microsoft.Extensions.Localization;
+using OneEchan.Server.Models.Aliyun;
 
 namespace OneEchan.Server
 {
@@ -30,6 +31,7 @@ namespace OneEchan.Server
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+                .AddJsonFile("cloudsetting.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
             Environment = env;
@@ -126,6 +128,8 @@ namespace OneEchan.Server
                 }
 
             });
+
+            services.Configure<AliyunOptions>(Configuration.GetSection("Aliyun"));
 
             services.AddMvc()
                 .AddRazorOptions(options =>

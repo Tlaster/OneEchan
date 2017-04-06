@@ -29,6 +29,11 @@ namespace OneEchan.Server.Controllers
             _sr = localizer;
         }
 
+        public IActionResult Create(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<IActionResult> Details(int id)
         {
             var video = await _context.Article

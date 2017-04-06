@@ -5,27 +5,27 @@
     ViewData["Title"] = $"Edit {Model.Name}";
 }
 <div class="row" style="padding: 2em;">
-    <div class="col-md-10 col-md-push-2">
+    <div>
         <form asp-controller="Video" asp-action="Edit" method="post" class="form-horizontal">
             <h4>@sr["Edit Video"]</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
             <input asp-for="Id" style="display: none;" />
             <div class="form-group">
-                <label asp-for="Name" class="col-md-2 control-label">@sr["Title"]</label>
-                <div class="col-md-10">
+                <label asp-for="Name" class="col-md-1 control-label">@sr["Title"]</label>
+                <div class="col-md-11">
                     <input asp-for="Name" class="form-control" />
                     <span asp-validation-for="Name" class="text-danger"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label asp-for="Description" class="col-md-2 control-label">@sr["Description"]</label>
-                <div class="col-md-10">
+                <label asp-for="Description" class="col-md-1 control-label">@sr["Description"]</label>
+                <div class="col-md-11">
                     <textarea id="Description" asp-for="Description" style="display:none;"></textarea>
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+                <div class="col-md-offset-1 col-md-11">
                     <div class="checkbox">
                         <label>
                             <input asp-for="AllowComment" />@sr["Allow Comment"]
@@ -34,14 +34,11 @@
                 </div>
             </div>
             <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
+                <div class="col-md-offset-1 col-md-11">
                     <button type="submit" class="btn btn-default">@sr["Edit"]</button>
                 </div>
             </div>
         </form>
-    </div>
-    <div class="col-md-2 col-md-pull-10">
-        @await Component.InvokeAsync("Navigation", new { viewName = "SideNavAlt1", filterName = NamedNavigationFilters.ParentTree, startingNodeKey = "EditVideo" })
     </div>
 </div>
 

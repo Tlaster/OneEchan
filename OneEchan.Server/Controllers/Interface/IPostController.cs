@@ -12,5 +12,6 @@ namespace OneEchan.Server.Controllers.Interface
         Task<IActionResult> Edit(int id);
         //Task<IActionResult> Edit(IPostEditViewModel model);
         Task<IActionResult> Details(int id);
+        IActionResult Create(int id);
     }
 }
