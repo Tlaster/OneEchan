@@ -8,10 +8,6 @@ namespace OneEchan.Server.Models
 {
     public class Article : Post
     {
-        public Article() : base()
-        {
-
-        }
         public string Content { get; set; }
     }
 }

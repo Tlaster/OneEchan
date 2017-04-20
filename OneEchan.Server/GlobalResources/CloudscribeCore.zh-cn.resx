@@ -984,4 +984,7 @@
   <data name="Your article has been changed." xml:space="preserve">
     <value>文章修改成功</value>
   </data>
+  <data name="Your video has been removed" xml:space="preserve">
+    <value>视频已删除</value>
+  </data>
 </root>

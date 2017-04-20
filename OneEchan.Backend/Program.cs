@@ -1,4 +1,8 @@
-﻿using System;
+﻿using Aliyun.Acs.Core;
+using Aliyun.Acs.Core.Http;
+using Aliyun.Acs.Core.Profile;
+using Aliyun.Acs.Sts.Model.V20150401;
+using System;
 
 namespace OneEchan.Backend
 {
@@ -6,7 +10,7 @@ namespace OneEchan.Backend
     {
         static void Main(string[] args)
         {
-
+            
         }
     }
 }

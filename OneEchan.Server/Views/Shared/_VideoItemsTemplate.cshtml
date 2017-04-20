@@ -1,4 +1,5 @@
-﻿@model IEnumerable<Video>
+﻿@using cloudscribe.Web.Common.Extensions
+@model IEnumerable<Video>
 @inject IStringLocalizer<CloudscribeCore> sr
 <div class="row">
     @foreach (var item in Model)
@@ -6,7 +7,7 @@
         <div class="col-md-4">
             <a href="@Url.Action(nameof(VideoController.Details), nameof(VideoController).Replace("Controller", ""), new { id = item.Id })">
                 <img src="@item.VideoUrl.FirstOrDefault()?.Thumb" style="width:100%">
-                <span>@item.Name</span>
+                <span>@item.Title</span>
             </a>
             <br />
             <span>@item.CreatedAt</span>
@@ -16,7 +17,7 @@
             </span>
             @if (item.UploaderId.ToString() == User.GetUserId())
             {
-                <a href="@Url.Action(nameof(VideoController.Edit), nameof(VideoController).Replace("Controller", ""), new { id = item.Id })">@sr["Edit"]</a>
+                <a href="@Url.Action(nameof(VideoController.Edit), nameof(VideoController).Replace("Controller", ""), new { id = item.Id, returnUrl = Context.Request.PathAndQuery() })">@sr["Edit"]</a>
             }
         </div>
     }

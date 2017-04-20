@@ -31,7 +31,7 @@ namespace OneEchan.Server
                 .SetBasePath(env.ContentRootPath)
                 .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddJsonFile("cloudsetting.json", optional: false, reloadOnChange: true)
+                .AddJsonFile("cloudoptions.json", optional: false, reloadOnChange: true)
                 .AddEnvironmentVariables();
             Configuration = builder.Build();
             Environment = env;
@@ -68,7 +68,7 @@ namespace OneEchan.Server
             services.AddCloudscribeLoggingEFStorageMSSQL(cloudscribe);
 
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("VideoConnection")));
-
+            services.AddDbContext<TranscodeDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("TranscodeConnection")));
             //services.AddCloudscribeCoreNoDbStorage();
             //services.AddCloudscribeLoggingNoDbStorage(Configuration);
 
@@ -210,6 +210,8 @@ namespace OneEchan.Server
         {
             using (var serviceScope = applicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope())
             {
+                var transcodeDb = serviceScope.ServiceProvider.GetService<TranscodeDbContext>();
+                await transcodeDb.Database.EnsureCreatedAsync();
                 var applicationDb = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
                 var coreDb = serviceScope.ServiceProvider.GetService<ICoreDbContext>();
                 if (await applicationDb.Database.EnsureCreatedAsync())
@@ -251,9 +253,9 @@ namespace OneEchan.Server
                                     Category = item,
                                     Description = $"Desc {number}",
                                     Language = Languages.AllLanguage[0].Id,
-                                    Name = $"Name {number}",
+                                    Title = $"Title {number}",
                                     PostState = Post.State.Published,
-                                    SiteId = (await coreDb.Sites.FirstOrDefaultAsync()).Id,
+                                    FileName = $"{number}.mp4",
                                     UploaderId = (await coreDb.Users.FirstOrDefaultAsync()).Id,
                                     Ip = "111.111.111.111"
                                 });
@@ -312,9 +314,8 @@ namespace OneEchan.Server
                                     Category = item,
                                     Content = $"Content {number}",
                                     Language = Languages.AllLanguage[0].Id,
-                                    Name = $"Name {number}",
+                                    Title = $"Title {number}",
                                     PostState = Post.State.Published,
-                                    SiteId = (await coreDb.Sites.FirstOrDefaultAsync()).Id,
                                     UploaderId = (await coreDb.Users.FirstOrDefaultAsync()).Id,
                                     Ip = "111.111.111.111"
                                 };

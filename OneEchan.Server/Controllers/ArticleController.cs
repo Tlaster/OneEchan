@@ -29,7 +29,7 @@ namespace OneEchan.Server.Controllers
             _sr = localizer;
         }
 
-        public IActionResult Create(int id)
+        public IActionResult Create()
         {
             throw new NotImplementedException();
         }
@@ -56,7 +56,7 @@ namespace OneEchan.Server.Controllers
 
 
         [Authorize]
-        public async Task<IActionResult> Edit(int id)
+        public async Task<IActionResult> Edit(int id, string returnUrl = null)
         {
             var article = await _context.Article
                 .Include(v => v.Category)
@@ -84,7 +84,7 @@ namespace OneEchan.Server.Controllers
             {
                 return RedirectToAction(nameof(Details), new { id = model.Id });
             }
-            article.Name = model.Name;
+            article.Title = model.Title;
             article.Content = model.Content;
             article.AllowComment = model.AllowComment;
             article.Ip = Request.HttpContext.GetIpV4Address();
@@ -92,6 +92,11 @@ namespace OneEchan.Server.Controllers
             await _context.SaveChangesAsync();
             this.AlertSuccess(_sr["Your article has been changed."]);
             return RedirectToAction(nameof(Edit), new { id = model.Id });
+        }
+
+        public Task<IActionResult> Remove(int id, string returnUrl = null)
+        {
+            throw new NotImplementedException();
         }
     }
 }

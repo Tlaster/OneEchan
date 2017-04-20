@@ -137,7 +137,7 @@ namespace OneEchan.Server.Controllers
                 .Include(v => v.VideoUrl)
                 .Include(v => v.Comment)
                 .Include(v => v.Attitude)
-                .Where(item => item.UploaderId == user.Id && string.IsNullOrEmpty(search) ? true : item.Name.Contains(search))
+                .Where(item => item.UploaderId == user.Id && string.IsNullOrEmpty(search) ? true : item.Title.Contains(search))
                 .OrderByDescending(v => v.CreatedAt)
                 .ToPagedList(page, PAGE_SIZE);
             return View(video);
@@ -149,7 +149,7 @@ namespace OneEchan.Server.Controllers
             var arricle = _context.Article
                 .Include(a => a.Comment)
                 .Include(a => a.Attitude)
-                .Where(item => item.UploaderId == user.Id && string.IsNullOrEmpty(search) ? true : item.Name.Contains(search))
+                .Where(item => item.UploaderId == user.Id && string.IsNullOrEmpty(search) ? true : item.Title.Contains(search))
                 .OrderByDescending(a => a.CreatedAt)
                 .ToPagedList(page, PAGE_SIZE);
             return View(arricle);

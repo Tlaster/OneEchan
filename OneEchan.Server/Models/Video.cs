@@ -11,9 +11,7 @@ namespace OneEchan.Server.Models
 {
     public class Video : Post
     {
-        public Video() : base()
-        {
-        }
+        public string FileName { get; set; }
         public string Description { get; set; }
         public virtual ICollection<VideoUrl> VideoUrl { get; set; }
     }

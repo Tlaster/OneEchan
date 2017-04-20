@@ -17,7 +17,8 @@ namespace OneEchan.Server.Models
             UploaderOnly,
             Editing,
         }
-        public Post()
+
+        protected Post()
         {
             CreatedAt = DateTime.UtcNow;
         }
@@ -26,13 +27,11 @@ namespace OneEchan.Server.Models
         public int Id { get; set; }
         [Required]
         [StringLength(140, MinimumLength = 6, ErrorMessage = "This field must between 6 and 140 characters")]
-        public string Name { get; set; }
-        [Column(name: "Created_At")]
+        public string Title { get; set; }
+        [Column("Created_At")]
         public DateTime CreatedAt { get; set; }
         [Required]
         public Guid UploaderId { get; set; }
-        [Required]
-        public Guid SiteId { get; set; }
         public State PostState{ get; set; }
         [Required]
         public int Language { get; set; }

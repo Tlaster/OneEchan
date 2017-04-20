@@ -1,6 +1,6 @@
 ﻿@model OneEchan.Server.Models.PostViewModel.PostDetailViewModel
 @{
-    ViewData["TItle"] = Model.Post.Name;
+    ViewData["TItle"] = Model.Post.Title;
 }
 <div class="row">
     @Html.Partial("_PostInfoTemplate", Model)

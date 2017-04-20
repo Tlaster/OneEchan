@@ -984,4 +984,7 @@
   <data name="Your article has been changed." xml:space="preserve">
     <value>Your article has been changed.</value>
   </data>
+  <data name="Your video has been removed" xml:space="preserve">
+    <value>Your video has been removed</value>
+  </data>
 </root>

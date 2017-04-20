@@ -1,0 +1,7 @@
+﻿@model OneEchan.Server.Models.VideoViewModel.UploadCallbackModel
+<form asp-controller="Video" asp-action="UploadCallback" id="upload-callback-form" style="display: none" method="post">
+    <input type="text" asp-for="FileName" />
+    <input type="url" asp-for="Endpoint"/>
+    <input type="text" asp-for="ObjectName"/>
+    <input type="text" asp-for="Bucket"/>
+</form>

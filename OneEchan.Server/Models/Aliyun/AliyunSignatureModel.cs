@@ -14,5 +14,6 @@ namespace OneEchan.Server.Models.Aliyun
         public string Expire { get; set; }
         public string Callback { get; set; }
         public string Dir { get; set; }
+        public string UserId { get; set; }
     }
 }

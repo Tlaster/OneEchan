@@ -8,7 +8,6 @@
     "jquery-validation-unobtrusive": "3.2.6",
     "video.js": "v5.19.1",
     "vjs-resolution-switcher": "videojs-resolution-switcher#v0.4.2",
-    "simplemde": "1.11.2",
-    "plupload": "Plupload#v3.1.0"
+    "simplemde": "1.11.2"
   }
 }

@@ -7,6 +7,23 @@
   <PropertyGroup>
     <PackageTargetFallback>$(PackageTargetFallback);portable-net45+win8+wp8+wpa81;</PackageTargetFallback>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="AliyunSdk\**" />
+    <Compile Remove="build\**" />
+    <Content Remove="AliyunSdk\**" />
+    <Content Remove="build\**" />
+    <EmbeddedResource Remove="AliyunSdk\**" />
+    <EmbeddedResource Remove="build\**" />
+    <None Remove="AliyunSdk\**" />
+    <None Remove="build\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="wwwroot\js\aliyun-sdk.min.js" />
+    <Content Include="wwwroot\js\video-upload.js" />
+    <Content Include="wwwroot\js\vod-sdk-upload-1.0.6.min.js" />
+  </ItemGroup>
   <ItemGroup>
     <PackageReference Include="cloudscribe.Core.Storage.EFCore.MSSQL" Version="1.1.0-rc20170401" />
     <PackageReference Include="cloudscribe.Logging.EFCore.MSSQL" Version="1.1.0-rc20170401" />
@@ -33,6 +50,11 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="AliyunSdk\aliyun-net-sdk-core\aliyun-net-sdk-core.csproj" />
+    <ProjectReference Include="AliyunSdk\aliyun-net-sdk-mts\aliyun-net-sdk-mts.csproj" />
+    <ProjectReference Include="AliyunSdk\aliyun-net-sdk-sts\aliyun-net-sdk-sts.csproj" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Update="GlobalResources\CloudscribeCore.en-US.resx">
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
@@ -40,5 +62,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
     </EmbeddedResource>
   </ItemGroup>
+  <ProjectExtensions><VisualStudio><UserProperties /></VisualStudio></ProjectExtensions>
 
 </Project>

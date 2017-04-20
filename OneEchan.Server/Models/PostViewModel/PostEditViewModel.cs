@@ -12,7 +12,7 @@ namespace OneEchan.Server.Models.PostViewModel
         public bool AllowComment { get; set; }
         [Required]
         [StringLength(140, MinimumLength = 6, ErrorMessage = "This field must between 6 and 140 characters")]
-        public string Name { get; set; }
+        public string Title { get; set; }
     }
     public class VideoEditViewModel : PostEditViewModel
     {

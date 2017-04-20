@@ -1,4 +1,5 @@
-﻿@using cloudscribe.Web.Navigation
+﻿@using cloudscribe.Web.Common.Extensions
+@using cloudscribe.Web.Navigation
 @model IPagedList<Video>
 @{
     ViewData["Title"] = "My Video";
@@ -10,9 +11,9 @@
             @foreach (var item in Model)
             {
                 <div class="col-md-4">
-                    <a href="@Url.Action(nameof(VideoController.Edit), nameof(VideoController).Replace("Controller", ""), new { id = item.Id })">
-                        <img src="@item.VideoUrl.FirstOrDefault()?.Thumb" style="width:100%">
-                        <span>@item.Name</span>
+                    <a href="@Url.Action(nameof(VideoController.Edit), nameof(VideoController).Replace("Controller", ""), new { id = item.Id, returnUrl = Context.Request.PathAndQuery() })">
+                        <img src="@item.VideoUrl.FirstOrDefault()?.Thumb" style="width:100%" alt="">
+                        <span>@item.Title</span>
                     </a>
                     <br />
                     <span>@item.CreatedAt</span>
@@ -23,11 +24,11 @@
                     </span>
                     <span>
                         <span class="glyphicon glyphicon-thumbs-up" aria-hidden="true"></span>
-                        <span>@item.Attitude.Where(at => at.AttitudeType == Attitude.Type.Like).Count()</span>
+                        <span>@item.Attitude.Count(at => at.AttitudeType == Attitude.Type.Like)</span>
                     </span>
                     <span>
                         <span class="glyphicon glyphicon-thumbs-down" aria-hidden="true"></span>
-                        <span>@item.Attitude.Where(at => at.AttitudeType == Attitude.Type.DisLike).Count()</span>
+                        <span>@item.Attitude.Count(at => at.AttitudeType == Attitude.Type.DisLike)</span>
                     </span>
                 </div>
             }

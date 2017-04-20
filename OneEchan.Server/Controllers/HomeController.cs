@@ -12,14 +12,12 @@ namespace OneEchan.Server.Controllers
 {
     public class HomeController : Controller
     {
-        private ApplicationDbContext _context;
-        private readonly ISiteContext _currentSite;
+        private readonly ApplicationDbContext _context;
         private const int PAGE_SIZE = 20;
 
-        public HomeController(ApplicationDbContext context, SiteContext currentSite)
+        public HomeController(ApplicationDbContext context)
         {
             _context = context;
-            _currentSite = currentSite;
         }
 
         public IActionResult Index()
@@ -30,25 +28,25 @@ namespace OneEchan.Server.Controllers
         [Route("Video")]
         public IActionResult Video(int page = 0)
         {
-            return View(_context.Video.Include(v => v.VideoUrl).Where(item => item.SiteId == _currentSite.Id).OrderByDescending(item => item.CreatedAt).ToPagedList(page, PAGE_SIZE));
+            return View(_context.Video.Include(v => v.VideoUrl).Where(item => item.PostState == Models.Post.State.Published).OrderByDescending(item => item.CreatedAt).ToPagedList(page, PAGE_SIZE));
         }
 
         [Route("Article")]
         public IActionResult Article(int page = 0)
         {
-            return View(_context.Article.Where(item => item.SiteId == _currentSite.Id).OrderByDescending(item => item.CreatedAt).ToPagedList(page, PAGE_SIZE));
+            return View(_context.Article.Where(item => item.PostState == Models.Post.State.Published).OrderByDescending(item => item.CreatedAt).ToPagedList(page, PAGE_SIZE));
         }
 
         [Route("Search")]
         public IActionResult Search(string query, int page = 0)
         {
-            return View(_context.Post.Where(item => item.Name.Contains(query)).OrderByDescending(item => item.CreatedAt).ToPagedList(page, PAGE_SIZE));
+            return View(_context.Post.Where(item => item.Title.Contains(query) && item.PostState == Models.Post.State.Published).OrderByDescending(item => item.CreatedAt).ToPagedList(page, PAGE_SIZE));
         }
 
         [Route("AllContent")]
         public IActionResult AllContent(int page = 0)
         {
-            return View(_context.Post.Where(item => item.SiteId == _currentSite.Id).OrderByDescending(item => item.CreatedAt).ToPagedList(page, PAGE_SIZE));
+            return View(_context.Post.Where(item => item.PostState == Models.Post.State.Published).OrderByDescending(item => item.CreatedAt).ToPagedList(page, PAGE_SIZE));
         }
 
         public IActionResult About()

@@ -1,8 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp1.1</TargetFramework>
   </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OneEchan.Server\AliyunSdk\aliyun-net-sdk-core\aliyun-net-sdk-core.csproj" />
+    <ProjectReference Include="..\OneEchan.Server\AliyunSdk\aliyun-net-sdk-sts\aliyun-net-sdk-sts.csproj" />
+  </ItemGroup>
 
 </Project>
