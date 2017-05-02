@@ -30,6 +30,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using Aliyun.Acs.Mts.Model.V20140618;
+using cloudscribe.Core.Web.Controllers;
 
 namespace OneEchan.Server.Controllers
 {
@@ -198,8 +199,9 @@ namespace OneEchan.Server.Controllers
                 .Include(v => v.Comment)
                 .Include(v => v.VideoUrl)
                 .Include(v => v.Category)
-                .Include(v => v.Category.CategoryName)
                 .FirstOrDefaultAsync(item => item.Id == id);
+            if (video?.PostState != Post.State.Published)
+                return NotFound();
             var uploader = await _userManager.FindByIdAsync(video.UploaderId.ToString());
             var likeCount = video.Attitude.Where(item => item.AttitudeType == Attitude.Type.Like).LongCount();
             var total = video.Attitude.LongCount();
@@ -213,24 +215,31 @@ namespace OneEchan.Server.Controllers
         }
 
         [Authorize]
-        public async Task<IActionResult> Edit(int id, string returnUrl = null)
+        public async Task<IActionResult> Edit(int id)
         {
-            ViewData["returnUrl"] = returnUrl;
             var video = await _context.Video
                 .Include(v => v.Category)
-                .Include(v => v.Category.CategoryName)
                 .FirstOrDefaultAsync(item => item.Id == id);
+            if (video == null)
+                return NotFound();
             if (video.UploaderId.ToString() != User.GetUserId())
             {
                 return RedirectToAction(nameof(Details), new { id = id });
             }
+            var categories = await _context.Category.ToArrayAsync();
+            ViewBag.Categories = categories;
             return View(video);
+            //return View(new VideoEditViewModel
+            //{
+            //    Categories = categories,
+            //    Video = video
+            //});
         }
 
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(VideoEditViewModel model)
+        public async Task<IActionResult> Edit(VideoEditModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -238,9 +247,9 @@ namespace OneEchan.Server.Controllers
             }
             var video = await _context.Video
                 .Include(v => v.Category)
-                .Include(v => v.Category.CategoryName)
-                .Include(v => v.VideoUrl)
                 .FirstOrDefaultAsync(item => item.Id == model.Id);
+            if (video == null)
+                return NotFound();
             if (video.UploaderId.ToString() != User.GetUserId())
             {
                 return RedirectToAction(nameof(Details), new { id = model.Id });
@@ -248,10 +257,10 @@ namespace OneEchan.Server.Controllers
             video.Title = model.Title;
             video.Description = model.Description;
             video.AllowComment = model.AllowComment;
-            video.Ip = Request.HttpContext.GetIpV4Address();
+            video.CategoryId = model.CategoryId;
             if (video.PostState == Post.State.Editing)
             {
-                video.PostState = video.VideoUrl.Any() ? Post.State.Published : Post.State.Publishing;
+                video.PostState = video.VideoState == Video.VideoStates.Complete ? Post.State.Published : Post.State.Publishing;
             }
             _context.Video.Update(video);
             await _context.SaveChangesAsync();
@@ -262,9 +271,11 @@ namespace OneEchan.Server.Controllers
         [HttpPost]
         [Authorize]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Remove(int id, string returnUrl = null)
+        public async Task<IActionResult> Remove(int id)
         {
             var video = await _context.Video.FindAsync(id);
+            if (video == null)
+                return NotFound();
             if (video.UploaderId.ToString() != User.GetUserId())
             {
                 return RedirectToAction(nameof(Details), new { id = id });
@@ -272,7 +283,7 @@ namespace OneEchan.Server.Controllers
             _context.Video.Remove(video);
             await _context.SaveChangesAsync();
             this.AlertSuccess(_sr["Your video has been removed"]);
-            return RedirectToLocal(returnUrl);
+            return RedirectToAction(nameof(HomeController.Index), "Home");
         }
 
 

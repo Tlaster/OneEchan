@@ -6,7 +6,7 @@
     {
         <div class="col-md-4">
             <a href="@Url.Action(nameof(VideoController.Details), nameof(VideoController).Replace("Controller", ""), new { id = item.Id })">
-                <img src="@item.VideoUrl.FirstOrDefault()?.Thumb" style="width:100%">
+                <img src="@item.Thumb" style="width:100%">
                 <span>@item.Title</span>
             </a>
             <br />
@@ -17,7 +17,7 @@
             </span>
             @if (item.UploaderId.ToString() == User.GetUserId())
             {
-                <a href="@Url.Action(nameof(VideoController.Edit), nameof(VideoController).Replace("Controller", ""), new { id = item.Id, returnUrl = Context.Request.PathAndQuery() })">@sr["Edit"]</a>
+                <a href="@Url.Action(nameof(VideoController.Edit), nameof(VideoController).Replace("Controller", ""), new { id = item.Id })">@sr["Edit"]</a>
             }
         </div>
     }

@@ -12,7 +12,7 @@ namespace OneEchan.Server.Data
         public DbSet<Category> Category { get; set; }   
         public DbSet<Video> Video { get; set; }
         public DbSet<Comment> Comment { get; set; }
-        public DbSet<CategoryName> CategoryName { get; set; }
+        //public DbSet<CategoryName> CategoryName { get; set; }
         public DbSet<Article> Article { get; set; }
         public DbSet<VideoUrl> VideoUrl { get; set; }
         public DbSet<Post> Post { get; set; }

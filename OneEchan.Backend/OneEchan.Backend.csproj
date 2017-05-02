@@ -6,6 +6,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Include="..\OneEchan.Server\cloudoptions.json" Link="cloudoptions.json" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OneEchan.Server\AliyunSdk\aliyun-net-sdk-core\aliyun-net-sdk-core.csproj" />
     <ProjectReference Include="..\OneEchan.Server\AliyunSdk\aliyun-net-sdk-sts\aliyun-net-sdk-sts.csproj" />
   </ItemGroup>

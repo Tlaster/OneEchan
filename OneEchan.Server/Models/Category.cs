@@ -10,10 +10,12 @@ namespace OneEchan.Server.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
+        //[Required]
+        //public Guid SiteId { get; set; }
         [Required]
-        public Guid SiteId { get; set; }
+        public string CategoryName { get; set; }
         
-        public virtual ICollection<CategoryName> CategoryName { get; set; }
+        //public virtual ICollection<CategoryName> CategoryName { get; set; }
         public virtual ICollection<Post> Post { get; set; }
     }
 }

@@ -11,6 +11,15 @@ namespace OneEchan.Server.Models
 {
     public class Video : Post
     {
+        public enum VideoStates
+        {
+            Transcoding,
+            Complete
+        }
+
+        public string Thumb { get; set; }
+
+        public VideoStates VideoState { get; set; } = VideoStates.Transcoding;
         public string FileName { get; set; }
         public string Description { get; set; }
         public virtual ICollection<VideoUrl> VideoUrl { get; set; }

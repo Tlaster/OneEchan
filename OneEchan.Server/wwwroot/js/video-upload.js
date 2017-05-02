@@ -104,5 +104,7 @@ function get_suffix(filename) {
 }
 
 $("#upload-file").on('click', function (event) {
+    $("#select-file").css("display", "none");
+    $("#upload-progress").css("display", "unset");
     uploadFile(true);
 });

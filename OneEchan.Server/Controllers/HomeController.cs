@@ -7,6 +7,7 @@ using OneEchan.Server.Data;
 using cloudscribe.Web.Pagination;
 using cloudscribe.Core.Models;
 using Microsoft.EntityFrameworkCore;
+using OneEchan.Server.Models;
 
 namespace OneEchan.Server.Controllers
 {
@@ -22,7 +23,17 @@ namespace OneEchan.Server.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            var hotVideo = _context.Video.Where(item => item.PostState == Models.Post.State.Published).OrderByDescending(item => item.ViewCount).Take(5).ToList();
+            var hotArticle = _context.Article.Where(item => item.PostState == Models.Post.State.Published).OrderByDescending(item => item.ViewCount).Take(5).ToList();
+            var newVideo = _context.Video.Where(item => item.PostState == Models.Post.State.Published).OrderByDescending(item => item.CreatedAt).Take(5).ToList();
+            var newArticle = _context.Article.Where(item => item.PostState == Models.Post.State.Published).OrderByDescending(item => item.CreatedAt).Take(5).ToList();
+            return View(new HomeViewModel
+            {
+                HotVideo = hotVideo,
+                HotArticle = hotArticle,
+                NewVideo = newVideo,
+                NewArticle = newArticle,
+            });
         }
 
         [Route("Video")]

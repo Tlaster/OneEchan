@@ -11,7 +11,7 @@
             @foreach (var item in Model)
             {
                 <div class="col-md-4">
-                    <a href="@Url.Action(nameof(VideoController.Edit), nameof(VideoController).Replace("Controller", ""), new { id = item.Id })">
+                    <a href="@Url.Action(nameof(VideoAdminController.Edit), nameof(VideoAdminController).Replace("Controller", ""), new { id = item.Id })">
                         <img src="@item.Thumb" style="width:100%" alt="">
                         <span>@item.Title</span>
                     </a>
@@ -37,11 +37,11 @@
                   cs-paging-pagenumber="@Model.PageNumber"
                   cs-paging-totalitems="@Model.TotalItemCount"
                   cs-pagenumber-param="page"
-                  asp-controller="Account"
-                  asp-action="Video"></cs-pager>
+                  asp-controller="VideoAdmin"
+                  asp-action="Index"></cs-pager>
     </div>
     <div class="col-md-2 col-md-pull-10">
-        @await Component.InvokeAsync("Navigation", new { viewName = "SideNavAlt1", filterName = NamedNavigationFilters.ParentTree, startingNodeKey = "Account" })
+        @await Component.InvokeAsync("Navigation", new { viewName = "SideNavAlt1", filterName = NamedNavigationFilters.ParentTree, startingNodeKey = "SiteAdmin" })
     </div>
 </div>
 @section Scripts {

@@ -14,7 +14,7 @@
                     <li class="list-group-item">
 
                         <div style="display: flex; justify-content: space-between">
-                            <a href="@Url.Action(nameof(ArticleController.Edit), nameof(ArticleController).Replace("Controller", ""), new { id = item.Id, returnUrl = Context.Request.PathAndQuery() })">@item.Title</a>
+                            <a href="@Url.Action(nameof(ArticleController.Edit), nameof(ArticleController).Replace("Controller", ""), new { id = item.Id })">@item.Title</a>
                             <div>
                                 <span>@item.CreatedAt</span>
                                 <span>

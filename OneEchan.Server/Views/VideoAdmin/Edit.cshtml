@@ -1,12 +1,12 @@
 ﻿@model Video
 @inject IStringLocalizer<CloudscribeCore> sr
 @using cloudscribe.Web.Navigation
-@{ 
+@{
     ViewData["Title"] = $"Edit {Model.Title}";
 }
 <div class="row" style="padding: 2em;">
     <div>
-        <form asp-controller="Video" asp-action="Edit" method="post" class="form-horizontal">
+        <form asp-controller="VideoAdmin" asp-action="Edit" method="post" class="form-horizontal">
             <h4>@sr["Edit Video"]</h4>
             <hr />
             <div asp-validation-summary="All" class="text-danger"></div>
@@ -24,7 +24,7 @@
                     <select asp-for="CategoryId">
                         @foreach (var item in ViewBag.Categories)
                         {
-                            <option value="@item.Id" @(item.Id == Model.CategoryId ? "selected" : "")>@item.CategoryName</option>
+                            <option value="@item.Id" @(item.Id= =Model.CategoryId ? "selected" : "" )>@item.CategoryName</option>
                         }
                     </select>
                 </div>
@@ -61,8 +61,8 @@
                 </div>
             </div>
         </form>
-        <form asp-controller="Video" asp-action="Remove" id="remove-video" style="display: none;">
-            <input asp-for="Id"/>
+        <form asp-controller="VideoAdmin" asp-action="Remove" id="remove-video" style="display: none;">
+            <input asp-for="Id" />
         </form>
     </div>
 </div>

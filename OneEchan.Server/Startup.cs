@@ -88,14 +88,14 @@ namespace OneEchan.Server
             {
                 var supportedCultures = new[]
                 {
-                    new CultureInfo("en-us"),
+                    //new CultureInfo("en-us"),
                     new CultureInfo("zh-cn"),
                     //new CultureInfo("ja-jp")
                 };
 
                 // State what the default culture for your application is. This will be used if no specific culture
                 // can be determined for a given request.
-                options.DefaultRequestCulture = new RequestCulture(culture: "en-US", uiCulture: "en-US");
+                options.DefaultRequestCulture = new RequestCulture("zh-CN", "zh-CN");
 
                 // You must explicitly state which cultures your application supports.
                 // These are the cultures the app supports for formatting numbers, dates, etc.
@@ -224,24 +224,25 @@ namespace OneEchan.Server
                         {
                             await applicationDb.Category.AddAsync(new Category
                             {
-                                SiteId = (await coreDb.Sites.FirstOrDefaultAsync()).Id
+                                //SiteId = (await coreDb.Sites.FirstOrDefaultAsync()).Id
+                                CategoryName = $"Name {number} {i}"
                             });
                         }
                         await applicationDb.SaveChangesAsync();
                     }
-                    if (!await applicationDb.CategoryName.AnyAsync())
-                    {
-                        foreach (var item in applicationDb.Category)
-                        {
-                            await applicationDb.CategoryName.AddAsync(new CategoryName
-                            {
-                                Category = item,
-                                Language = Languages.AllLanguage[0].Id,
-                                Name = $"Name {number} {Languages.AllLanguage[0].Id}",
-                            });
-                        }
-                        await applicationDb.SaveChangesAsync();
-                    }
+                    //if (!await applicationDb.CategoryName.AnyAsync())
+                    //{
+                    //    foreach (var item in applicationDb.Category)
+                    //    {
+                    //        await applicationDb.CategoryName.AddAsync(new CategoryName
+                    //        {
+                    //            Category = item,
+                    //            Language = Languages.AllLanguage[0].Id,
+                    //            Name = $"Name {number} {Languages.AllLanguage[0].Id}",
+                    //        });
+                    //    }
+                    //    await applicationDb.SaveChangesAsync();
+                    //}
                     if (!await applicationDb.Video.AnyAsync())
                     {
                         foreach (var item in applicationDb.Category)
@@ -257,7 +258,9 @@ namespace OneEchan.Server
                                     PostState = Post.State.Published,
                                     FileName = $"{number}.mp4",
                                     UploaderId = (await coreDb.Users.FirstOrDefaultAsync()).Id,
-                                    Ip = "111.111.111.111"
+                                    Ip = "111.111.111.111",
+                                    Thumb = "http://i2.hdslb.com/bfs/archive/6f0f6a2017426e8c8ce85d82bf1648be22550a07.jpg_320x200.jpg",
+                                    VideoState = Video.VideoStates.Complete,
                                 });
                             }
                         }
@@ -273,7 +276,6 @@ namespace OneEchan.Server
                                 QualityInfo = "h265 1080P",
                                 Url = "http://www.w3school.com.cn/i/movie.ogg",
                                 Video = item,
-                                Thumb = "http://www.w3school.com.cn/i/movie.ogg",
                                 Type = "video/ogg"
                             });
                             await applicationDb.VideoUrl.AddAsync(new VideoUrl
@@ -282,7 +284,6 @@ namespace OneEchan.Server
                                 QualityInfo = "h265 720P",
                                 Url = "http://www.w3school.com.cn/i/movie.ogg",
                                 Video = item,
-                                Thumb = "http://www.w3school.com.cn/i/movie.ogg",
                                 Type = "video/ogg"
                             });
                         }

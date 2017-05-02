@@ -8,10 +8,14 @@
     private string GetAntiXsrfRequestToken() => Xsrf.GetAndStoreTokens(Context).RequestToken;
 }
 
-<div class="row">
-    <input type="file" class="form-control" name="file" id="file"/>
-    <input type="button" class="btn btn-primary" name="submit" id="upload-file" value="upload" />
-    <div class="progress">
+<div class="row" style="padding: 2em;">
+    <h4>Upload Video</h4>
+    <br />
+    <div id="select-file">
+        <input type="file" class="form-control col-md-4" name="file" id="file" />
+        <input type="button" class="btn btn-primary col-md-4" name="submit" id="upload-file" value="upload" />
+    </div>
+    <div id="upload-progress" class="progress col-md-12" style="display:none;">
         <div id="progress-bar"
              class="progress-bar"
              role="progressbar"

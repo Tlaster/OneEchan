@@ -987,4 +987,10 @@
   <data name="Your video has been removed" xml:space="preserve">
     <value>视频已删除</value>
   </data>
+  <data name="Category" xml:space="preserve">
+    <value>分类</value>
+  </data>
+  <data name="Video is transcoding" xml:space="preserve">
+    <value>视频文件正在转码中</value>
+  </data>
 </root>
